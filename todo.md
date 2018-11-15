@@ -1,28 +1,27 @@
-Biology
+# Biology
 
 * New Bio Lab
 * Turn in old lab with sketches
 
 
-CS 118
+# CS 118
 
 * Do the discussion before Sunday
 
-Spanish 3
+# Spanish 3
 
 * Presentation thing
 * NO WEEKLY NOTES
 
 
-Engineering
+# Engineering
 
 * Hah lol
 
-English
+# English
 
-* Complete timed write
 
-US History
+# US History
 
 * Compile slides into presentation
 
