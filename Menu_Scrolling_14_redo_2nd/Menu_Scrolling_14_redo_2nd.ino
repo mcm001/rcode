@@ -100,6 +100,9 @@ void ReadVoltage(){
   // display2.display();
   Serial.println(sensorValueVolt);
   Serial.println(readVcc(),DEC);
+  Serial.println(voltage);
+  delay(100);
+  
 
 }
 
@@ -116,14 +119,14 @@ void ContinuityTester(){
     // display2.print("Continuity: ");
     // display2.display();
     if(resistance<80){
-      digitalWrite(Buzzpin,HIGH);
+      tone(Buzzpin,500,50);
       Serial.println("Continuity!");
       // display2.setCursor(80,25);
       // display2.println("Yes");
       // display2.display();
       delay(50);
     } else {
-      digitalWrite(Buzzpin,LOW);
+      noTone(Buzzpin);
       Serial.println("NO Continuity");
       // display2.setCursor(80,25);
       // display2.println("NO");
