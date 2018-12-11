@@ -1,27 +1,25 @@
 # Biology
 
-* New Bio Lab
-* Turn in old lab with sketches
-
+* Complete owl lab
 
 # CS 118
 
-* Do the discussion before Sunday
+* Do final exam
 
 # Spanish 3
 
-* Presentation thing
-* NO WEEKLY NOTES
-
+* Weekly notes
+* Paragraph
 
 # Engineering
 
-* Hah lol
+* Hah lol meme
 
 # English
 
+* Great Gatsby essay
 
 # US History
 
-* Compile slides into presentation
+* Study for exam retake
 
