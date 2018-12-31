@@ -111,8 +111,8 @@ wave4time = []
 
 # Make a list of half waves one and three, which don't need to be reflected/transformed
 for x in range( extrimaIndex[0] - zeroCrossIndexes[0] ):
-    quarterWave1.append(abs(data['Ampere'][x+zeroCrossIndexes[0]]))
-    wave1time.append(data['second'][x+zeroCrossIndexes[0]])
+    quarterWave1.append(abs(data['Ampere'][x+zeroCrossIndexes[0]])) # Append the data at [amps][target index] to the wave list
+    wave1time.append(data['second'][x+zeroCrossIndexes[0]]) # Append the timestamp to the table, TODO normalize with respect to zero cross index 0
 for x in range( zeroCrossIndexes[1] - extrimaIndex[0] ):
     quarterWave2.append(abs(data['Ampere'][zeroCrossIndexes[1]-x]))
     wave2time.append(data['second'][x+extrimaIndex[0]])
@@ -123,44 +123,74 @@ for x in range( zeroCrossIndexes[2] - extrimaIndex[1] ):
     quarterWave4.append(abs(data['Ampere'][zeroCrossIndexes[2]-x]))
     wave4time.append(data['second'][x+extrimaIndex[1]])
 
-# This is such a hack
-minlen = len(wave1time)
-if len(wave2time) > minlen:
-    minlen = len(wave2time)
-if len(wave3time) > minlen:
-    minlen = len(wave3time)
-if len(wave4time) > minlen:
-    minlen = len(wave4time)
+scopeTimeDelta = 1 / 100000
+
+print "----------------aaaaaaaaaaaaa-----------------"
+print "the current wave 2 time list is: "
+print wave2time
+print " bbbbbbbbbbb------------------------bbbbbbbbbbbbbbbbbbbb"
+def normalizeTime(timeList):
+    #Figure out the overall time delta, and normalize such the data stretches from 0 to 1
+    # deltaTime = timeList[len(timeList) - 1] - timeList[0]
+    timeList[0]=10#timeList[1]# - scopeTimeDelta
+    # print timeList
+    for x in range(len(timeList)):
+        timeList[x] = timeList[x] - timeList[0]
+        print "index %s is %s" % (x, timeList[x])
+    for x in range(len(timeList)):
+        timeList[x] = timeList[x] * 1/timeList[len(timeList) - 1]
+    
+    return timeList
+
+def normalizeMagnitude(amplitudeList, multiplier):
+    for x in range(len(amplitudeList)):
+        amplitudeList[x] = amplitudeList[x] * multiplier
+    return amplitudeList
+
+def shiftList(data, amount):
+    for x in range(len(data)):
+        data[x] = data[x] + amount
+    return amount
+
+valueToMultiplyBy = 248/((-min + max)/2)
+
+# print wave2time[1]
+
+wave1time = normalizeTime(wave1time)
+wave2time = normalizeTime(wave2time)
+wave3time = normalizeTime(wave3time)
+wave4time = normalizeTime(wave4time)
+quarterWave1 = normalizeMagnitude(quarterWave1, valueToMultiplyBy)
+quarterWave2 = normalizeMagnitude(quarterWave2, valueToMultiplyBy)
+quarterWave3 = normalizeMagnitude(quarterWave3, valueToMultiplyBy)
+quarterWave4 = normalizeMagnitude(quarterWave4, valueToMultiplyBy)
+
+# print wave2time[1]
+print "-------------------------------------"
+
+print wave2time
+# print quarterWave2
 
 
-percentDeltas = []
-for x in range( minlen ):
-    datas = [quarterWave1[x], quarterWave2[x], quarterWave3[x], quarterWave4[x]]
-    print datas
-    print min(datas)
-    # percentDeltas[x] = (max(datas) - min(datas))#/data['Ampere'][x]
-# print("Mean wave delta: % s%%" % (abs(mean(percentDeviation) ) ) )
-
-
-
-
+for x in range(len(optimalSineWave)):
+    optimalSineWave[x] = abs(optimalSineWave[x])
 
 # plot the stuff
-# ax.plot(data['second'], optimalSineWave, linewidth=3, color='c')
+# ax.plot(data['second'], (optimalSineWave), linewidth=3, color='c')
 # ax.plot(data['second'], data['Ampere'], color='k', label='the data')
 ax.axhline(linewidth=1, color='k')
-ax.plot(data['second'], deviation, linewidth=1.5, color='r')
+# ax.plot(data['second'], deviation, linewidth=1.5, color='r')
 ax.plot(wave1time, quarterWave1)#, linewidth=1.5, color='r')
 ax.plot(wave2time, quarterWave2)#, linewidth=1.5, color='r')
 ax.plot(wave3time, quarterWave3)#, linewidth=1.5, color='r')
 ax.plot(wave4time, quarterWave4)#, linewidth=1.5, color='r')
 
 # i=0
-for x in range(len(SignChangeTimeStamps)):
-    # i+=1
-    ax.axvline(x=SignChangeTimeStamps[x-1], color='g')
-ax.axvline(x=tmin, color='b')
-ax.axvline(x=tmax, color='b')
+# for x in range(len(SignChangeTimeStamps)):
+#     # i+=1
+#     ax.axvline(x=SignChangeTimeStamps[x-1], color='g')
+# ax.axvline(x=tmin, color='b')
+# ax.axvline(x=tmax, color='b')
 
 ax.set_title("Current vs time")
 ax.set_xlabel("Time in seconds")
