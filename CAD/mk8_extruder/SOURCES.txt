@@ -1,0 +1,5 @@
+Sources for Unified Prusa i3 Extruder for Mk8 drive gear, e3d v6 hotend, and BLTouch sensor.
+
+Prusa I3 Extruder (Flexible Filament) (http://www.thingiverse.com/thing:755164)
+Direct Extruder - MK8 - E3d - 1.75mm (Flexible Filament) (http://www.thingiverse.com/thing:932386)
+BLTouch auto leveling sensor (dummy prop) (http://www.thingiverse.com/thing:1229934)
