@@ -1,0 +1,7 @@
+
+*.bin
+*.lock
+java/javamemes/.classpath
+*.properties
+*.prefs
+*.class

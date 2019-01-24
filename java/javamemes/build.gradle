@@ -1,0 +1,24 @@
+plugins {
+    id "edu.wpi.first.GradleRIO" version "2019.1.1"
+}
+
+apply plugin: 'java'
+
+apply plugin: 'application'
+mainClassName = 'javamemes.Main'
+
+repositories {
+    mavenCentral()
+
+    maven {
+      url 'http://first.wpi.edu/FRC/roborio/maven/release'
+    }
+
+}
+
+dependencies {
+    compile wpi.deps.wpilib()
+    compile wpi.deps.vendor.java()
+    nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
+    nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
+}
