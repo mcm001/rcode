@@ -1,25 +1,17 @@
-# Biology
-
-* Complete owl lab
-
-# CS 118
-
-* Do final exam
-
 # Spanish 3
 
 * Weekly notes
-* Paragraph
+* Intro Paragraph
+* First paragraph
+
+# English
+
+* Wath the online video things - DONE
+
+# US History
+
+* ADEPT explainer - half done now
 
 # Engineering
 
 * Hah lol meme
-
-# English
-
-* Great Gatsby essay
-
-# US History
-
-* Study for exam retake
-
