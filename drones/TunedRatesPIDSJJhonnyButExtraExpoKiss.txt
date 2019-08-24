@@ -1,0 +1,143 @@
+{
+  "G_P": [
+    3.9,
+    5.7,
+    8.9
+  ],
+  "G_I": [
+    0.05,
+    0.05,
+    0.055
+  ],
+  "G_D": [
+    11.5,
+    15,
+    0
+  ],
+  "ACCtrim": [
+    0,
+    0
+  ],
+  "RC_Rate": [
+    1.09,
+    0.97,
+    1.08
+  ],
+  "RPY_Expo": [
+    0.8,
+    0.8,
+    0.67
+  ],
+  "RPY_Curve": [
+    0.21,
+    0.21,
+    0.08
+  ],
+  "ACCZero": [
+    0,
+    0,
+    0
+  ],
+  "TPA": [
+    0.39,
+    0.18,
+    0.18
+  ],
+  "RGB": [
+    0,
+    0,
+    0
+  ],
+  "CBO": [
+    0,
+    0,
+    0
+  ],
+  "AUX": [
+    21,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    37,
+    0,
+    0,
+    0
+  ],
+  "DB": [
+    0,
+    0,
+    0
+  ],
+  "NFE": [
+    0,
+    0
+  ],
+  "NFCF": [
+    200,
+    200
+  ],
+  "NFCO": [
+    100,
+    100
+  ],
+  "ver": 113,
+  "reverseMotors": 0,
+  "A_P": 4,
+  "A_I": 0.04,
+  "A_D": 10,
+  "RXType": 17,
+  "PPMchanOrder": 0,
+  "CopterType": 2,
+  "Active3DMode": 0,
+  "ESConeshot125": 5,
+  "MinCommand16": 1000,
+  "MidCommand16": 1500,
+  "MinThrottle16": 1030,
+  "MaxThrottle16": 2000,
+  "TYmid16": 1500,
+  "TYinv8": 0,
+  "maxAng": 50,
+  "LPF": 1,
+  "ESConeshot42": 0,
+  "failsaveseconds": 0,
+  "BoardRotation": 0,
+  "CustomTPAInfluence": 0,
+  "TPABP1": 30,
+  "TPABP2": 50,
+  "TPABPI1": 30,
+  "TPABPI2": 0,
+  "TPABPI3": 0,
+  "TPABPI4": 100,
+  "BatteryInfluence": 0,
+  "voltage1": 12.8,
+  "voltage2": 14.8,
+  "voltage3": 16.8,
+  "voltgePercent1": 130,
+  "voltgePercent2": 100,
+  "voltgePercent3": 70,
+  "loggerConfig": 0,
+  "vtxChannel": 32,
+  "vbatAlarm": 0,
+  "debugVariables": 0,
+  "mahAlarm": 0,
+  "lipoConnected": 0,
+  "lapTimerTypeAndInterface": 0,
+  "lapTimerTransponderId": 0,
+  "loggerDebugVariables": 0,
+  "YawCfilter": 35,
+  "vtxType": 0,
+  "vtxPowerLow": 25,
+  "vtxPowerHigh": 25,
+  "motorBuzzer": 0,
+  "loopTimeDivider": 1,
+  "yawLpF": 1,
+  "DLpF": 1,
+  "adaptiveFilter": 1,
+  "ledBrightness": 100,
+  "setpointIntoD": 100,
+  "ESCOutputLayout": 0
+}
