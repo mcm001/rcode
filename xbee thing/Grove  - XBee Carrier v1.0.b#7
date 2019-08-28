@@ -209,6 +209,10 @@
 <hole x="33.147" y="3.1242" drill="2.5"/>
 <hole x="44.279" y="38.503" drill="3.2"/>
 <hole x="13.1572" y="3.0734" drill="2.5"/>
+<wire x1="17.78" y1="19.939" x2="16.129" y2="19.939" width="0.1524" layer="22"/>
+<wire x1="16.129" y1="19.939" x2="16.129" y2="17.018" width="0.1524" layer="22"/>
+<wire x1="16.129" y1="17.018" x2="17.78" y2="17.018" width="0.1524" layer="22"/>
+<wire x1="17.78" y1="17.018" x2="17.78" y2="19.939" width="0.1524" layer="22"/>
 </plain>
 <libraries>
 <library name="discrete" urn="urn:adsk.eagle:library:211">
