@@ -4263,6 +4263,11 @@ Super Speed pins not available on the 16-pin purely SMD connector so this part i
 <wire x1="104.14" y1="10.16" x2="101.6" y2="10.16" width="0.1524" layer="91"/>
 <junction x="104.14" y="10.16"/>
 <label x="96.52" y="10.16" size="1.778" layer="95"/>
+<pinref part="U1" gate="A" pin="TSTMODE"/>
+<wire x1="104.14" y1="33.02" x2="101.6" y2="33.02" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="33.02" x2="101.6" y2="12.7" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="12.7" x2="104.14" y2="12.7" width="0.1524" layer="91"/>
+<junction x="104.14" y="12.7"/>
 </segment>
 </net>
 <net name="RX" class="0">
@@ -4370,6 +4375,11 @@ Super Speed pins not available on the 16-pin purely SMD connector so this part i
 <wire x1="179.07" y1="81.28" x2="173.99" y2="81.28" width="0.1524" layer="91"/>
 <label x="170.18" y="81.28" size="1.778" layer="95"/>
 <pinref part="Q2" gate="MOS" pin="S"/>
+</segment>
+<segment>
+<pinref part="U1" gate="A" pin="BUSPWR"/>
+<wire x1="104.14" y1="30.48" x2="96.52" y2="30.48" width="0.1524" layer="91"/>
+<label x="88.9" y="30.48" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="D6" class="0">

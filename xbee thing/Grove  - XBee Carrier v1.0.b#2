@@ -1482,6 +1482,7 @@ design rules under a new name.</description>
 <wire x1="24.09268125" y1="45.566" x2="23.545" y2="45.566" width="0.2032" layer="16"/>
 <contactref element="U1" pad="7"/>
 <contactref element="U1" pad="28"/>
+<contactref element="U1" pad="31"/>
 <wire x1="40.19231875" y1="45.331" x2="40.16" y2="36.456" width="0" layer="19" extent="16-16"/>
 <wire x1="31.115" y1="41.91" x2="30.92768125" y2="45.331" width="0" layer="19" extent="16-16"/>
 <wire x1="29.21" y1="41.91" x2="31.115" y2="41.91" width="0" layer="19" extent="16-16"/>
@@ -1509,7 +1510,8 @@ design rules under a new name.</description>
 <wire x1="24.257" y1="6.668" x2="16.034" y2="12.08" width="0" layer="19" extent="16-16"/>
 <wire x1="30.3582" y1="8.6938" x2="27.159" y2="6.2871" width="0" layer="19" extent="16-16"/>
 <wire x1="-7.8486" y1="15.6464" x2="15.24" y2="18.415" width="0" layer="19" extent="1-16"/>
-<wire x1="-12.4714" y1="9.4234" x2="-7.8486" y2="15.6464" width="0" layer="19" extent="1-1"/>
+<wire x1="-10.2616" y1="15.6464" x2="-7.8486" y2="15.6464" width="0" layer="19" extent="1-1"/>
+<wire x1="-12.4714" y1="9.4234" x2="-10.2616" y2="15.6464" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="RX">
 <contactref element="R1" pad="2"/>
@@ -1637,8 +1639,10 @@ design rules under a new name.</description>
 <via x="18.161" y="32.766" extent="1-16" drill="0.381" diameter="0.8128"/>
 <contactref element="U4" pad="4"/>
 <contactref element="J4" pad="1"/>
+<contactref element="U1" pad="8"/>
 <wire x1="33.9404" y1="27.9714" x2="33.909" y2="28.0766" width="0" layer="19" extent="16-16"/>
 <wire x1="34.0106" y1="27.9738" x2="33.9404" y2="27.9714" width="0" layer="19" extent="16-16"/>
+<wire x1="-12.4714" y1="8.636" x2="14.224" y2="11.811" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="D6">
 <contactref element="J3" pad="3"/>
@@ -1929,7 +1933,6 @@ design rules under a new name.</description>
 <via x="18.9526" y="14.747" extent="1-16" drill="0.381" diameter="0.8128"/>
 <via x="22.606" y="25.1802" extent="1-16" drill="0.381" diameter="0.8128"/>
 <via x="36.125" y="33.14" extent="1-16" drill="0.381" diameter="0.8128"/>
-<wire x1="37.725" y1="34.84" x2="37.725" y2="34.896" width="0.8128" layer="1"/>
 <contactref element="D2" pad="+"/>
 <contactref element="R10" pad="2"/>
 <contactref element="U4" pad="20"/>
