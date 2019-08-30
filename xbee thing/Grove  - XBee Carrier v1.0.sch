@@ -3464,7 +3464,6 @@ Source: Epson Toyocom FC-12M.pdf</description>
 <sheets>
 <sheet>
 <plain>
-<text x="157.48" y="73.66" size="1.778" layer="91">RC for usb hub reset</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="-1.27" y="-1.27" smashed="yes">
@@ -3488,13 +3487,13 @@ Source: Epson Toyocom FC-12M.pdf</description>
 <attribute name="NAME" x="30.48" y="101.6" size="1.778" layer="95"/>
 <attribute name="VALUE" x="29.845" y="83.82" size="1.778" layer="96"/>
 </instance>
-<instance part="U4" gate="1" x="43.18" y="46.99" smashed="yes">
-<attribute name="NAME" x="33.02" y="73.66" size="1.778" layer="95"/>
-<attribute name="VALUE" x="39.37" y="16.51" size="1.778" layer="96"/>
+<instance part="U4" gate="1" x="35.56" y="41.91" smashed="yes">
+<attribute name="NAME" x="25.4" y="68.58" size="1.778" layer="95"/>
+<attribute name="VALUE" x="31.75" y="11.43" size="1.778" layer="96"/>
 </instance>
-<instance part="C3" gate="C" x="19.05" y="69.85" smashed="yes">
-<attribute name="NAME" x="15.24" y="70.485" size="1.778" layer="95"/>
-<attribute name="VALUE" x="13.97" y="66.675" size="1.778" layer="96"/>
+<instance part="C3" gate="C" x="11.43" y="64.77" smashed="yes">
+<attribute name="NAME" x="7.62" y="65.405" size="1.778" layer="95"/>
+<attribute name="VALUE" x="6.35" y="61.595" size="1.778" layer="96"/>
 </instance>
 <instance part="C2" gate="C" x="57.15" y="88.9" smashed="yes">
 <attribute name="NAME" x="53.34" y="89.535" size="1.778" layer="95"/>
@@ -3508,29 +3507,29 @@ Source: Epson Toyocom FC-12M.pdf</description>
 <attribute name="NAME" x="11.43" y="94.615" size="1.778" layer="95"/>
 <attribute name="VALUE" x="10.795" y="90.805" size="1.778" layer="96"/>
 </instance>
-<instance part="R1" gate="R" x="68.58" y="69.85" smashed="yes">
-<attribute name="NAME" x="64.135" y="70.485" size="1.778" layer="95" ratio="10"/>
-<attribute name="VALUE" x="69.85" y="69.85" size="1.778" layer="96" ratio="10"/>
+<instance part="R1" gate="R" x="60.96" y="64.77" smashed="yes">
+<attribute name="NAME" x="56.515" y="65.405" size="1.778" layer="95" ratio="10"/>
+<attribute name="VALUE" x="62.23" y="64.77" size="1.778" layer="96" ratio="10"/>
 </instance>
-<instance part="R3" gate="R" x="68.58" y="67.31" smashed="yes">
-<attribute name="NAME" x="64.135" y="67.31" size="1.778" layer="95" ratio="10"/>
-<attribute name="VALUE" x="69.85" y="67.31" size="1.778" layer="96" ratio="10"/>
+<instance part="R3" gate="R" x="60.96" y="62.23" smashed="yes">
+<attribute name="NAME" x="56.515" y="62.23" size="1.778" layer="95" ratio="10"/>
+<attribute name="VALUE" x="62.23" y="62.23" size="1.778" layer="96" ratio="10"/>
 </instance>
-<instance part="RX" gate="LED" x="76.2" y="46.99" smashed="yes" rot="R180">
-<attribute name="NAME" x="81.915" y="49.53" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="82.55" y="46.355" size="1.778" layer="96" rot="R180"/>
+<instance part="RX" gate="LED" x="68.58" y="41.91" smashed="yes" rot="R180">
+<attribute name="NAME" x="74.295" y="44.45" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="74.93" y="41.275" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="TX" gate="LED" x="76.2" y="39.37" smashed="yes" rot="R180">
-<attribute name="NAME" x="81.28" y="41.275" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="82.55" y="39.37" size="1.778" layer="96" rot="R180"/>
+<instance part="TX" gate="LED" x="68.58" y="34.29" smashed="yes" rot="R180">
+<attribute name="NAME" x="73.66" y="36.195" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="74.93" y="34.29" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="R7" gate="R" x="87.63" y="39.37" smashed="yes">
-<attribute name="NAME" x="83.185" y="39.37" size="1.778" layer="95" ratio="10"/>
-<attribute name="VALUE" x="89.535" y="39.37" size="1.778" layer="96" ratio="10"/>
+<instance part="R7" gate="R" x="80.01" y="34.29" smashed="yes">
+<attribute name="NAME" x="75.565" y="34.29" size="1.778" layer="95" ratio="10"/>
+<attribute name="VALUE" x="81.915" y="34.29" size="1.778" layer="96" ratio="10"/>
 </instance>
-<instance part="R9" gate="R" x="87.63" y="46.99" smashed="yes">
-<attribute name="NAME" x="83.185" y="47.625" size="1.778" layer="95" ratio="10"/>
-<attribute name="VALUE" x="89.535" y="47.625" size="1.778" layer="96" ratio="10"/>
+<instance part="R9" gate="R" x="80.01" y="41.91" smashed="yes">
+<attribute name="NAME" x="75.565" y="42.545" size="1.778" layer="95" ratio="10"/>
+<attribute name="VALUE" x="81.915" y="42.545" size="1.778" layer="96" ratio="10"/>
 </instance>
 <instance part="ASSOC" gate="LED" x="151.13" y="147.32" smashed="yes">
 <attribute name="NAME" x="153.67" y="147.955" size="1.778" layer="95"/>
@@ -3581,13 +3580,13 @@ Source: Epson Toyocom FC-12M.pdf</description>
 <attribute name="NAME" x="98.425" y="74.93" size="1.778" layer="95" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="95.885" y="74.93" size="1.778" layer="96" ratio="10" rot="R270"/>
 </instance>
-<instance part="R2" gate="R" x="176.53" y="60.96" smashed="yes" rot="R270">
-<attribute name="NAME" x="173.99" y="63.5" size="1.778" layer="95" ratio="10" rot="R270"/>
-<attribute name="VALUE" x="177.8" y="62.865" size="1.778" layer="96" ratio="10" rot="R270"/>
+<instance part="R2" gate="R" x="173.99" y="78.74" smashed="yes" rot="R270">
+<attribute name="NAME" x="171.45" y="81.28" size="1.778" layer="95" ratio="10" rot="R270"/>
+<attribute name="VALUE" x="175.26" y="80.645" size="1.778" layer="96" ratio="10" rot="R270"/>
 </instance>
-<instance part="C6" gate="C" x="176.53" y="50.8" smashed="yes" rot="R270">
-<attribute name="NAME" x="177.165" y="49.53" size="1.778" layer="95" ratio="10" rot="R270"/>
-<attribute name="VALUE" x="174.625" y="49.53" size="1.778" layer="96" ratio="10" rot="R270"/>
+<instance part="C6" gate="C" x="173.99" y="68.58" smashed="yes" rot="R270">
+<attribute name="NAME" x="174.625" y="67.31" size="1.778" layer="95" ratio="10" rot="R270"/>
+<attribute name="VALUE" x="172.085" y="67.31" size="1.778" layer="96" ratio="10" rot="R270"/>
 </instance>
 <instance part="R6" gate="R" x="94.996" y="36.322" smashed="yes" rot="R180">
 <attribute name="NAME" x="97.536" y="38.862" size="1.778" layer="95" ratio="10" rot="R180"/>
@@ -3701,26 +3700,26 @@ Source: Epson Toyocom FC-12M.pdf</description>
 <pinref part="C4" gate="C" pin="2"/>
 </segment>
 <segment>
-<wire x1="15.24" y1="69.85" x2="11.43" y2="69.85" width="0.1524" layer="91"/>
-<label x="8.89" y="70.485" size="1.778" layer="95"/>
+<wire x1="7.62" y1="64.77" x2="3.81" y2="64.77" width="0.1524" layer="91"/>
+<label x="-1.27" y="62.865" size="1.778" layer="95"/>
 <pinref part="C3" gate="C" pin="1"/>
 </segment>
 <segment>
-<wire x1="30.48" y1="29.21" x2="24.13" y2="29.21" width="0.1524" layer="91"/>
-<label x="24.13" y="29.21" size="1.778" layer="95"/>
+<wire x1="22.86" y1="24.13" x2="16.51" y2="24.13" width="0.1524" layer="91"/>
+<label x="16.51" y="24.13" size="1.778" layer="95"/>
 <pinref part="U4" gate="1" pin="GND@A"/>
 </segment>
 <segment>
-<wire x1="58.42" y1="26.67" x2="60.96" y2="26.67" width="0.1524" layer="91"/>
-<wire x1="60.96" y1="26.67" x2="60.96" y2="31.75" width="0.1524" layer="91"/>
-<wire x1="60.96" y1="31.75" x2="58.42" y2="31.75" width="0.1524" layer="91"/>
-<wire x1="60.96" y1="26.67" x2="60.96" y2="24.13" width="0.1524" layer="91"/>
-<wire x1="60.96" y1="24.13" x2="60.96" y2="21.59" width="0.1524" layer="91"/>
-<wire x1="60.96" y1="21.59" x2="58.42" y2="21.59" width="0.1524" layer="91"/>
-<wire x1="58.42" y1="24.13" x2="60.96" y2="24.13" width="0.1524" layer="91"/>
-<junction x="60.96" y="26.67"/>
-<junction x="60.96" y="24.13"/>
-<label x="62.23" y="24.13" size="1.778" layer="95"/>
+<wire x1="50.8" y1="21.59" x2="53.34" y2="21.59" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="21.59" x2="53.34" y2="26.67" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="26.67" x2="50.8" y2="26.67" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="21.59" x2="53.34" y2="19.05" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="19.05" x2="53.34" y2="16.51" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="16.51" x2="50.8" y2="16.51" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="19.05" x2="53.34" y2="19.05" width="0.1524" layer="91"/>
+<junction x="53.34" y="21.59"/>
+<junction x="53.34" y="19.05"/>
+<label x="54.61" y="19.05" size="1.778" layer="95"/>
 <pinref part="U4" gate="1" pin="GND"/>
 <pinref part="U4" gate="1" pin="TEST"/>
 <pinref part="U4" gate="1" pin="GND@2"/>
@@ -3777,9 +3776,9 @@ Source: Epson Toyocom FC-12M.pdf</description>
 </segment>
 <segment>
 <pinref part="C6" gate="C" pin="-"/>
-<wire x1="176.53" y1="46.99" x2="176.53" y2="45.72" width="0.1524" layer="91"/>
-<wire x1="176.53" y1="45.72" x2="185.42" y2="45.72" width="0.1524" layer="91"/>
-<label x="185.42" y="45.72" size="1.778" layer="95"/>
+<wire x1="173.99" y1="64.77" x2="173.99" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="173.99" y1="63.5" x2="182.88" y2="63.5" width="0.1524" layer="91"/>
+<label x="182.88" y="63.5" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="R12" gate="R" pin="1"/>
@@ -3815,8 +3814,8 @@ Source: Epson Toyocom FC-12M.pdf</description>
 <wire x1="127.762" y1="134.62" x2="127.762" y2="137.922" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<wire x1="72.39" y1="69.85" x2="76.2" y2="69.85" width="0.1524" layer="91"/>
-<label x="73.66" y="69.85" size="1.778" layer="95"/>
+<wire x1="64.77" y1="64.77" x2="68.58" y2="64.77" width="0.1524" layer="91"/>
+<label x="66.04" y="64.77" size="1.778" layer="95"/>
 <pinref part="R1" gate="R" pin="2"/>
 </segment>
 </net>
@@ -3833,8 +3832,8 @@ Source: Epson Toyocom FC-12M.pdf</description>
 <wire x1="127.762" y1="142.24" x2="127.762" y2="143.002" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<wire x1="72.39" y1="67.31" x2="76.2" y2="67.31" width="0.1524" layer="91"/>
-<label x="73.66" y="67.31" size="1.778" layer="95"/>
+<wire x1="64.77" y1="62.23" x2="68.58" y2="62.23" width="0.1524" layer="91"/>
+<label x="66.04" y="62.23" size="1.778" layer="95"/>
 <pinref part="R3" gate="R" pin="2"/>
 </segment>
 </net>
@@ -3881,15 +3880,15 @@ Source: Epson Toyocom FC-12M.pdf</description>
 <pinref part="C4" gate="C" pin="1"/>
 </segment>
 <segment>
-<wire x1="30.48" y1="67.31" x2="24.13" y2="67.31" width="0.1524" layer="91"/>
-<label x="20.955" y="65.405" size="1.778" layer="95"/>
+<wire x1="22.86" y1="62.23" x2="16.51" y2="62.23" width="0.1524" layer="91"/>
+<label x="13.335" y="60.325" size="1.778" layer="95"/>
 <pinref part="U4" gate="1" pin="VCCIO"/>
 </segment>
 <segment>
-<wire x1="91.44" y1="46.99" x2="96.52" y2="46.99" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="46.99" x2="96.52" y2="39.37" width="0.1524" layer="91"/>
-<wire x1="96.52" y1="39.37" x2="91.44" y2="39.37" width="0.1524" layer="91"/>
-<label x="95.25" y="47.625" size="1.778" layer="95"/>
+<wire x1="83.82" y1="41.91" x2="88.9" y2="41.91" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="41.91" x2="88.9" y2="34.29" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="34.29" x2="83.82" y2="34.29" width="0.1524" layer="91"/>
+<label x="87.63" y="42.545" size="1.778" layer="95"/>
 <pinref part="R9" gate="R" pin="2"/>
 <pinref part="R7" gate="R" pin="2"/>
 </segment>
@@ -3908,8 +3907,8 @@ Source: Epson Toyocom FC-12M.pdf</description>
 </segment>
 <segment>
 <pinref part="R2" gate="R" pin="1"/>
-<wire x1="176.53" y1="64.77" x2="176.53" y2="71.12" width="0.1524" layer="91"/>
-<label x="177.8" y="71.12" size="1.778" layer="95"/>
+<wire x1="173.99" y1="82.55" x2="173.99" y2="88.9" width="0.1524" layer="91"/>
+<label x="175.26" y="88.9" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U1" gate="A" pin="EEDATA/GANGED"/>
@@ -4077,8 +4076,8 @@ Source: Epson Toyocom FC-12M.pdf</description>
 <wire x1="127.762" y1="107.95" x2="127.762" y2="107.442" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<wire x1="58.42" y1="59.69" x2="68.58" y2="59.69" width="0.1524" layer="91"/>
-<label x="63.5" y="59.69" size="1.778" layer="95"/>
+<wire x1="50.8" y1="54.61" x2="60.96" y2="54.61" width="0.1524" layer="91"/>
+<label x="55.88" y="54.61" size="1.778" layer="95"/>
 <pinref part="U4" gate="1" pin="!DTR"/>
 </segment>
 </net>
@@ -4135,8 +4134,8 @@ Source: Epson Toyocom FC-12M.pdf</description>
 </net>
 <net name="USB_5V" class="0">
 <segment>
-<wire x1="30.48" y1="69.85" x2="22.86" y2="69.85" width="0.1524" layer="91"/>
-<label x="26.035" y="69.85" size="1.778" layer="95" rot="R90"/>
+<wire x1="22.86" y1="64.77" x2="15.24" y2="64.77" width="0.1524" layer="91"/>
+<label x="18.415" y="64.77" size="1.778" layer="95" rot="R90"/>
 <pinref part="U4" gate="1" pin="VCC"/>
 <pinref part="C3" gate="C" pin="2"/>
 </segment>
@@ -4165,8 +4164,8 @@ Source: Epson Toyocom FC-12M.pdf</description>
 </net>
 <net name="D-" class="0">
 <segment>
-<wire x1="30.48" y1="34.29" x2="24.13" y2="34.29" width="0.1524" layer="91"/>
-<label x="25.4" y="34.29" size="1.778" layer="95"/>
+<wire x1="22.86" y1="29.21" x2="16.51" y2="29.21" width="0.1524" layer="91"/>
+<label x="17.78" y="29.21" size="1.778" layer="95"/>
 <pinref part="U4" gate="1" pin="USBDM"/>
 </segment>
 <segment>
@@ -4184,8 +4183,8 @@ Source: Epson Toyocom FC-12M.pdf</description>
 </net>
 <net name="D+" class="0">
 <segment>
-<wire x1="30.48" y1="36.83" x2="24.13" y2="36.83" width="0.1524" layer="91"/>
-<label x="25.4" y="36.83" size="1.778" layer="95"/>
+<wire x1="22.86" y1="31.75" x2="16.51" y2="31.75" width="0.1524" layer="91"/>
+<label x="17.78" y="31.75" size="1.778" layer="95"/>
 <pinref part="U4" gate="1" pin="USBDP"/>
 </segment>
 <segment>
@@ -4205,48 +4204,48 @@ Source: Epson Toyocom FC-12M.pdf</description>
 </net>
 <net name="TXD" class="0">
 <segment>
-<wire x1="58.42" y1="69.85" x2="64.77" y2="69.85" width="0.1524" layer="91"/>
-<label x="58.42" y="70.485" size="1.778" layer="95"/>
+<wire x1="50.8" y1="64.77" x2="57.15" y2="64.77" width="0.1524" layer="91"/>
+<label x="50.8" y="65.405" size="1.778" layer="95"/>
 <pinref part="U4" gate="1" pin="TXD"/>
 <pinref part="R1" gate="R" pin="1"/>
 </segment>
 </net>
 <net name="RXD" class="0">
 <segment>
-<wire x1="58.42" y1="67.31" x2="64.77" y2="67.31" width="0.1524" layer="91"/>
-<label x="58.42" y="67.945" size="1.778" layer="95"/>
+<wire x1="50.8" y1="62.23" x2="57.15" y2="62.23" width="0.1524" layer="91"/>
+<label x="50.8" y="62.865" size="1.778" layer="95"/>
 <pinref part="U4" gate="1" pin="RXD"/>
 <pinref part="R3" gate="R" pin="1"/>
 </segment>
 </net>
 <net name="RX_LED" class="0">
 <segment>
-<wire x1="58.42" y1="46.99" x2="72.39" y2="46.99" width="0.1524" layer="91"/>
-<label x="60.96" y="46.99" size="1.778" layer="95"/>
+<wire x1="50.8" y1="41.91" x2="64.77" y2="41.91" width="0.1524" layer="91"/>
+<label x="53.34" y="41.91" size="1.778" layer="95"/>
 <pinref part="U4" gate="1" pin="CBUS0"/>
 <pinref part="RX" gate="LED" pin="-"/>
 </segment>
 </net>
 <net name="TX_LED" class="0">
 <segment>
-<wire x1="58.42" y1="44.45" x2="66.04" y2="44.45" width="0.1524" layer="91"/>
-<wire x1="66.04" y1="44.45" x2="66.04" y2="39.37" width="0.1524" layer="91"/>
-<wire x1="66.04" y1="39.37" x2="72.39" y2="39.37" width="0.1524" layer="91"/>
-<label x="60.325" y="41.91" size="1.778" layer="95"/>
+<wire x1="50.8" y1="39.37" x2="58.42" y2="39.37" width="0.1524" layer="91"/>
+<wire x1="58.42" y1="39.37" x2="58.42" y2="34.29" width="0.1524" layer="91"/>
+<wire x1="58.42" y1="34.29" x2="64.77" y2="34.29" width="0.1524" layer="91"/>
+<label x="52.705" y="36.83" size="1.778" layer="95"/>
 <pinref part="U4" gate="1" pin="CBUS1"/>
 <pinref part="TX" gate="LED" pin="-"/>
 </segment>
 </net>
 <net name="N$15" class="0">
 <segment>
-<wire x1="80.01" y1="46.99" x2="83.82" y2="46.99" width="0.1524" layer="91"/>
+<wire x1="72.39" y1="41.91" x2="76.2" y2="41.91" width="0.1524" layer="91"/>
 <pinref part="RX" gate="LED" pin="+"/>
 <pinref part="R9" gate="R" pin="1"/>
 </segment>
 </net>
 <net name="N$16" class="0">
 <segment>
-<wire x1="83.82" y1="39.37" x2="80.01" y2="39.37" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="34.29" x2="72.39" y2="34.29" width="0.1524" layer="91"/>
 <pinref part="R7" gate="R" pin="1"/>
 <pinref part="TX" gate="LED" pin="+"/>
 </segment>
@@ -4368,11 +4367,11 @@ Source: Epson Toyocom FC-12M.pdf</description>
 </segment>
 <segment>
 <pinref part="R2" gate="R" pin="2"/>
-<wire x1="176.53" y1="57.15" x2="185.42" y2="57.15" width="0.1524" layer="91"/>
-<label x="180.848" y="57.15" size="1.778" layer="95"/>
+<wire x1="173.99" y1="74.93" x2="182.88" y2="74.93" width="0.1524" layer="91"/>
+<label x="178.308" y="74.93" size="1.778" layer="95"/>
 <pinref part="C6" gate="C" pin="+"/>
-<wire x1="176.53" y1="57.15" x2="176.53" y2="54.61" width="0.1524" layer="91"/>
-<junction x="176.53" y="57.15"/>
+<wire x1="173.99" y1="74.93" x2="173.99" y2="72.39" width="0.1524" layer="91"/>
+<junction x="173.99" y="74.93"/>
 </segment>
 </net>
 <net name="USB_OVRCUR" class="0">
