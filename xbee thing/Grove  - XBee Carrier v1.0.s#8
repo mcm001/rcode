@@ -3633,6 +3633,9 @@ Source: Epson Toyocom FC-12M.pdf</description>
 <pinref part="J7" gate="J1" pin="GND"/>
 <wire x1="215.9" y1="40.64" x2="220.98" y2="40.64" width="0.1524" layer="91"/>
 <label x="220.98" y="40.64" size="1.778" layer="95"/>
+<pinref part="J7" gate="J1" pin="SHLD"/>
+<wire x1="215.9" y1="43.18" x2="215.9" y2="40.64" width="0.1524" layer="91"/>
+<junction x="215.9" y="40.64"/>
 </segment>
 <segment>
 <pinref part="R14" gate="R" pin="1"/>
@@ -4000,8 +4003,6 @@ Source: Epson Toyocom FC-12M.pdf</description>
 <wire x1="215.9" y1="55.88" x2="233.68" y2="55.88" width="0.1524" layer="91"/>
 <label x="233.68" y="55.88" size="1.778" layer="95"/>
 </segment>
-</net>
-<net name="VBET_OUT" class="0">
 <segment>
 <wire x1="10.16" y1="88.9" x2="25.4" y2="88.9" width="0.1524" layer="91"/>
 <wire x1="25.4" y1="99.06" x2="10.16" y2="99.06" width="0.1524" layer="91"/>
@@ -4114,18 +4115,20 @@ Source: Epson Toyocom FC-12M.pdf</description>
 <label x="146.05" y="106.68" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$3" class="0">
+<net name="USBC_CC1" class="0">
 <segment>
 <pinref part="J7" gate="J1" pin="CC1"/>
 <pinref part="R14" gate="R" pin="2"/>
 <wire x1="215.9" y1="48.26" x2="223.52" y2="48.26" width="0.1524" layer="91"/>
+<label x="218.44" y="48.26" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$10" class="0">
+<net name="USBC_CC2" class="0">
 <segment>
 <pinref part="R15" gate="R" pin="2"/>
 <pinref part="J7" gate="J1" pin="CC2"/>
 <wire x1="228.6" y1="45.72" x2="215.9" y2="45.72" width="0.1524" layer="91"/>
+<label x="218.44" y="45.72" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ROOTD+" class="0">
