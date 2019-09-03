@@ -1,11 +1,102 @@
-<html>
-   <body>
-      <form action = "http://localhost:5000/result" method = "POST">
-         <p>Name <input type = "text" name = "Name" /></p>
-         <p>Physics <input type = "text" name = "Physics" /></p>
-         <p>Chemistry <input type = "text" name = "chemistry" /></p>
-         <p>Maths <input type ="text" name = "Mathematics" /></p>
-         <p><input type = "submit" value = "submit" /></p>
+<!DOCTYPE html>
+  <html>
+  
+  <head>
+      <meta charset="utf-8">
+      <title>Match Scouting Form</title>
+      <style>
+        form {
+          /* Just to center the form on the page */
+          margin: 0 auto;
+          width: 800px;
+          /* To see the outline of the form */
+          padding: 1em;
+          border: 1px solid #CCC;
+          border-radius: 1em;
+        }
+  
+        form div + div {
+          margin-top: 1em;
+        }
+  
+        label {
+          /* To make sure that all labels have the same size and are properly aligned */
+          display: inline-block;
+          width: 200px;
+          text-align: right;
+        }
+  
+        input, textarea {
+          /* To make sure that all text fields have the same font settings By default, textareas have a monospace font */
+          font: 1em sans-serif;
+          /* To give the same size to all text fields */
+          width: 300px;
+          box-sizing: border-box; /* To harmonize the look & feel of text field border */
+          border: 1px solid #999;
+        }
+  
+        input:focus, textarea:focus {
+          /* To give a little highlight on active elements */
+          border-color: #000;
+        }
+  
+        textarea {
+          /* To properly align multiline text fields with their labels */
+          vertical-align: top;
+          /* To give enough room to type some text */
+          height: 5em;
+        }
+  
+        .button {
+          /* To position the buttons to the same position of the text fields */
+          padding-left: 90px;
+          /* same size as the label elements */
+        }
+  
+        button {
+          /* This extra margin represent roughly the same space as the space between the labels and their text fields */
+          margin-left: .5em;
+        }
+      </style>
+  </head>
+  
+  <body>
+      <form action="/result" method="post">
+          <div> <label for="teamNum">Team number:</label> <input type="number" id="teamNum" name="teamNum"> </div>
+          <div> <label for="matchTpe">Match type:</label> <select name="matchTpe"> 
+            <option value="practice">Practice</option>
+            <option value="qual">Qualification</option>
+            <option value="elim">Elimination</option>
+          </select> </div>
+          <div> <label for="teamNum">Match number:</label> <input type="number" id="matchNum" name="matchNum"> </div>
+          <div> <label for="robotPos">Robot position:</label> <select name="robotPos"> 
+            <option value="B1">Blue 1</option>
+            <option value="B2">Blue 2</option>
+            <option value="B3">Blue 3</option>
+            <option value="R1">Red 1</option>
+            <option value="R2">Red 2</option>
+            <option value="R3">Red 3</option>
+          </select> </div>
+
+          <div> <label for="HPShipSand">Cargo Ship Hatches Sandstorm:</label> <input type="number" id="HPShipSand" name="HPShipSand"> </div>
+          <div> <label for="HPRocketSand">Rocket Hatches Sandstorm:</label> <input type="number" id="HPRocketSand" name="HPRocketSand"> </div>
+          <div> <label for="HPDropSand">Dropped Hatches Sandstorm:</label> <input type="number" id="HPDropSand" name="HPDropSand"> </div>
+          <div> <label for="CShipSand">Cargo Ship Cargo Sandstorm:</label> <input type="number" id="CShipSand" name="CShipSand"> </div>
+          <div> <label for="CRocketSand">Rocket Cargo Sandstorm:</label> <input type="number" id="CRocketSand" name="CRocketSand"> </div>
+          <div> <label for="CDropSand">Dropped Cargo Sandstorm:</label> <input type="number" id="CDropSand" name="CDropSand"> </div>
+
+          <div> <label for="HPShipGame">Cargo Ship Hatches Game:</label> <input type="number" id="HPShipGame" name="HPShipGame"> </div>
+          <div> <label for="HPRocketGame">Rocket Hatches Game:</label> <input type="number" id="HPRocketGame" name="HPRocketGame"> </div>
+          <div> <label for="HPDropGame">Dropped Hatches Game:</label> <input type="number" id="HPDropGame" name="HPDropGame"> </div>
+          <div> <label for="CShipGame">Cargo Ship Cargo Game:</label> <input type="number" id="CShipGame" name="CShipGame"> </div>
+          <div> <label for="CRocketGame">Rocket Cargo Game:</label> <input type="number" id="CRocketGame" name="CRocketGame"> </div>
+          <div> <label for="CDropGame">Dropped Cargo Game:</label> <input type="number" id="CDropGame" name="CDropGame"> </div>
+
+
+          <div class="button">
+            <button type="submit"><b>S3NDIT</b></button>
+          </div>
       </form>
-   </body>
-</html>
+  </body>
+  
+  </html>

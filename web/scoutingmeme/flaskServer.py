@@ -9,7 +9,9 @@ def student():
 def result():
    if request.method == 'POST':
       result = request.form
-      return render_template("result.html",result = result)
+      print(result)
+      # return render_template("result.html",result = result)
+      return student()
 
 if __name__ == '__main__':
    app.run(debug = True)
