@@ -2,8 +2,8 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 @app.route('/')
-def student():
-   return render_template('student.html')
+def matchData():
+   return render_template('matchData.html')
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
@@ -11,7 +11,7 @@ def result():
       result = request.form
       print(result)
       # return render_template("result.html",result = result)
-      return student()
+      return matchData()
 
 if __name__ == '__main__':
    app.run(debug = True)
