@@ -1,17 +1,15 @@
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
-@app.route('/')
-def matchData():
-   return render_template('matchData.html')
-
-@app.route('/result',methods = ['POST', 'GET'])
-def result():
+@app.route('/scout', methods = ['POST', 'GET'])
+def scoutAMatch():
    if request.method == 'POST':
+      # Handle POST requests from hitting submit
       result = request.form
       print(result)
-      # return render_template("result.html",result = result)
-      return matchData()
+
+   #Point back to the main form page
+   return render_template('matchData.html')
 
 if __name__ == '__main__':
    app.run(debug = True)
