@@ -2,7 +2,7 @@ d-student (NEW!)
 psk=Obnubilate/Blancmange
 
 d-guest
-psk=CapitolTheater1976
+psk=nestcepas
 d-phone
 psk=secretmenu
 
