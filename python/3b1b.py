@@ -26,13 +26,12 @@ class PendulumScene(Scene):
         },
         "vector_field_config": {
             # "max_magnitude": 2,
-            "delta_x": 0.8,
-            "delta_y": 0.8,
-            "x_max": 15
-            # "min_arc_length": 0.0,
-            # "max_arc_length": 6.5,
+            "delta_x": 0.5,
+            "delta_y": 0.5,
+            # "x_max": 6,
+            "length_func": lambda norm: 0.6 * sigmoid(norm)
             # "color_by_arc_length": True,
-            # "colors": [BLUE, RED]
+            # "colors": [BLUE_E, GREEN, YELLOW, RED]
         },
         "coordinate_plane_config": {
             "x_max": 5 * PI / 2,
@@ -45,14 +44,14 @@ class PendulumScene(Scene):
         self.create_vector_field()
 
         pendulum = self.pendulum
-        pendulum.move_to(BOTTOM + LEFT_SIDE + 2 * RIGHT + 2 * UP)
+        pendulum.move_to(BOTTOM + LEFT_SIDE + 2.5 * RIGHT + 2 * UP)
         pendulum.add_background_rectangle(opacity=1.0)
-        pendulum.background_rectangle.set_width(4).shift(LEFT * 0.8)
+        pendulum.background_rectangle.set_width(4.5).shift(LEFT * 0.8)
         pendulum.scale_in_place(0.7)
         self.add(pendulum)
 
         # self.wait(20)
-        self.wait(3)
+        self.wait(5)
 
     def create_vector_field(self):
         plane = self.plane = NumberPlane(**self.coordinate_plane_config)
@@ -64,14 +63,14 @@ class PendulumScene(Scene):
         vector_field = self.vector_field = VectorField(self.pendulum_function, **self.vector_field_config)
         self.vector_field.sort(get_norm)
 
-        point = self.point = Dot().set_color(RED)
+        point = self.point = Dot().set_color(GREEN)
         point.scale_in_place(1)
         point.set_x(self.pendulum.get_theta())
         point.set_y(self.pendulum.get_omega())
         point.add_updater(self.update_state_point)
 
         # self.play(ShowCreation(field))
-        self.add(plane, vector_field)
+        self.add(plane, vector_field, point)
 
     def update_state_point(self, point: Point):
         point.set_x(self.pendulum.get_theta())
@@ -79,18 +78,23 @@ class PendulumScene(Scene):
 
     def pendulum_function(self, point):
         x, y = self.plane.point_to_coords(point)
-
-        # x_dot = np.array([[y], [-9.806 / 2.0 * math.sin(x)]]) + np.array([[0], [4.903]])
-        # x_dot = np.array([[1.0], [0.0]])
         x_dot = np.array([[0, 1], [-9.8 / self.pendulum.length, 0]]) @ (np.array([[math.sin(x)], [y]]))
-
-        return x_dot
+        return np.array([x_dot[0, 0], x_dot[1, 0], 0.0])
 
     def create_pendulum_but_dont_add(self):
         pendulum = self.pendulum = Pendulum(**self.pendulum_config)
         pendulum.add_theta_label()
         pendulum.add_velocity_vector()
         pendulum.start_swinging()
+
+
+def pendulum_vector_field_func(point, mu=0.1, g=9.8, L=3):
+    x, y = point[:2]
+    return np.array([
+        y,
+        -np.sqrt(g / L) * np.sin(x) - mu * y,
+        0,
+    ])
 
 
 class Pendulum(VGroup):
@@ -287,128 +291,3 @@ class Pendulum(VGroup):
         self.set_theta(theta)
         self.set_omega(omega)
         return self
-
-
-class OpeningManimExample(Scene):
-    def construct(self):
-        title = TextMobject("This is some \\LaTeX")
-        basel = TexMobject(
-            "\\sum_{n=1}^\\infty "
-            "\\frac{1}{n^2} = \\frac{\\pi^2}{6}"
-        )
-        VGroup(title, basel).arrange(DOWN)
-        self.play(
-            Write(title),
-            FadeInFrom(basel, UP),
-        )
-        self.wait()
-
-        transform_title = TextMobject("That was a transform")
-        transform_title.to_corner(UP + LEFT)
-        self.play(
-            Transform(title, transform_title),
-            LaggedStart(*map(FadeOutAndShiftDown, basel)),
-        )
-        self.wait()
-
-        grid = NumberPlane()
-        grid_title = TextMobject("This is a grid")
-        grid_title.scale(1.5)
-        grid_title.move_to(transform_title)
-
-        self.add(grid, grid_title)  # Make sure title is on top of grid
-        self.play(
-            FadeOut(title),
-            FadeInFromDown(grid_title),
-            ShowCreation(grid, run_time=3, lag_ratio=0.1),
-        )
-        self.wait()
-
-        grid_transform_title = TextMobject(
-            "That was a non-linear function \\\\"
-            "applied to the grid"
-        )
-        grid_transform_title.move_to(grid_title, UL)
-        grid.prepare_for_nonlinear_transform()
-        self.play(
-            grid.apply_function,
-            lambda p: p + np.array([
-                np.sin(p[1]),
-                np.sin(p[0]),
-                0,
-            ]),
-            run_time=3,
-        )
-        self.wait()
-        self.play(
-            Transform(grid_title, grid_transform_title)
-        )
-        self.wait()
-
-
-class SquareToCircle(Scene):
-    def construct(self):
-        circle = Circle()
-        square = Square()
-        square.flip(RIGHT)
-        square.rotate(-3 * TAU / 8)
-        circle.set_fill(PINK, opacity=0.5)
-
-        self.play(ShowCreation(square))
-        self.play(Transform(square, circle))
-        self.play(FadeOut(square))
-
-
-class WarpSquare(Scene):
-    def construct(self):
-        square = Square()
-        self.play(ApplyPointwiseFunction(
-            lambda point: complex_to_R3(np.exp(R3_to_complex(point))),
-            square
-        ))
-        self.wait()
-
-
-class WriteStuff(Scene):
-    def construct(self):
-        example_text = TextMobject(
-            "This is a some text",
-            tex_to_color_map={"text": YELLOW}
-        )
-        example_tex = TexMobject(
-            "\\sum_{k=1}^\\infty {1 \\over k^2} = {\\pi^2 \\over 6}",
-        )
-        group = VGroup(example_text, example_tex)
-        group.arrange(DOWN)
-        group.set_width(FRAME_WIDTH - 2 * LARGE_BUFF)
-
-        self.play(Write(example_text))
-        self.play(Write(example_tex))
-        self.wait()
-
-
-class UpdatersExample(Scene):
-    def construct(self):
-        decimal = DecimalNumber(
-            0,
-            show_ellipsis=True,
-            num_decimal_places=3,
-            include_sign=True,
-        )
-        square = Square().to_edge(UP)
-
-        decimal.add_updater(lambda d: d.next_to(square, RIGHT))
-        decimal.add_updater(lambda d: d.set_value(square.get_center()[1]))
-        self.add(square, decimal)
-        self.play(
-            square.to_edge, DOWN,
-            rate_func=there_and_back,
-            run_time=5,
-        )
-        self.wait()
-
-# See old_projects folder for many, many more
-
-
-
-
