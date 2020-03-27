@@ -16,8 +16,10 @@ from manimlib.imports import *
 # for a 1920x1080 video)
 
 
-class PendulumScene(Scene):
+class PendulumCirclingOrigin(Scene):
     CONFIG = {
+        "extra_torque": lambda point: 0.0,
+        "point_vector_max_len": 4.0,
         "pendulum_config": {
             "initial_theta": 50 * DEGREES,
             "length": 2.0,
@@ -26,8 +28,8 @@ class PendulumScene(Scene):
         },
         "vector_field_config": {
             # "max_magnitude": 2,
-            "delta_x": 0.5,
-            "delta_y": 0.5,
+            "delta_x": 0.5 * 1.5,
+            "delta_y": 0.5 * 1.5,
             # "x_max": 6,
             "length_func": lambda norm: 0.6 * sigmoid(norm)
             # "color_by_arc_length": True,
@@ -50,10 +52,11 @@ class PendulumScene(Scene):
         pendulum.scale_in_place(0.7)
         self.add(pendulum)
 
-        # self.wait(20)
-        self.wait(5)
+        self.wait(20)
+        # self.wait(2)
 
     def create_vector_field(self):
+        pendulum: Pendulum = self.pendulum
         plane = self.plane = NumberPlane(**self.coordinate_plane_config)
         plane.add(plane.y_axis.get_labels())
 
@@ -63,14 +66,29 @@ class PendulumScene(Scene):
         vector_field = self.vector_field = VectorField(self.pendulum_function, **self.vector_field_config)
         self.vector_field.sort(get_norm)
 
-        point = self.point = Dot().set_color(GREEN)
-        point.scale_in_place(1)
-        point.set_x(self.pendulum.get_theta())
-        point.set_y(self.pendulum.get_omega())
-        point.add_updater(self.update_state_point)
+        def make_point_and_vector():
+            # Create a dot to represent our current state in state-space
+            point = Dot().set_color(GREEN)
+            state_point_at_t = (np.array((pendulum.get_theta(), pendulum.get_omega(), 0.)))
+            point.shift(state_point_at_t)
 
-        # self.play(ShowCreation(field))
-        self.add(plane, vector_field, point)
+            # Create a vector representing xdot at tour current point in state-space
+            xdot_at_t = vector_field.func(np.array((point.get_x(), point.get_y(), 0.)))
+            multiple = np.clip(
+                get_norm(xdot_at_t), -self.point_vector_max_len, self.point_vector_max_len
+            )
+            vector = Vector(xdot_at_t / multiple)
+            vector.set_color(GREEN)
+
+            # return our point + vector mobj
+            point.add(vector)
+            vector.shift(state_point_at_t)
+            return point
+
+        # Always redraw our point and vector
+        self.state_point_and_vec = always_redraw(make_point_and_vector)
+        self.add(self.state_point_and_vec)
+        self.add(plane, vector_field)
 
     def update_state_point(self, point: Point):
         point.set_x(self.pendulum.get_theta())
