@@ -21,6 +21,7 @@ class PendulumCirclingOrigin(Scene):
     CONFIG = {
         "extra_accel_": lambda point: 0.0,
         "point_vector_max_len": 4.0,
+        "show_vector_field_vector": True,
         "pendulum_config": {
             "initial_theta": 50 * DEGREES,
             "length": 2.0,
@@ -75,24 +76,27 @@ class PendulumCirclingOrigin(Scene):
 
     def create_point_and_vec(self):
         pendulum: Pendulum = self.pendulum
+
         def make_point_and_vector():
             # Create a dot to represent our current state in state-space
             point = Dot().set_color(GREEN)
             state_point_at_t = (np.array((pendulum.get_theta(), pendulum.get_omega(), 0.)))
             point.shift(state_point_at_t)
 
-            # Create a vector representing xdot at tour current point in state-space
-            xdot_at_t = self.vector_field.func(np.array((point.get_x(), point.get_y(), 0.)))
-            multiple = np.clip(
-                get_norm(xdot_at_t), -self.point_vector_max_len, self.point_vector_max_len
-            )
-            # vector = Vector(xdot_at_t / multiple)
-            vector = Vector(xdot_at_t)
-            vector.set_color(GREEN)
+            if (self.show_vector_field_vector):
+                # Create a vector representing xdot at tour current point in state-space
+                xdot_at_t = self.vector_field.func(np.array((point.get_x(), point.get_y(), 0.)))
+                multiple = np.clip(
+                    get_norm(xdot_at_t), -self.point_vector_max_len, self.point_vector_max_len
+                )
+                # vector = Vector(xdot_at_t / multiple)
+                vector = Vector(xdot_at_t)
+                vector.set_color(GREEN)
 
-            # return our point + vector mobj
-            point.add(vector)
-            vector.shift(state_point_at_t)
+                # return our point + vector mobj
+                point.add(vector)
+                vector.shift(state_point_at_t)
+
             return point
 
         # Always redraw our point and vector
@@ -341,4 +345,15 @@ class UnstableFeedForwardAtHorizontal(PendulumCirclingOrigin):
         "pendulum_config": {
             "initial_theta": -30 * DEGREES,
         },
+    }
+
+
+class FeedbackWithArmAtHorizontal(PendulumCirclingOrigin):
+    CONFIG = {
+        "extra_accel_": lambda point: (
+                    np.array((0.0, 4.9, 0.0)) + np.array((5.0 * (PI / 2.0 - point[0]), 5.0 * (0.0 - point[1]), 0.0))),
+        "pendulum_config": {
+            "initial_theta": -30 * DEGREES,
+        },
+        "show_vector_field_vector": False
     }
