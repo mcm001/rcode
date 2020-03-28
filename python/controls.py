@@ -57,7 +57,7 @@ for x1 in np.arange(-math.pi, math.pi, math.pi / 8):
         feedback = K @ error
         
         # print(feedback)
-        x_dot = (np.array([[x_hat[1, 0]], [-9.806 / 2.0 * math.sin(x_hat[0, 0])]])) #+ np.array([[0], [4.903]])) + feedback
+        x_dot = (np.array([[x_hat[1, 0]], [-9.806 / 2.0 * math.sin(x_hat[0, 0])]])) + np.array([[0], [4.903]])) + feedback
         
         
         # print("xdot at %s, %s is (%s, %s)" % (x1, x2, x_dot[0, 0], x_dot[1, 0]))

@@ -2,7 +2,6 @@
 
 from manimlib.imports import *
 
-
 # To watch one of these scenes, run the following:
 # python -m manim example_scenes.py SquareToCircle -pl
 #
@@ -15,10 +14,12 @@ from manimlib.imports import *
 # Use -r <number> to specify a resolution (for example, -r 1080
 # for a 1920x1080 video)
 
+extra_accel = lambda point: 0.0  # use to simulate feedback/feedforward
+
 
 class PendulumCirclingOrigin(Scene):
     CONFIG = {
-        "extra_torque": lambda point: 0.0,
+        "extra_accel_": lambda point: 0.0,
         "point_vector_max_len": 4.0,
         "pendulum_config": {
             "initial_theta": 50 * DEGREES,
@@ -42,9 +43,18 @@ class PendulumCirclingOrigin(Scene):
     }
 
     def construct(self):
+        global extra_accel
+        extra_accel = self.extra_accel_
+        self.plane = NumberPlane(**self.coordinate_plane_config)
         self.create_pendulum_but_dont_add()
         self.create_vector_field()
+        self.create_point_and_vec()
+        self.add_pendulum()
 
+        # self.wait(20)
+        self.wait(6)
+
+    def add_pendulum(self):
         pendulum = self.pendulum
         pendulum.move_to(BOTTOM + LEFT_SIDE + 2.5 * RIGHT + 2 * UP)
         pendulum.add_background_rectangle(opacity=1.0)
@@ -52,12 +62,8 @@ class PendulumCirclingOrigin(Scene):
         pendulum.scale_in_place(0.7)
         self.add(pendulum)
 
-        self.wait(20)
-        # self.wait(2)
-
     def create_vector_field(self):
-        pendulum: Pendulum = self.pendulum
-        plane = self.plane = NumberPlane(**self.coordinate_plane_config)
+        plane = self.plane
         plane.add(plane.y_axis.get_labels())
 
         plane.x_axis.add_numbers(direction=DL)
@@ -65,7 +71,10 @@ class PendulumCirclingOrigin(Scene):
 
         vector_field = self.vector_field = VectorField(self.pendulum_function, **self.vector_field_config)
         self.vector_field.sort(get_norm)
+        self.add(plane, vector_field)
 
+    def create_point_and_vec(self):
+        pendulum: Pendulum = self.pendulum
         def make_point_and_vector():
             # Create a dot to represent our current state in state-space
             point = Dot().set_color(GREEN)
@@ -73,11 +82,12 @@ class PendulumCirclingOrigin(Scene):
             point.shift(state_point_at_t)
 
             # Create a vector representing xdot at tour current point in state-space
-            xdot_at_t = vector_field.func(np.array((point.get_x(), point.get_y(), 0.)))
+            xdot_at_t = self.vector_field.func(np.array((point.get_x(), point.get_y(), 0.)))
             multiple = np.clip(
                 get_norm(xdot_at_t), -self.point_vector_max_len, self.point_vector_max_len
             )
-            vector = Vector(xdot_at_t / multiple)
+            # vector = Vector(xdot_at_t / multiple)
+            vector = Vector(xdot_at_t)
             vector.set_color(GREEN)
 
             # return our point + vector mobj
@@ -88,7 +98,6 @@ class PendulumCirclingOrigin(Scene):
         # Always redraw our point and vector
         self.state_point_and_vec = always_redraw(make_point_and_vector)
         self.add(self.state_point_and_vec)
-        self.add(plane, vector_field)
 
     def update_state_point(self, point: Point):
         point.set_x(self.pendulum.get_theta())
@@ -96,8 +105,7 @@ class PendulumCirclingOrigin(Scene):
 
     def pendulum_function(self, point):
         x, y = self.plane.point_to_coords(point)
-        x_dot = np.array([[0, 1], [-9.8 / self.pendulum.length, 0]]) @ (np.array([[math.sin(x)], [y]]))
-        return np.array([x_dot[0, 0], x_dot[1, 0], 0.0])
+        return pendulum_vector_field_func(np.array((x, y, 0.)), L=self.pendulum_config['length'])
 
     def create_pendulum_but_dont_add(self):
         pendulum = self.pendulum = Pendulum(**self.pendulum_config)
@@ -106,18 +114,26 @@ class PendulumCirclingOrigin(Scene):
         pendulum.start_swinging()
 
 
-def pendulum_vector_field_func(point, mu=0.1, g=9.8, L=3):
+def pendulum_vector_field_func(point, L=3, g=9.8):
     x, y = point[:2]
-    return np.array([
-        y,
-        -np.sqrt(g / L) * np.sin(x) - mu * y,
-        0,
-    ])
+    x_dot = np.array([[0, 1], [-g / L, 0]]) @ (np.array([[math.sin(x)], [y]]))
+    a_dot_x = np.array([x_dot[0, 0], x_dot[1, 0], 0.0])
+
+    # x, y = point[:2]
+    extra_acceleration = extra_accel(np.array((x, y)))
+    # a_dot_x = np.array([
+    #     y,
+    #     -np.sqrt(g / L) * np.sin(x) - mu * y,
+    #     0.,
+    # ])
+    # print("normal: %s, extra: %s" % (a_dot_x, extra_acceleration))
+    return a_dot_x + extra_acceleration
+    # return np.array([1, 0, 0])
 
 
 class Pendulum(VGroup):
     CONFIG = {
-        "length": 3,
+        "length": 2,
         "gravity": 9.8,
         "weight_diameter": 0.5,
         "initial_theta": 0.3,
@@ -295,17 +311,34 @@ class Pendulum(VGroup):
         self.remove_updater(Pendulum.update_by_gravity)
 
     def update_by_gravity(self, dt):
+
         theta = self.get_theta()
         omega = self.get_omega()
         nspf = self.n_steps_per_frame
         for x in range(nspf):
+            # d_theta = omega * dt / nspf
+            # d_omega = op.add(
+            #     -self.damping * omega,
+            #     -(self.gravity / self.length) * np.sin(theta),
+            # ) * dt / nspf
+
+            # states are (angle, angular velocity)
+            # so vector field would return (angular velocity, angular acceleration)
+
             d_theta = omega * dt / nspf
-            d_omega = op.add(
-                -self.damping * omega,
-                -(self.gravity / self.length) * np.sin(theta),
-            ) * dt / nspf
+            d_omega = pendulum_vector_field_func(np.array((theta, omega, 0.)), L=self.length)[1] * dt / nspf
+
             theta += d_theta
             omega += d_omega
         self.set_theta(theta)
         self.set_omega(omega)
         return self
+
+
+class UnstableFeedForwardAtHorizontal(PendulumCirclingOrigin):
+    CONFIG = {
+        "extra_accel_": lambda point: np.array((0.0, 4.9, 0.0)),
+        "pendulum_config": {
+            "initial_theta": -30 * DEGREES,
+        },
+    }
