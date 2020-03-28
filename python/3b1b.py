@@ -53,7 +53,7 @@ class PendulumCirclingOrigin(Scene):
         self.add_pendulum()
 
         # self.wait(20)
-        self.wait(6)
+        self.wait(10)
 
     def add_pendulum(self):
         pendulum = self.pendulum
@@ -351,7 +351,7 @@ class UnstableFeedForwardAtHorizontal(PendulumCirclingOrigin):
 class FeedbackWithArmAtHorizontal(PendulumCirclingOrigin):
     CONFIG = {
         "extra_accel_": lambda point: (
-                    np.array((0.0, 4.9, 0.0)) + np.array((5.0 * (PI / 2.0 - point[0]), 5.0 * (0.0 - point[1]), 0.0))),
+                    np.array((0.0, 4.9, 0.0)) + np.array((500.0 * (PI / 2.0 - point[0]), 500.0 * (0.0 - point[1]), 0.0))),
         "pendulum_config": {
             "initial_theta": -30 * DEGREES,
         },

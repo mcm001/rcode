@@ -6,3 +6,6 @@ java/javamemes/.classpath
 *.prefs
 *.class
 *.tex
+python/Tex/*
+python/Tex
+*.pyc
