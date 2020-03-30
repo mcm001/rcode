@@ -17,13 +17,20 @@ from manimlib.imports import *
 extra_accel = lambda point: 0.0  # use to simulate feedback/feedforward
 
 
+class State:
+    def __init__(self, position, velocity):
+        self.theta = position
+        self.omega = velocity
+
+
+# noinspection PyAttributeOutsideInit
 class PendulumCirclingOrigin(Scene):
     CONFIG = {
         "extra_accel_": lambda point: 0.0,
-        "point_vector_max_len": 4.0,
-        "show_vector_field_vector": True,
+        "point_vector_max_len": 6.0,
+        "show_state_point_vector": True,
         "pendulum_config": {
-            "initial_theta": 50 * DEGREES,
+            "initial_theta": 60 * DEGREES,
             "length": 2.0,
             "damping": 0,
             "top_point": ORIGIN,
@@ -46,6 +53,7 @@ class PendulumCirclingOrigin(Scene):
     def construct(self):
         global extra_accel
         extra_accel = self.extra_accel_
+        self.state = State(self.pendulum_config["initial_theta"], 0.0)
         self.plane = NumberPlane(**self.coordinate_plane_config)
         self.create_pendulum_but_dont_add()
         self.create_vector_field()
@@ -53,15 +61,23 @@ class PendulumCirclingOrigin(Scene):
         self.add_pendulum()
 
         # self.wait(20)
-        self.wait(10)
+        self.wait(5)
 
     def add_pendulum(self):
-        pendulum = self.pendulum
-        pendulum.move_to(BOTTOM + LEFT_SIDE + 2.5 * RIGHT + 2 * UP)
-        pendulum.add_background_rectangle(opacity=1.0)
-        pendulum.background_rectangle.set_width(4.5).shift(LEFT * 0.8)
-        pendulum.scale_in_place(0.7)
-        self.add(pendulum)
+        self.add(self.pendulum)
+
+    def get_evolving_trajectory(self, mobject, color=WHITE):
+        trajectory = VMobject()
+        trajectory.start_new_path(mobject.get_center())
+        trajectory.set_stroke(color, opacity=1)
+
+        def update_trajectory(traj):
+            point = mobject.get_center()
+            if get_norm(trajectory.points[-1] == point) > 0.05:
+                traj.add_smooth_curve_to(point)
+
+        trajectory.add_updater(update_trajectory)
+        return trajectory
 
     def create_vector_field(self):
         plane = self.plane
@@ -77,45 +93,72 @@ class PendulumCirclingOrigin(Scene):
     def create_point_and_vec(self):
         pendulum: Pendulum = self.pendulum
 
-        def make_point_and_vector():
+        state_point = Dot().set_color(GREEN)
+        state_point.add_updater(
+            lambda point: state_point.move_to((np.array((self.pendulum.get_theta(), self.pendulum.get_omega(), 0.)))))
+
+        def draw_vector_and_move_state_point():
             # Create a dot to represent our current state in state-space
-            point = Dot().set_color(GREEN)
-            state_point_at_t = (np.array((pendulum.get_theta(), pendulum.get_omega(), 0.)))
-            point.shift(state_point_at_t)
 
-            if (self.show_vector_field_vector):
-                # Create a vector representing xdot at tour current point in state-space
-                xdot_at_t = self.vector_field.func(np.array((point.get_x(), point.get_y(), 0.)))
-                multiple = np.clip(
-                    get_norm(xdot_at_t), -self.point_vector_max_len, self.point_vector_max_len
-                )
-                # vector = Vector(xdot_at_t / multiple)
-                vector = Vector(xdot_at_t)
-                vector.set_color(GREEN)
+            state_point_pos = state_point.get_center_of_mass()
+            state_point_at_t = state_point_pos
 
-                # return our point + vector mobj
-                point.add(vector)
-                vector.shift(state_point_at_t)
+            # Create a vector representing xdot at tour current point in state-space
+            xdot_at_t = self.vector_field.func(state_point_at_t)
+            multiple = np.clip(
+                get_norm(xdot_at_t), -self.point_vector_max_len, self.point_vector_max_len
+            )
+            # vector = Vector(xdot_at_t / multiple)
+            vector = Vector(xdot_at_t / multiple)
+            vector.shift(state_point_pos)
+            vector.set_color(GREEN)
 
-            return point
+            # return our point + vector mobj
+            # vector.s(state_point_at_t)
+            return vector
 
-        # Always redraw our point and vector
-        self.state_point_and_vec = always_redraw(make_point_and_vector)
-        self.add(self.state_point_and_vec)
-
-    def update_state_point(self, point: Point):
-        point.set_x(self.pendulum.get_theta())
-        point.set_y(self.pendulum.get_omega())
+        self.state_point = state_point
+        self.trajectory = self.get_evolving_trajectory(state_point)
+        if (self.show_state_point_vector):
+            state_vector = always_redraw(draw_vector_and_move_state_point)
+            self.add(state_vector)
+        self.add(self.trajectory, self.state_point)
 
     def pendulum_function(self, point):
         x, y = self.plane.point_to_coords(point)
         return pendulum_vector_field_func(np.array((x, y, 0.)), L=self.pendulum_config['length'])
+
+    def update_by_gravity(self, dt):
+
+        theta = self.state.theta()
+        omega = self.state.omega()
+
+        nspf = self.pendulum.n_steps_per_frame
+        for x in range(nspf):
+            d_theta = omega * dt / nspf
+            d_omega = pendulum_vector_field_func(np.array((theta, omega, 0.)), L=self.length)[1] * dt / nspf
+
+            theta += d_theta
+            omega += d_omega
+
+        self.state.theta = theta
+        self.state.omega = omega
+
+        return self
 
     def create_pendulum_but_dont_add(self):
         pendulum = self.pendulum = Pendulum(**self.pendulum_config)
         pendulum.add_theta_label()
         pendulum.add_velocity_vector()
         pendulum.start_swinging()
+
+        pendulum = self.pendulum
+        background_rectangle = Rectangle(height=6, width=6, opacity=1.0, color=GREEN) \
+            .set_fill(color=BLACK, opacity=1.0) \
+            .shift(DOWN * 0.5)
+        pendulum.add_to_back(background_rectangle)
+        pendulum.scale_in_place(0.5)
+        pendulum.move_to(TOP + LEFT_SIDE + (RIGHT + DOWN) * 0.25, aligned_edge=pendulum.get_corner(UP + LEFT))
 
 
 def pendulum_vector_field_func(point, L=3, g=9.8):
@@ -138,7 +181,6 @@ def pendulum_vector_field_func(point, L=3, g=9.8):
 class Pendulum(VGroup):
     CONFIG = {
         "length": 2,
-        "gravity": 9.8,
         "weight_diameter": 0.5,
         "initial_theta": 0.3,
         "omega": 0,
@@ -288,6 +330,9 @@ class Pendulum(VGroup):
         theta = (theta + PI) % TAU - PI
         return theta
 
+    def get_unbounded_theta(self):
+        return self.rod.get_angle() - self.dashed_line.get_angle()
+
     def set_theta(self, theta):
         self.rotating_group.rotate(
             theta - self.get_theta()
@@ -318,22 +363,17 @@ class Pendulum(VGroup):
 
         theta = self.get_theta()
         omega = self.get_omega()
+        if (theta > 3):
+            ohno = 4
+
         nspf = self.n_steps_per_frame
         for x in range(nspf):
-            # d_theta = omega * dt / nspf
-            # d_omega = op.add(
-            #     -self.damping * omega,
-            #     -(self.gravity / self.length) * np.sin(theta),
-            # ) * dt / nspf
-
-            # states are (angle, angular velocity)
-            # so vector field would return (angular velocity, angular acceleration)
-
             d_theta = omega * dt / nspf
             d_omega = pendulum_vector_field_func(np.array((theta, omega, 0.)), L=self.length)[1] * dt / nspf
 
             theta += d_theta
             omega += d_omega
+
         self.set_theta(theta)
         self.set_omega(omega)
         return self
@@ -343,7 +383,7 @@ class UnstableFeedForwardAtHorizontal(PendulumCirclingOrigin):
     CONFIG = {
         "extra_accel_": lambda point: np.array((0.0, 4.9, 0.0)),
         "pendulum_config": {
-            "initial_theta": -30 * DEGREES,
+            "initial_theta": 60 * DEGREES,
         },
     }
 
@@ -351,9 +391,21 @@ class UnstableFeedForwardAtHorizontal(PendulumCirclingOrigin):
 class FeedbackWithArmAtHorizontal(PendulumCirclingOrigin):
     CONFIG = {
         "extra_accel_": lambda point: (
-                    np.array((0.0, 4.9, 0.0)) + np.array((500.0 * (PI / 2.0 - point[0]), 500.0 * (0.0 - point[1]), 0.0))),
+                np.array((0.0, 4.9, 0.0)) + np.array((1.0 * (PI / 2.0 - point[0]), 1.0 * (0.0 - point[1]), 0.0))),
         "pendulum_config": {
-            "initial_theta": -30 * DEGREES,
+            "initial_theta": 30 * DEGREES,
         },
-        "show_vector_field_vector": False
+        "show_state_point_vector": False
     }
+
+    def construct(self):
+        global extra_accel
+        extra_accel = self.extra_accel_
+        self.plane = NumberPlane(**self.coordinate_plane_config)
+        self.create_pendulum_but_dont_add()
+        self.create_vector_field()
+        self.create_point_and_vec()
+        self.add_pendulum()
+
+        # self.wait(20)
+        self.wait(4)
