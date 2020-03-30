@@ -29,6 +29,7 @@ class PendulumCirclingOrigin(Scene):
         "extra_accel_": lambda point: 0.0,
         "point_vector_max_len": 6.0,
         "show_state_point_vector": True,
+        "hide_pendulum": False,
         "pendulum_config": {
             "initial_theta": 60 * DEGREES,
             "length": 2.0,
@@ -128,24 +129,6 @@ class PendulumCirclingOrigin(Scene):
         x, y = self.plane.point_to_coords(point)
         return pendulum_vector_field_func(np.array((x, y, 0.)), L=self.pendulum_config['length'])
 
-    def update_by_gravity(self, dt):
-
-        theta = self.state.theta()
-        omega = self.state.omega()
-
-        nspf = self.pendulum.n_steps_per_frame
-        for x in range(nspf):
-            d_theta = omega * dt / nspf
-            d_omega = pendulum_vector_field_func(np.array((theta, omega, 0.)), L=self.length)[1] * dt / nspf
-
-            theta += d_theta
-            omega += d_omega
-
-        self.state.theta = theta
-        self.state.omega = omega
-
-        return self
-
     def create_pendulum_but_dont_add(self):
         pendulum = self.pendulum = Pendulum(**self.pendulum_config)
         pendulum.add_theta_label()
@@ -158,7 +141,11 @@ class PendulumCirclingOrigin(Scene):
             .shift(DOWN * 0.5)
         pendulum.add_to_back(background_rectangle)
         pendulum.scale_in_place(0.5)
-        pendulum.move_to(TOP + LEFT_SIDE + (RIGHT + DOWN) * 0.25, aligned_edge=pendulum.get_corner(UP + LEFT))
+
+        if(self.hide_pendulum is False):
+            pendulum.move_to(TOP + LEFT_SIDE + (RIGHT + DOWN) * 0.25, aligned_edge=pendulum.get_corner(UP + LEFT))
+        else:
+            pendulum.move_to((TOP + LEFT_SIDE) * 1.1, aligned_edge=pendulum.get_corner(DOWN + RIGHT))
 
 
 def pendulum_vector_field_func(point, L=3, g=9.8):
@@ -395,7 +382,8 @@ class FeedbackWithArmAtHorizontal(PendulumCirclingOrigin):
         "pendulum_config": {
             "initial_theta": 30 * DEGREES,
         },
-        "show_state_point_vector": False
+        "show_state_point_vector": False,
+        "hide_pendulum": True
     }
 
     def construct(self):
