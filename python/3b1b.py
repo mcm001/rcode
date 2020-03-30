@@ -47,7 +47,9 @@ class PendulumCirclingOrigin(Scene):
         },
         "coordinate_plane_config": {
             "x_max": 5 * PI / 2,
-            "x_min": -5 * PI / 2
+            "x_min": -5 * PI / 2,
+            "y_max": 5,
+            "y_min": -5
         }
     }
 
@@ -142,7 +144,7 @@ class PendulumCirclingOrigin(Scene):
         pendulum.add_to_back(background_rectangle)
         pendulum.scale_in_place(0.5)
 
-        if(self.hide_pendulum is False):
+        if (self.hide_pendulum is False):
             pendulum.move_to(TOP + LEFT_SIDE + (RIGHT + DOWN) * 0.25, aligned_edge=pendulum.get_corner(UP + LEFT))
         else:
             pendulum.move_to((TOP + LEFT_SIDE) * 1.1, aligned_edge=pendulum.get_corner(DOWN + RIGHT))
@@ -397,3 +399,93 @@ class FeedbackWithArmAtHorizontal(PendulumCirclingOrigin):
 
         # self.wait(20)
         self.wait(4)
+
+
+class DotWithState(Dot):
+    def __init__(self, n_steps_per_frame, length, gravity, plane: NumberPlane, point=ORIGIN, state=None, **kwargs):
+        Dot.__init__(self, point=point, **kwargs)
+        if state is None:
+            self.state = State(point[0], point[1])
+        else:
+            self.state = state
+        self.n_steps_per_frame = n_steps_per_frame
+        self.length = length
+        self.gravity = gravity
+        self.plane: NumberPlane = plane
+
+    def get_state(self):
+        return self.state
+
+    def get_theta(self):
+        return self.state.theta
+
+    def get_omega(self):
+        return self.state.omega
+
+    def set_theta(self, theta):
+        self.state.theta = theta
+
+    def set_omega(self, omega):
+        self.state.omega = omega
+
+    def update_position(self):
+        x, y = self.plane.point_to_coords(np.array((self.state.theta, self.state.omega, 0.0)))
+        self.move_to([x, y, 0])
+
+    def start_swinging(self):
+        self.add_updater(DotWithState.update_state_by_gravity)
+
+    def update_state_by_gravity(self, dt):
+
+        theta = self.get_theta()
+        omega = self.get_omega()
+
+        nspf = self.n_steps_per_frame
+        currentState = [theta, omega]
+        for x in range(nspf):
+            x_dot_discrete = (pendulum_vector_field_func(np.array((theta, omega, 0.)), g=self.gravity,
+                                                         L=self.length) * dt / nspf)[:2]
+            currentState = currentState + x_dot_discrete
+
+        (theta, omega) = currentState
+        self.set_theta(theta)
+        self.set_omega(omega)
+        self.update_position()
+        return self
+
+
+class ShowMultipleFeedback(PendulumCirclingOrigin):
+    CONFIG = {
+        "gravity": 9.8,
+        "extra_accel_": lambda point: (
+                np.array((0.0, 0.0, 0.0)) + 0 * np.array(((0 - point[0]), (0 - point[1]), 0.0))),
+        "show_state_point_vector": False,
+        "hide_pendulum": True,
+        "n_steps_per_frame": 5
+    }
+
+    def construct(self):
+        global extra_accel
+        extra_accel = self.extra_accel_
+        self.plane = NumberPlane(**self.coordinate_plane_config)
+        self.create_vector_field()
+        self.create_and_add_points()
+
+        self.wait(4.0)
+
+    def create_and_add_points(self):
+        # create 10 points between -5 and 5 on x and -3 and 3 on y
+
+        dot = DotWithState(self.n_steps_per_frame, self.pendulum_config["length"], self.gravity, self.plane,
+                           point=np.array((2, 1, 0)))
+        trajectory = (self.get_evolving_trajectory(dot, color=WHITE))
+        dot.start_swinging()
+        self.add(trajectory, dot)
+
+        # for x in np.arange(-5, 5, 2):
+        #     for y in np.arange(-3, 3, 2):
+        #         dot = DotWithState(self.n_steps_per_frame, self.pendulum_config["length"], self.gravity,
+        #                            point=np.array((x, y, 0)))
+        #         trajectory = self.get_evolving_trajectory(dot, WHITE)
+        #         dot.start_swinging()
+        #         self.add(trajectory, dot)
