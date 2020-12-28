@@ -441,13 +441,13 @@ class DotWithState(Dot):
         omega = self.get_omega()
 
         nspf = self.n_steps_per_frame
-        currentState = [theta, omega]
         for x in range(nspf):
-            x_dot_discrete = (pendulum_vector_field_func(np.array((theta, omega, 0.)), g=self.gravity,
-                                                         L=self.length) * dt / nspf)[:2]
-            currentState = currentState + x_dot_discrete
+            d_theta = omega * dt / nspf
+            d_omega = pendulum_vector_field_func(np.array((theta, omega, 0.)), L=self.length)[1] * dt / nspf
 
-        (theta, omega) = currentState
+            theta += d_theta
+            omega += d_omega
+
         self.set_theta(theta)
         self.set_omega(omega)
         self.update_position()
@@ -461,7 +461,7 @@ class ShowMultipleFeedback(PendulumCirclingOrigin):
                 np.array((0.0, 0.0, 0.0)) + 0 * np.array(((0 - point[0]), (0 - point[1]), 0.0))),
         "show_state_point_vector": False,
         "hide_pendulum": True,
-        "n_steps_per_frame": 5
+        "n_steps_per_frame": 100
     }
 
     def construct(self):
@@ -471,7 +471,7 @@ class ShowMultipleFeedback(PendulumCirclingOrigin):
         self.create_vector_field()
         self.create_and_add_points()
 
-        self.wait(4.0)
+        self.wait(10.0)
 
     def create_and_add_points(self):
         # create 10 points between -5 and 5 on x and -3 and 3 on y
@@ -482,10 +482,10 @@ class ShowMultipleFeedback(PendulumCirclingOrigin):
         dot.start_swinging()
         self.add(trajectory, dot)
 
-        # for x in np.arange(-5, 5, 2):
-        #     for y in np.arange(-3, 3, 2):
-        #         dot = DotWithState(self.n_steps_per_frame, self.pendulum_config["length"], self.gravity,
-        #                            point=np.array((x, y, 0)))
-        #         trajectory = self.get_evolving_trajectory(dot, WHITE)
-        #         dot.start_swinging()
-        #         self.add(trajectory, dot)
+        for x in np.arange(-7, 7.1, 2.0):
+            for y in np.arange(-4, 4.1, 2.0):
+                dot = DotWithState(self.n_steps_per_frame, self.pendulum_config["length"], self.gravity, self.plane,
+                                   point=np.array((x, y, 0)))
+                trajectory = self.get_evolving_trajectory(dot, WHITE)
+                dot.start_swinging()
+                self.add(trajectory, dot)
