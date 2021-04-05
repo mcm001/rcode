@@ -1,0 +1,1740 @@
+altos (1.2.9) unstable; urgency=low
+
+  * test builds for upcoming 1.3 release
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 18 Dec 2013 12:17:29 -0700
+
+altos (1.0.1+3+g93b8f40) unstable; urgency=low
+
+  * update release process docs
+  * more release process doc updates
+
+ -- Bdale Garbee <bdale@gag.com>  Sun, 28 Aug 2011 13:39:31 -0600
+
+altos (1.0.1) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * use multimaint-merge to make Debian changelogs less ugly
+  * update TeleMini turnon script now that we've made a stable firmware release
+  * moving git-buildpackage config into .git/ since it is fairly specific to 
+    Bdale's build environment, and doesn't need to be in the source package
+  * get ready for a 1.0.1 release
+  * update changelogs for Debian build
+  * fix telemini firmware path name
+  * ignore generated log file
+  * roll release notes version from 1.0 to 1.0.1
+  * roll back packaging changelog for rebuild
+
+  [ Keith Packard ]
+  * altos: Clear callsign on initial config load
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 26 Aug 2011 10:39:29 -0600
+
+altos (1.0) unstable; urgency=low
+
+  [ Keith Packard ]
+  * altos: Lost change that reported flight 0 when log memory was full
+  * altosui: Ancient log files used 'apogee' for 'coast' state
+  * altosui: Add 'On-board Data Logging' indicator to pad tab
+
+  [ Bdale Garbee ]
+  * update changelogs for Debian build
+  * update changelogs for Debian build
+
+  [ Keith Packard ]
+  * altosui: remove debug printf in pad pane
+  * altosui: Disable 'max flight log' config when there are stored flights
+  * altos: Merge common config code in ao_config.c
+  * Bump version to 0.9.7
+  * altos/altosui: Add ability to disable telemetry/rdf completely
+  * altosui: Clean up command line processing. Add --graph
+  * altos-fat/windows: Check and install Java 1.6 as needed
+  * altosui/windows: Fix a bunch of windows compiler warnings.
+  * altosui: Attempt to make both 32- and 64-bit windows DLLs
+  * doc: Add note about telemetry disable mode to 1.0 release notes
+  * doc: Add Installation Recommendations chapter
+  * altosui: Add a few simple unit conversions
+  * altosui: Capture date/time/serial/flight in AltosFlightStats
+  * altosui: Add date/time/serial/flight to flight stats tab
+  * altosui: Show filename in AltosGraph window
+  * altosui: Add --summary option to dump flight stats to stdout
+  * altosui: Make monitor-idle display correct 'On-board data logging' status
+  * altosui: Can't configure flight log max on TeleMini
+  * altosui: fix 'magic' string to signal end of config data
+  * altosui: Only 'show' config dialog once
+  * altosui: Reset all config data on 'reset' command
+  * altosui: Update mac os X library
+  * libaltos: fix Mac OS X function signatures
+  * altosui: add tool-tips to the button box.
+
+  [ Bdale Garbee ]
+  * turn off auto-tagging during Debian build
+  * update changelogs for Debian build
+  * rewind changelog to 0.9.6.0 for rebuild
+  * update changelogs for Debian build
+
+  [ Keith Packard ]
+  * altosui: Use system look&feel
+  * Remove stale tools (ao-dumplog, ao-postflight, ao-view)
+  * altosui: Add tool-tips to config dialogs
+  * altosui: Try to get dialogs to look a little better
+
+  [ Bdale Garbee ]
+  * another test round
+  * roll changelog back in prep for another test build
+  * update changelogs for Debian build
+  * add pkg-config to the build deps
+  * prepare for another rebuild
+  * update changelogs for Debian build
+
+  [ Keith Packard ]
+  * altosui: Don't trust companion telemetry record 'channels' count
+  * altosui: Make flight monitor font size configurable
+  * altos/windows: Get latest JRE 1.6 version (Version 6 update 27)
+
+  [ Bdale Garbee ]
+  * doc tweaks through chap 3
+
+  [ Keith Packard ]
+  * doc: Spelling corrections in altusmetrum.xsl
+  * doc: Document pad-mode 'on-board data logging' indicator
+
+  [ Bdale Garbee ]
+  * more doc tweaking
+
+  [ Keith Packard ]
+  * doc: Describe packet command mode a bit better.
+  * doc: Move Packet Command Mode section to System Operations chapter
+
+  [ Bdale Garbee ]
+  * more doc tweaks
+  * more tweaks
+
+  [ Keith Packard ]
+  * doc: use 'radio link' to refer to packet command mode
+
+  [ Bdale Garbee ]
+  * more tweaking
+
+  [ Keith Packard ]
+  * doc: Move updating device firmware section to separate chapter
+  * doc: Updating Firmware is now a separate chapter
+
+  [ Bdale Garbee ]
+  * more changes
+
+  [ Keith Packard ]
+  * doc: Move the remaining command-mode descriptions to the appendix
+
+  [ Bdale Garbee ]
+  * tweak tweak tweak
+
+  [ Keith Packard ]
+  * doc: Describe max flight log, ignite mode and pad orientation
+  * doc: Remove duplicate documentation about max flight log
+
+  [ Bdale Garbee ]
+  * more tweaks
+  * prepare to release
+  * don't deliver sources.list fragment in official Debian packages
+  * changes in preparation for upload to Debian
+  * ao-view is no longer included in the altos package, so have the 
+    old-style Debian menu entry point to altosui instead
+  * rewind packaging changelog to last tagged version
+  * update desktop file for consistency with package section
+  * we need a main category in the desktop file
+  * really, I mean it, no longer deliver the sources.list fragment
+  * add a postinst to remove sources.list.d fragment delivered by old 
+    private versions of this package, no longer needed once we have 
+    official packages
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 25 Aug 2011 02:22:21 -0600
+
+altos (0.9.6.0) unstable; urgency=low
+
+  [ Keith Packard ]
+  * altos: Correct flight log max on Tm to 5k
+  * altosui: Change button to 'Configure Altimeter'
+  * altos: Remove pad_orientation functions from non-accel devices
+  * altos: Add ability to set arbitrary radio frequency
+  * altosui: Add dialogs to configure 'common' frequencies
+  * altosui: Convert from channels to frequencies
+  * Set version to 0.9.5.0
+  * altosui: altimeter is not spelled altimter
+  * altosui: Pull out BlueTooth support
+  * altos: minor type in comment about accel correction
+  * altosui: Must set radio calibration before radio setting
+  * altosui: A few misc cleanups.
+  * altosui: Have single radio_to_frequency function
+  * altosui: Save frequency after setting it in AltosFlightUI
+  * altosui: Show AltosFrequency in scan results
+  * altosui: Remove debugging printfs from AltosSerial
+  * altosui: Flush radio setting to serial device
+  * altosui: Remove unused AltosConfigData from AltosTelemetryReader
+  * altosui: Reading serial from swing thread only bad if remote
+  * altosui: Make set of telemetries to use while scanning configurable
+  * altosui: Add close button to 'fire' dialog
+  * altos: Switch telemini from v0.1 to v1.0
+  * altosui: Don't export product defs from libaltos
+  * altosui: Ensure serial code tracks reply nesting correctly
+  * altosui: Ship TeleMini v1.0 firmware with fat blobs
+  * Altosui: Add flight statistics tab to graph window
+  * altosui: Add a 'Graph Flight' button to the 'landed'  tab
+  * altosui: Prune telemetry file graphs to just the flight
+  * altosui: Plot reasonable data from Tm files
+  * altosui: Move launch-sites.txt file to altusmetrum.org
+  * Bump version to 0.9.6.0
+  * doc: Update altusmetrum.xsl for v1.0 software and TeleMini
+  * doc: Document Ignite Mode and Pad Orientation configuration options
+  * doc: Describe 'stats' tab in Graph UI, 'Graph Flight' button.
+  * doc: Add telemetry docs to debian/linux/mac/windows packages
+  * doc: Add release notes, include them in altusmetrum doc. Shuffle altusmetrum
+  * doc: Add 1.0 release notes.
+  * altos: Pull igniter pins low as soon as possible at boot time
+  * altos: Apply igniter boot pulse-width reduction to telemini
+  * altos: remove monitor disable stubs from altimeter code
+  * ao-tools: ao-list was crashing with more than 3 devices connected
+  * libaltos: Mis-allocated device list in libaltos
+  * altos: shrink text space from ao_config.c
+  * altos: re-write a bit of GPS parsing code to reduce size
+  * altos/altosui: Report log format in the version command
+  * altos: Don't try to use non-basestations for remote eeprom download
+  * altos: Add SPI-based companion board support
+  * altos: Put SPI in slower mode when talking to companion board
+  * altos: Make sure companion task exits cleanly when done
+  * altos: add the 'L' command to show the status of a linked companion board
+  * altos: Check for companion init packet validity was busted
+  * altosui: Add companion support to the flight UI and CSV conversion
+  * altos: Send SPI message at flight state changes
+  * altos: Send serial/flight to companion board
+  * altos: wait 10s for companion to boot
+  * altosui: Clean up eeprom parsing a bit
+  * altosui: Add support for TeleScience eeprom download
+  * altosui: Devices with log-format can also delete flights
+  * altosui: Eliminate inter-chunk flush_input calls
+  * altos: AltosSerial.flush_input shouldn't discard Interrupted exceptions
+  * altos: Correct AO_CONFIG_MINOR from 6 to 7
+  * altos: Reset radio channel to zero when using radio setting
+  * altos: use raw height while waiting for landing
+  * altosui: don't set channel when using radio setting
+  * altosui: Respect storage limits in flight log max config
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 19 Aug 2011 22:47:25 -0600
+
+altos (0.9.4.5) unstable; urgency=low
+
+  [ Keith Packard ]
+  * altosui: Mark empty eeprom records 'invalid', don't generate exception
+  * altosui: Always read whole eeprom block, even at end of flight
+  * altosui: Display eeprom parsing errors to user
+  * Revert "src/ao_gps_skytraq.c: Update logging rate to 10Hz"
+
+  [ Anthony Towns ]
+  * src/ao_cmd: Shave off bytes from doc strings
+
+  [ Keith Packard ]
+  * altos: Oops. Lost a couple of commands when merging the doc patch
+  * altosui: Missed jcommon.jar in the Mac OS install image
+  * Bump published version number to 0.9.1
+  * aoview: remove -s option.
+
+  [ Anthony Towns ]
+  * ao_intflash: Use internal flash for storage
+
+  [ Keith Packard ]
+  * altos: Make serial, usb, beeper and accelerometer optional components
+  * altos/test: Use ao_convert.c instead of hand-coded pres → alt func
+  * altos/test: Add baro-only flight test program
+  * altos: Start with packet slave running. Turn off in pad mode.
+  * altos: Add TeleMini v1.0
+
+  [ Anthony Towns ]
+  * ao_intflash: Avoid overwriting code
+
+  [ Keith Packard ]
+  * altos: Switch LED usage for TeleMini around
+  * altos: Switch pins around for TeleMini
+  * bringup: Add script for telemini
+  * ao-load: Make usb descriptor rewriting optional
+  * altos: oops -- altitude reporting wasn't pausing between signals
+  * altos: Internal flash ops block when running from flash
+
+  [ Anthony Towns ]
+  * ignore new flight test file
+
+  [ Keith Packard ]
+  * altos: Add tiny logging for TeleMini/TeleNano
+  * altos: Add kalman filters for baro-only boards
+  * altos: Tiny logging fixes. Scan at start, stop when land or full.
+  * altos: Add TeleNano support
+
+  [ Bdale Garbee ]
+  * fix up script to work and have reasonable texts
+
+  [ Keith Packard ]
+  * altos: Fix mini/nano default log size to available flash space
+  * altos/test: Add scripts to run lots of flights through the code
+  * altos: Write height values to log for nano/mini
+  * altos: Baro-only boards must not detect launch on accel or speed data
+  * altosui: Add software version to Configure AltosUI dialog
+  * altos: Don't init packet slave on TD. Make slave start optional
+  * altos: Configure packet size from send/recv parameters.
+  * altos: Make telemetry interval more consistent
+  * altos: Split out tiny telemetry from full telemetry
+  * altos: Split telenano main from telemini
+  * altos: The kalman code requires a constant sample rate
+  * altos: New telemetry report format (version 4). Supports tiny telemetry.
+  * altos: Add .sdcdbrc file for teledongle
+  * altos: Add nickle kalman implementation.
+  * altos: Switch telemetrum over to kalman filter
+  * altos: Compute a 'trust' value for the barometer
+  * altos/kalman: Kalman terms can be > 1, use 32-bit fixed point
+  * altos: Clean up some debug stuff in ao_flight.c
+  * altos: Add ao_flight_debug code
+  * altos: Missing parens and some bad arithmetic in the kalman code
+  * altos: Fix up flight code testing
+  * altos: Restore sensible kalman values
+  * altos: Ignore alt error for fast->coast. Allow larger error for baro apogee.
+  * altos: Exit flight test at landing. Allow description in test flight list
+  * Add ao_kalman.h to .gitignore
+  * Add description to test flights
+  * altosui: Add support for telemetry version 4
+  * altosui: Add telemetry format menu and preferences
+  * altosui: Remove a bunch of debug printfs from the eeprom manager code
+  * altosui: Add support for downloading TeleMini/TeleNano flight logs
+  * altosui: Remove extra AltosEepromBlock layer
+  * altosui: swing hide/show methods are deprecated
+  * altosui: Allow TM config connection to be canceled.
+  * altos: Variable log rate in full logging code too
+  * altos: full logging must flush pending data before checking state
+  * altosui: Off-by-one error in telemetry format configuration UI
+  * altosui: Allow radio channel to be configured over the radio link
+  * altosui: Tell serial device which frame to use for timeout dialogs
+  * altosui: Handle serial calls from swing thread
+  * altos: Split up flight code into separate flight/sample/kalman bits
+  * altos: Create custom nano flight code
+  * altosui: Clean up packet link connecting dialog
+  * altosui: Make flight log downloading handle 'Connecting...' dialog
+  * altosui: Make deployment testing handle Connecting... dialog
+  * altosui: Display exception messages from swing thread
+  * altosui: Don't display 0000-00-00 for missing flight log dates
+  * altos: ao_sample_preflight was exiting preflight mode immediately
+  * altos: Run RDF beacon after apogee instead of waiting for landing
+  * altos: Enable logging during nano flights
+  * altosui: Parse and export Max flight log value
+  * altosui: Only plot acceleration when present in data file
+  * altos: Reflect ao_flight split in ao_flight_test dependencies
+  * altos: Baro useful ceiling is MSL, not AGL
+  * altos: Make ao_flight_test show true height but report saturated height
+  * altos: Add initial TeleBT code
+  * altos: Add P2SEL_*_MASK defines to cc1111.h
+  * altos: expose set of available stdio values
+  * altos: Provide for a pre-filter on commands
+  * altos: Allow any stdio to be used with packet forwarding
+  * altos: Remove serial monitor command
+  * altos: Make ao_serial_drain public
+  * altos: Clean up usage of serial port for stdio
+  * altos: Clean up serial initialization
+  * altos: Make cmd echo per-connection instead of global
+  * altos: Clean up BT serial communcations
+  * altosui: Add missing AltosTelemetryMap.java file
+  * altos: Use PIO(6) on BTM to monitor BT connection. Fix BTM init.
+  * altosui: Add TeleBT USB device support
+  * altosui: Add low-level Bluetooth APIs
+  * altos/altosui: Log averaged baro sensor data in Tm/Tn
+  * altosui: oops - lost state changes when downloading eeprom data.
+  * altos: Write a few pre-launch samples for Tm/Tn devices
+  * altosui: Add primitive bluetooth device manager UI.
+  * altosui: Create abstract AltosDevice class
+  * altosui: Make AltosBTDevice implement AltosDevice interface
+  * altosui: Make bluetooth dialog modal
+  * altosui: Use persistent list of bluetooth devices for device dialogs
+  * altos: Add delays to bt startup sequence
+  * altosui: Wait two seconds after bluetooth connect XXX
+  * altos: Solidify BT connections
+  * altos: Simplify BT communications
+  * altos: Remove bt debug command
+  * altos: remove BT logging code
+  * altosui: Eliminate ao_cmd_filter hook
+  * altosui: Make flight data download work through TeleBT
+  * altos: add telebt-v0.0 Makefile
+  * altosui: Separate out flash debug code to separate thread
+  * altosui: Fix TeleBT name in flight monitor title
+  * altosui: Display reader name (usually the device) when an I/O error occurs
+  * altosui: Move AltosIgniteUI device open out of Swing thread
+  * altosui: Fix BT manage dialog so that the device lists resize
+  * altos: Add preliminary telebt v0.1 defines
+
+  [ Bdale Garbee ]
+  * first cut at a telebt turn on script
+
+  [ Keith Packard ]
+  * altos: Add telebt-v0.1 to Makefile
+  * altos: Use USART configuration 1 with flow control for TBT
+  * altos: Fix BT link status pin for real TBT hardware
+  * altos: pull TBT v0.1 ser_reset line low
+  * altos: Add beeper to TBT v0.1
+  * altos: Debugging TBT issues -- check pin configuration after boot
+  * altos: Initialize beeper for telebt
+  * altos: Hook up the P1 ISR for TeleBT v0.1 bt_link line
+  * altos: clear CPU port 1 interrupt flag when handled
+  * Revert "altos: Debugging TBT issues -- check pin configuration after boot"
+  * Switch version to 0.9.4
+  * altosui: Handle old TeleDongle receiving kalman telemetry packets
+  * altos: Rename telemetry to telemetry_orig
+  * altos: Add arbitrary telemetry packet monitoring
+  * altos: Add checksum to TELEM output lines
+  * altos: Start adding new telemetry frame definitions
+  * altos: ao_radio_recv needs byte count *including* rssi and status
+  * altosui: Support raw telemetry from TeleDongle
+  * doc: Add telemetry format description
+  * doc: Complete initial telemetry description
+  * doc: Fix a few minor telemetry doc mistakes
+  * Version strings must be < 8 bytes long
+  * altos: teledongle does not need ao_packet_slave.c
+  * altos: Shrink const space in ao_config
+  * altos: Add sat info to GPS report command
+  * altos: Shrink help text
+  * altos: Add split telemetry code
+  * altos: Complete new telemetry switchover
+  * altosui: Parse remaining standard telemetry packets
+  * doc: Chang Config and Location packets
+  * altos: Adapt to changes in telemetry Configuration packet
+  * doc: Add section about TeleDongle USB line format
+  * altosui: Elide nul bytes at end of telemetry string values
+  * altosui: Elide missing values from graphs
+  * altosui: Add main/drogue voltages to default graph
+  * altosui: Remove debug printf.
+  * altosui: Compress telemetry records marked with the same time
+  * altos: Shrink ao_cmd_put16, ao_cmd_hex and ao_cmd
+  * altos: Shrink ao_config_callsign_set
+  * altos: Shrink ao_add_task by rolling up a memset loop
+  * altos: Switch ao_gps_skytraq and ao_gps_sirf __xdata to __pdata
+  * altos: Switch ao_ignite and ao_gps_sirf __xdata to __pdata
+  * altos: Switch ao_log.c and ao_log_big.c __xdata to __pdata
+  * altos: Switch ao_report.c __xdata to __pdata
+  * altos: Switch ao_rssi.c __xdata to __pdata
+  * altos: Switch ao_sample.c __xdata to __pdata
+  * altos: Switch ao_serial.c __xdata to __pdata
+  * altos: Switch ao_stdio.c __data to __pdata
+  * altos: Switch ao_telemetry.c __xdata to __pdata
+  * altos: Switch ao_usb.c __xdata to __pdata
+  * altos: Switch const for __code in struct ao_cmds
+  * altos: switch ao_cmd __xdata to __pdata
+  * altos: Switch ao_config.c __xdata to __pdata
+  * altos: Switch ao_dbg.c __xdata to __pdata
+  * altos: Switch ao_flight and ao_flight_nano __xdata to __pdata
+  * altos: Switch flash drivers __xdata to __pdata
+  * altos: Switch Tm and Tn to common telemetry code
+  * altos: Remove ao_telemetry_orig.c and ao_telemetry_tiny.c
+  * altos: Ensure low-rate telem packets interleave with sensor telem packets
+  * altos: product defines are always in ao_product.h
+  * altosui: Build device constants into .java code
+  * altosui: Don't show missing igniter and gps values
+  * altos: new versions of sdcc require __ prefixes for custom keywords
+  * Set version to 0.9.4.3 for Bdale 2011-7-16 flights
+  * altosui: Start adding support for scanning radio for available devices
+  * altosui: Pop up monitor window from scan dialog
+  * altosui: Remove debugging printf from AltosLog
+  * altosui: Configuration telemetry record includes flight number
+  * altosui: Finish radio scanning UI
+  * altosui: Generalize and centralize telemetry constants, parse v0.8 telemetry
+  * altosui: Initialize channel and telemetry before use in ScanUI
+  * altosui: Set 'seen' bits in legacy telemetry packet reader
+  * altosui: Add map preloading GUI
+  * altosui: Try to avoid resize weirdness with map preloading
+  * altosui: Flush telemetry lines before starting to watch for scan results
+  * altosui: Display full map preload area in view.
+  * altosui: Remove a bunch of sitemap debugging printfs
+
+  [ Anthony Towns ]
+  * altosui: Make sure degree and minute values are visible (map preload)
+
+  [ Keith Packard ]
+  * Set version to 0.9.4.4
+  * altos, altosui: Add igniter mode (dual, apogee, main)
+  * altosui: Download list of site locations for map preloading
+  * altosui: Add launch-sites.txt
+  * altosui: Add a bunch more site locations
+  * altosui: Mark preload site location with red circles (like launch)
+  * Fix NCR Pawnee location
+  * Add HARA Bragg Farms site
+  * altosui: Change continutity colors to yellow/magenta
+  * altos: Add ability to read new TELEM files to ao_flight_test
+  * altos: Average height values for landing detection
+  * altos: Reduce height averaging filter time constant
+  * altos: Require sequencing through 'main' state before landing
+  * altosui: Standard text field in flight UI needs more width (now 20)
+  * altosui: Parse accel cal from 'c s' command
+  * altosui: Simple timeouts don't work with query data
+  * altosui: Add idle monitor dialog
+  * altos/altosui: Add pad orientation configure option
+
+  [ Bdale Garbee ]
+  * update version for a Bdale build for use turning on TeleMini v1.0
+  * simplify version in last changelog entry so git-dch is less confused
+  * update changelogs for Debian build
+  * update changelogs for Debian build
+  * stop doing automatic tag push during builds
+  * build depend on bluetooth dev package
+  * clean up all existing lintian warnings
+  * rewind changelog for re-build of 0.9.4.5
+
+ -- Bdale Garbee <bdale@gag.com>  Mon, 08 Aug 2011 09:37:04 -0600
+
+altos (0.9.1) unstable; urgency=low
+
+  [ Keith Packard ]
+  * ao-load: fix usage message to note that '=' is required for options
+  * altos/test: Add dependencies in the Makefile for ao_flight_test
+  * altos/test: auto-configure acceleration parameters from the log file
+
+  [ Anthony Towns ]
+  * ao_radio: generalise setup of packet size
+  * src/ao_gps_skytraq: simplify parsing code
+  * src/ao_gps_skytraq.c: Update logging rate to 10Hz
+
+  [ Bdale Garbee ]
+  * tie bringup scripts to Bdale's bench TeleDongle
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 01 Apr 2011 20:02:12 -0600
+
+altos (0.9) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * prepare to release
+  * update changelogs for Debian build
+  * update turnon script to prefer TeleDongle as programmer
+
+  [ Keith Packard ]
+  * altos: Program default flight log max value for new boards
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 19 Jan 2011 12:46:47 -0700
+
+altos (0.8.1+81+g4ae724f) unstable; urgency=low
+
+  * we need an install target to prevent parent dir make from failing
+
+ -- Bdale Garbee <bdale@gag.com>  Tue, 18 Jan 2011 23:55:36 -0700
+
+altos (0.8.1+79+g9a5666f) unstable; urgency=low
+
+  [ Keith Packard ]
+  * doc: Don't delete telemetrum-outline.pdf
+  * doc: Add v0.9 features from altosui to documentation.
+
+  [ Bdale Garbee ]
+  * add 0.9 revision entry, with caveat about telemetry format change
+  * freshen copyright year
+
+  [ Keith Packard ]
+  * fat: Add firmware for v1.1 and docs to mac/windows/linux installers
+  * fat: Add docs to Linux package
+  * doc: Build with 'make all' from top level. Build with 'make fat'
+
+ -- Bdale Garbee <bdale@gag.com>  Tue, 18 Jan 2011 23:47:52 -0700
+
+altos (0.8.1+71+gda42f40) unstable; urgency=low
+
+  [ Keith Packard ]
+  * doc: Add telemetrum mounting template in svg and pdf forms
+
+  [ Mike Beattie ]
+  * Re-order and re-arrange eeprom download dialog
+  * Convert EepromSelect dialog to use a GridBag
+  * Close serial port if Download/Delete dialog is cancelled.
+
+  [ Keith Packard ]
+  * altosui: Reset eeprom download instance variables before reading
+    flight
+  * altosui: Make serial debug more complete and accurate
+  * altosui: Use long input flush timeout when remote.
+  * altosui: Remove debug message when eeprom downloads are complete.
+  * altosui: Ensure serial device is closed after eeprom download
+    finishes
+  * altosui: Require 4 sats to light up the 'GPS locked' light.
+  * doc: inkscape tracks the filename inside the document
+  * altos: TELEMETRY PROTOCOL CHANGE. Switch to 16-bit serial numbers.
+  * altos: Flush log when full
+
+  [ Anthony Towns ]
+  * altos: Restructure skytraq NMEA parsing code to save some space
+
+  [ Keith Packard ]
+  * altos: average 512 accel/baro samples at startup instead of 1000
+
+  [ Mike Beattie ]
+  * altos: Added check for an accel value above 1.5g
+  * altos: Added check for out of bounds accel
+
+  [ Keith Packard ]
+  * altos: Add DATA_TO_XDATA to linux test harness
+  * altosui: Remove spurious colons from eeprom selection headers
+
+  [ Mike Beattie ]
+  * Rework invalid accel cal detection code
+
+  [ Keith Packard ]
+  * altos: Auto-calibrate linux-based flight testing code
+  * altos: Ensure flight code gets first crack at new ADC data
+  * altos: Sample the accelerometer reference voltage on v1.1 boards
+  * altos: Optimize fetching of ADC data in flight code
+  * altos: Use 5V reference data to correct accelerometer measurements.
+  * doc: Remove mention of ao_wake_task
+
+  [ Bdale Garbee ]
+  * update documentation to reflect reality that modifying a board for
+    separate pyro battery is not trivial
+
+ -- Bdale Garbee <bdale@gag.com>  Tue, 18 Jan 2011 17:26:33 -0700
+
+altos (0.8.1+42+g646e192) unstable; urgency=low
+
+  [ Keith Packard ]
+  * altosui: Show dialog after successful delete or when no flights
+  * altosui: Ensure serial line is flushed after disabling remote link
+  * altosui: Add preference for serial debugging.
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 14 Jan 2011 18:00:51 -0700
+
+altos (0.8.1+37+g97b1ca9) unstable; urgency=low
+
+  [ Keith Packard ]
+  * altos: Add configuration parameter for maximum flight log size
+  * altos: support storage of multiple flights.
+  * altos: Speed up at45 and 25lc erase speeds
+  * altos: white space fix
+  * altos: report flight log offsets in hex block numbers instead of
+    bytes
+  * altos: ensure erase mark is written when erasing flights
+
+  [ Anthony Towns ]
+  * altos: Optimize Morse code generation
+
+  [ Keith Packard ]
+  * altos: Check requested log max size against available space
+  * altos: Check for full log and complain
+  * altosui: Add configuration of flight log size
+
+  [ Anthony Towns ]
+  * altos: Remove unused accel_vel_mach and accel_vel_boost variables
+  * altos: Remove redundant initialization of ao_interval variables
+
+  [ Keith Packard ]
+  * altosui: Split eeprom download code apart
+  * altos: oops -- 'e' command was only showing 7 of the 8 bytes per
+    line
+  * altosui: Add support for parsing list of flights from the 'l'
+    command
+  * altosui: Add eeprom 'manage' ui to download and delete multiple
+    flights
+  * altos: check for valid flight number in ao_log_delete
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 14 Jan 2011 14:30:37 -0700
+
+altos (0.8.1+18+g408a3e0) unstable; urgency=low
+
+  [ Anthony Towns ]
+  * altosui: move maps to subdir, fix E/W mismatch
+
+  [ Keith Packard ]
+  * altos: clean up radio abort paths. Share radio code.
+  * altos: eliminate ao_wake_task
+  * windows: Add compatibility IDs to telemetrum.inf
+  * windows: Update NSIS installer file to use compatibility IDs
+  * altos: Split out SPI driver.
+  * altos: Add telemetrum-v1.1 directory
+  * altos: packet and usb i/o routines use 'char', not 'uint8_t'
+  * altos: Simplify storage API
+  * altos: Require manual flight erasing.
+  * altos: Move common storage code to ao_storage.c. Add M25P80 driver
+  * altos: Rip out 'optimization' in ao_log_scan
+  * altos: Mark end of available flight list with 'done' to make the UI
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 07 Jan 2011 00:51:41 -0700
+
+altos (0.8.1+4+gea95c06) unstable; urgency=low
+
+  * fix symlink paths in rules file
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 01 Dec 2010 00:14:24 -0700
+
+altos (0.8.1+2+gea7130e) unstable; urgency=low
+
+  * modify Debian package build to deliver one copy of background.png
+    for
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 01 Dec 2010 00:03:14 -0700
+
+altos (0.8.1) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * moved doc dir in web content to AltOS tree
+  * fix publish target in doc/Makefile
+  * fix section layering
+  * fix an Altos vs Altus typo in the docs
+  * adding Bdale's release process document to the source tree
+
+  [ Keith Packard ]
+  * windows: Add jfreechart.jar and jcommon.jar to windows install image
+  * Move "Releasing" to top level
+  * Add minimal release testing plan to Releasing
+
+  [ Bdale Garbee ]
+  * releasing 0.8.1
+
+ -- Bdale Garbee <bdale@gag.com>  Mon, 29 Nov 2010 21:46:54 -0700
+
+altos (0.8) unstable; urgency=low
+
+  [ Keith Packard ]
+  * altosui: Correct windows hardware IDs for nsis installer file
+  * windows: try harder to get windows install to work
+  * windows: remove some non-existent .inf file section references
+  * windows: more .inf file hacking
+  * windows: Bump .inf file version
+
+  [ Bdale Garbee ]
+  * declaring 0.8 released
+  * update changelogs for Debian build
+  * update changelogs for Debian build
+  * rewind changelog to recover from stupid build failure
+
+ -- Bdale Garbee <bdale@gag.com>  Sun, 28 Nov 2010 18:32:12 -0700
+
+altos (0.7.1+168+gcb08bc2) unstable; urgency=low
+
+  [ Keith Packard ]
+  * altosui: Split out flight monitoring to separate window
+  * altosui: Create buttons for main actions
+  * altosui: Fix channel setting at serial open time
+  * altosui: Fix more calls to AltosPreferences.channel()
+  * altosui: Create abstract interface for flight data display
+  * altosui: Add tab UI with 'pad' mode.
+  * altosui: Add ascent, descent and landed tabs
+
+  [ Bob Finch ]
+  * Updated PKGBUILD-git.altos
+
+  [ Keith Packard ]
+  * altos: Use grey leds when unlit - easier to see
+
+  [ Anthony Towns ]
+  * use value_font for values
+  * add --replay command line argument
+  * read preferences for --replay
+  * reduce font size for FlightInfoTable
+  * use grayled.png for off
+  * add compass bearing to voice output
+  * add compass bearing during descent
+  * add site map tab, at least for QRS launches
+  * tabs -> spaces
+  * make infotable scrollable, revert its fontsize to 14
+  * pull up maps for arbitrary locations
+  * better error behaviour if no map
+
+  [ Bdale Garbee ]
+  * first cut at instructions on how to re-flash TM and TD devices based
+    on email
+  * fold in content from Keith's email on the re-flashing subject
+
+  [ Keith Packard ]
+  * altosui: Add RF calibration to TeleMetrum config dialog
+
+  [ Anthony Towns ]
+  * AltosTelemetryReader: actually open serial port
+  * AltosSiteMap: add targeting circles around landing site
+
+  [ Bdale Garbee ]
+  * continuing to work on the docs
+
+  [ Keith Packard ]
+  * altosui: Eliminate unncessary import altosui lines
+  * altosui: Open serial device at 'new' time. Prohibit duplicate opens.
+  * altosui: Replace flight status table with labels, fix resize.
+  * altosui: With --replay option, exit when replay window is closed
+  * altosui: oops, missed a file in the previous commit
+  * altosui: eliminate menu bar, moving elements to buttons.
+  * altosui: add reboot button to telemetrum configuration UI
+
+  [ Bdale Garbee ]
+  * add a paragraph about forcing TM back to idle mode if an accel cal
+    goes badly
+
+  [ Keith Packard ]
+  * altosui: Add callsign configuration in AltosUI configuration dialog
+  * altosui: Cleanup flight UI layout
+  * altosui: Add igniter status to ascent and descent tabs
+
+  [ Anthony Towns ]
+  * altosui: tile site maps
+  * AltosSiteMapTile: autoscale to about 2 nmi per tile
+  * AltosSiteMapTile: adjust centering calculation
+  * AltosSiteMapTile: adjust scale to 1 nmi per tile
+
+  [ Keith Packard ]
+  * altosui: Add igniter ground testing code
+  * altosui: Unify datafile selection to AltosDataChooser
+  * altosui: Clean up global AltosUI configuration settings dialog
+  * doc: Add preliminary altosui documentation
+  * doc: git ignore generated doc files
+  * doc: Document the 'Flash Image' operation.
+  * altosui: Use timeouts to recover from broken packet links.
+
+  [ Bdale Garbee ]
+  * update turnon scripts to use stashed copies of stable release
+    firmware
+
+  [ Keith Packard ]
+  * altosui: switch channel selector to combo box. Shorten displayed
+    device names
+  * altosui: When switching log files, don't terminate log thread
+  * altosui: calling thread.interrupt with null thread doesn't work well
+  * altosui: Initialize display thread state in constructor instead of
+    run
+  * altosui: Fix channel changing in flight UI to actually work
+
+  [ Anthony Towns ]
+  * AltosSiteMap: add autoscroll and grabndrag scroll
+  * AltosSiteMapTile: seperate map and drawing layers
+  * AltosSiteMap: automatic fetching of map data
+  * AltosSiteMapTile: draw boost circle as well as landed
+  * AltosAscent/Descent: tidy up layout
+  * AltosDescent: switch elev from height to range
+
+  [ Keith Packard ]
+  * altosui: re-indent
+
+  [ Anthony Towns ]
+  * AltosSiteMap: major refactoring
+  * Add GrabNDrag.java
+
+  [ Keith Packard ]
+  * altosui: change descent tab formatting to four columns
+
+  [ Anthony Towns ]
+  * AltosSiteMap: be more polite about preferred size
+  * altosui: reindent
+
+  [ Keith Packard ]
+  * altosui: Rewrite info table to mix with scroll pane well. Fix
+    startup size
+
+  [ Anthony Towns ]
+  * AltosSiteMap: better gps check, lower zoom
+
+  [ Keith Packard ]
+  * altosui: Set site map flight path lines to 6 pixels anti-aliased.
+
+  [ Anthony Towns ]
+  * AltosSiteMap: explain tile size better
+  * AltosSiteMap: extend map if rocket goes far away
+  * AltosSiteMap: try to get new tile construction right
+  * AltosSiteMap: thread safe tile addition
+  * AltosSiteMap: refactor tile collection
+  * AltosSiteMap: never accept 0,0 as lat/long
+  * AltosSiteMap: limit nr of tiles to 200x200
+
+  [ Keith Packard ]
+  * altosui: When fixing eeprom gps time information, make GPS data
+    valid
+
+  [ Anthony Towns ]
+  * AltosSiteMap: ensure buffer around active tile
+  * altosui: improve sitemap scrolling behaviour
+  * altosui: keep sitemap more centred on rocket
+
+  [ Keith Packard ]
+  * altos: Add on/off modes to 'C' command
+
+  [ Bob Finch ]
+  * Added PKGBUILDs for deps into contribs
+
+  [ Keith Packard ]
+  * altosui: Close serial port when debug link fails
+  * altos: assume igniter worked.
+
+  [ Bdale Garbee ]
+  * add a rudimentary --help for command line use
+
+  [ Keith Packard ]
+  * doc: Add internal documentation for AltOS
+
+  [ Anthony Towns ]
+  * altosui: don't switch away from user selected tab
+  * altosui: sitemap uses rocket gps if no pad gps
+
+  [ Bdale Garbee ]
+  * merge Keith's AltosUI documention into "the big book"
+  * lose the placeholder on how GPS works, as it's going to be a
+
+  [ Keith Packard ]
+  * altos: remove unused variable from ao_igniter
+  * altos: Don't abort radio transmissions with ao_radio_abort
+  * altos: Make radio test command careful with the radio mutex.
+  * altosui: Make AltosSerial.flush_input keep reading while non-empty
+  * altosui: New AltosSerial.set_radio function sets channel/call
+  * altosui: Disable radio configation over packet link.
+  * altosui: Let people fire igniters that don't read as 'ready'
+  * altosui: Make sure packet mode is turned off when the connection
+    fails
+
+  [ Anthony Towns ]
+  * docs: Document altosui "Graph Data" button
+
+  [ Keith Packard ]
+  * Move altosui to the top level, placing libaltos inside it.
+
+  [ Anthony Towns ]
+  * doc: Document altosui "Site Map" tab
+
+  [ Keith Packard ]
+  * Missing change to top level Makefile to build altosui
+
+  [ Bdale Garbee ]
+  * fix missing section close in Site Map content
+  * tweak rev history
+  * manually fold in documentation work from the master branch
+
+  [ Keith Packard ]
+  * doc: Reformat altos to use sections for each function
+  * doc: Add more authors, fix URL formatting, note that AltosUI
+    actually exists
+  * doc: Rename telemetrum-doc as altusmetrum
+
+  [ Bdale Garbee ]
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 25 Nov 2010 01:10:18 -0700
+
+altos (0.7.1+36+g811ced6) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * remove the csv build dep, as that code will be abandoned
+
+  [ Keith Packard ]
+  * altosui: Remove ability to graph data in .csv files
+  * altosui: Separate out jfreechart and jcommon directories
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 06 Oct 2010 17:47:32 -0600
+
+altos (0.7.1+32+g8103432) unstable; urgency=low
+
+  * add build-dep on libcsv-java
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 06 Oct 2010 16:25:57 -0600
+
+altos (0.7.1+28+gd8a2f4c) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * make the column headers comma separated, too, so they align with the
+    data
+
+  [ Keith Packard ]
+  * altosui: set default .csv file name in file save dialog
+  * altosui: Remember directory containing firmware files
+
+  [ Anthony Towns ]
+  * Add graphing.
+  * Add JFreeChart to Makefile.am
+
+  [ Keith Packard ]
+  * altosui: Use recorded ground acceleration when reading eeprom files
+  * altosui: Write raw sensor data to .csv files
+  * altosui: Factor some UI elements into separate classes
+  * altosui: remove unused ReplayThread wrapper classes
+  * altosui: Require 4 sats for 'good' GPS data
+  * altosui: Create iterables for log file scanning. Split out display
+    threads
+  * altosui: .CSV output: add link quality, gps hdop and sat C/N0
+    numbers
+  * altosui: Deal with eeprom dates going backwards across wrap
+
+  [ Anthony Towns ]
+  * Hax0r graphing to support telem/eeprom files
+
+  [ Keith Packard ]
+  * altosui: use Altos constants in graphing code
+
+  [ Anthony Towns ]
+  * Add callsign/serial/flight to graph title
+
+  [ Keith Packard ]
+  * altosui: Add KML file export.
+
+  [ Bdale Garbee ]
+  * add build dep on jfreechart lib
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 06 Oct 2010 16:19:12 -0600
+
+altos (0.7.1) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Add firmware and libaltos to 'fat' target at top-level
+  * altosui: Remove some debug printfs.
+  * altosui: libaltos.so is built with libtool -- it's in
+    ../libaltos/.libs
+  * Add --with-fat-dir configure option to publish finished stand-alone
+    bits
+  * altosui: Fix telemetry file reader to handle tick count wrapping
+  * altosui: Remove debug printfs from AltosTelemetryReader
+  * altosui: Fill in time value of last Eeprom record read from file
+  * altosui: Stop parsing eeprom file after hitting 'landed' state
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 10 Sep 2010 00:09:02 -0600
+
+altos (0.7+96+g48f5799) unstable; urgency=low
+
+  [ Keith Packard ]
+  * altosui: conflating USB product and vendor IDs is a bad idea
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 09 Sep 2010 21:29:13 -0600
+
+altos (0.7+94+g1ac3d7e) unstable; urgency=low
+
+  * initial cut at an altosui man page
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 09 Sep 2010 20:34:38 -0600
+
+altos (0.7+92+g0ea7576) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * handle versioning of ihx files (poorly) by just wildcarding the file
+    name
+
+  [ Keith Packard ]
+  * altosui: Need to have JVM include path substituted into libaltos
+    Makefile
+  * altosui: Store libaltos.so in $(libdir)/altos
+  * altosui: Display error dialog when AltOS JNI library can't be loaded
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 09 Sep 2010 20:05:44 -0600
+
+altos (0.7+86+g6c0ae7e) unstable; urgency=low
+
+  [ Keith Packard ]
+  * altosui: Add explicit requirement to create classes directory
+  * altosui: fix telemetrum.inf FFFE:000A product names on AMD64 and
+    ia64
+  * altosui: hack to make JAVAROOT directory get created before javac
+    runs
+  * altosui: remove FATJAR from all-local to avoid building fat .jar
+    file
+
+  [ Bdale Garbee ]
+  * add libtool to build deps
+
+  [ Keith Packard ]
+  * altosui: Add windows installer build using 'nsis'
+  * altosui: ignore built files
+  * altosui: oops. renamed the nsis file to altos-windows.nsi
+  * icon: add some icons for application programs
+  * altosui: Add icons to application and Windows menus.
+  * Use autotools for altosui and libaltos
+  * altos: add some SDCDB config files
+  * Ignore libtool files.
+  * Add version numbers to released files. Set version to 0.7.1
+  * Add top-level 'fat' target to aid building distribution files
+  * altosui: Fix windows installer to ship correct files
+  * altosui: Fix up Mac OSX .zip file
+  * altosui: Fix linux fat distribution
+  * altosui: Return AO_LOG_INVALID instead of exception for eeprom files
+  * altosui: Remove debugging printf from AltosEepromReader
+  * altosui: Eeprom files contain only one date; save it.
+  * altosui: Add elevation and range data to main display
+  * altosui: When replay thread is interrupted, don't make final report
+  * altosui: Start idle thread after the rocket leaves the pad
+  * altosui: Add AltosVoice.drain() to wait for queued speech to finish
+  * altosui: Prevent voice altitude data from queueing up
+  * altosui: Use local .class files in the classpath
+  * altosui: Record flight number when scanning file, not when running
+  * altosui: eeprom files place 'boost' time in the flight number
+    record.
+  * altosui: ensure that 'altosui' script is installed. Pass arguments
+    along.
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 09 Sep 2010 15:43:28 -0600
+
+altos (0.7+53+g59798c6) unstable; urgency=low
+
+  [ Keith Packard ]
+  * altosui: Abort flashing if debug port isn't working
+  * altosui: allow flashing to be canceled from the rom config dialog
+  * altosui: Hide internal rom config UI helper function
+  * altosui: Remove some debug printfs from AltosRomconfig class
+  * altosui: Post error dialog on invalid ROM config values.
+  * altosui: build Mac OS .zip file to include paths
+  * altosui: Report telemetry CRC errors in UI
+  * altosui: Deal with altos bug setting radio channel while monitoring
+  * altosui: Allow 'connect to device' when already connected
+  * Revert "altosui: Deal with altos bug setting radio channel while
+    monitoring"
+  * altosui: Must flush serial line after configuring for telemetry
+  * altosui: Catch I/O errors on telemetry device, report to user
+
+ -- Bdale Garbee <bdale@gag.com>  Sat, 04 Sep 2010 00:46:12 -0400
+
+altos (0.7+40+g59a40f6) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * add distclean targets to libaltos and altosui to all Debian package
+    to build, and clean up other distclean content as needed
+
+  [ Keith Packard ]
+  * altosui: missed AltosReader.class in the Makefile
+  * altos: Bounds check Skytraq GPS tracking data array
+  * altosui: Remove Manifest.txt from git repo as it's built now
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 02 Sep 2010 00:44:15 -0400
+
+altos (0.7+28+gd006c5e) unstable; urgency=low
+
+  * add runtime dependencies for altos binary package
+
+ -- Bdale Garbee <bdale@gag.com>  Tue, 31 Aug 2010 00:20:00 -0400
+
+altos (0.7+26+gc35632e) unstable; urgency=low
+
+  * don't build all the "fat" jar deliverables by default
+
+ -- Bdale Garbee <bdale@gag.com>  Mon, 30 Aug 2010 19:37:40 -0600
+
+altos (0.7+23+g25764fc) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * fix up for an 0.7 release
+  * update changelogs for Debian build
+
+  [ Keith Packard ]
+  * libaltos: AltusMetrum devices use more than one USB ID.
+  * altosui: provide separate flush_input/flush_output for serial. deal
+    with monitor automatically
+  * altosui: discard invalid lines while reading Eeprom flight data
+  * libaltos: Mac OS X cannot use 'poll(2)' on serial lines.
+  * libaltos: Missing OS_LDFLAGS on cjnitest build
+  * libaltos: cjnitest needs altos_flush now
+  * altos: flush pending output when terminating packet mode
+  * altos: Abort radio harder when terminating packet mode.
+  * altos: shut down packet mode cleanly
+  * libaltos: Fix windows build.
+  * libaltos: Improve Makefile
+  * Update telemetrum.inf to include all current USB ids.
+  * libaltos: Add pre-built Mac OS X libaltos.dylib
+  * libaltos: Add pre-built Windows .dll
+  * altos: Windows sends USB Out packets of 0 length. Ack them.
+  * libaltos: Use overlapped I/O on windows
+  * altosui: Build linux, mac and windows archives on Linux
+  * altosui: build debian-style altosui too
+  * altosui: Devices with USB id 0x000a always get listed
+
+  [ Bdale Garbee ]
+  * continue even if rm's don't have anything to do
+  * make invocation of 'install' pathless to work on more Unix variants
+  * add a .gitattributes file, configuring the Mac and Windows binary
+    library
+
+ -- Bdale Garbee <bdale@gag.com>  Mon, 30 Aug 2010 19:07:13 -0600
+
+altos (0.7) unstable; urgency=low
+
+  * update changelogs for Debian build
+  * fix up for an 0.7 release
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 27 Aug 2010 22:25:38 -0600
+
+altos (0.6+375+g0bd4cc0) unstable; urgency=low
+
+  * fix path to installed shared library
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 27 Aug 2010 13:13:14 -0600
+
+altos (0.6+373+gcf65c6b) unstable; urgency=low
+
+  [ Keith Packard ]
+  * altosui: rename AltosEeprom -> AltosEepromDownload, split out Altos
+    constants
+  * altosui: Capture config and version info in .eeprom files
+  * altosui: Merge gps date and time classes into gps class
+  * altosui: Clear displayed data rows as needed.
+  * altosui: Split status and info panels into separate files
+  * altosui: Explicitly initialize Altos class
+  * altosui: Split flight record out of telemetry class
+  * altosui: Compute flight state from eeprom data
+  * altosui: Add comments to Eeprom reader
+  * altos: add callsign to packet mode, increase payload to 64 bytes
+  * altosui: Start adding code to write csv files from eeprom/telem
+    files
+  * ao-dumplog: add --channel option (for use with -R option)
+  * libaltos: integrate Windows support.
+  * altosui: Select devices by USB vendor/product ID.
+  * altos: Define USB product ID in per-product Makefile.defs file
+  * altosui: Make teledongle callsign configurable
+  * altosui: Add TeleMetrum configuration
+  * altosui: Set callsign when fetching eeprom data over the air
+
+  [ Bdale Garbee ]
+  * add freetts as a build dep
+  * working on java packaging details
+
+  [ Keith Packard ]
+  * altosui: Add .ihx file reading code and stub out flashing UI
+  * altosui: Add debug dongle API, split flash UI out
+  * ao-dumplog: Fix --remote and --channel options to actually work
+  * altosui: pad TM config dialog values to avoid clipping descenders
+  * libaltos: use pipe to wake up getchar on close. use mutexes
+  * altosui: Add lots more cc1111 debug interface functions
+  * altosui: remove debug printf from AltosHexfile
+  * altosui: flush serial output before waiting for reply
+  * altosui: Remove debug printf from AltosRomconfig
+  * altosui: Finish device programming code
+  * altos: Place rom config variables in fixed location
+  * altosui: make default Manifest look for built-in freetts
+  * altosui: Separate out log file choosing dialog to share with CSV
+    generator
+  * altosui: refactor logfile chooser dialog to share more code
+  * altosui: Add ability to create CSV file from telem or eeprom files
+  * altosui: disable radio monitoring while using serial line for
+    debugging
+  * altosui: Delay mapping Flash UI until flashing actually starts
+  * altosui: fetch existing romconfig for flashing
+  * altosui: always display romconfig ui while flashing
+  * altosui: write USB serial number string while flashing
+  * altosui: flush replies from serial link when entering debug mode
+  * altos: always rebuild ao_product.c to track git version
+  * altos: print GPS state flags in GPS 'g' command
+  * altos: mark gps date written only after it gets into eeprom
+  * altosui: Move number parsing code to Altos general class
+  * altosui: Add AltosGreatCircle constructors
+  * altosui: add rssi and distance/dir from pad to CSV files
+  * altosui: AltosEepromReader was mis-setting boost tick
+  * altosui: Add support for old (version < 3) telemetry files
+  * altosui: Serial line is in UTF-8 encoding. Deal with it.
+  * altosui: When parsing saved telem files, errors shouldn't abort file
+  * altosui: Remove debug printf from AltosState.java
+  * altosui: command line args are converted to csv format
+  * altos: prepare for sdcc 2.9.1
+
+  [ Bdale Garbee ]
+  * add a dummy install target
+  * lose the prebuild hook for now while I'm fumbling
+  * add install target for libaltos
+  * add an install target for altosui
+
+  [ Keith Packard ]
+  * altosui: add elevation and range information
+
+  [ Bdale Garbee ]
+  * fix up the wrapper's path to the jar file
+  * update Debian standards version
+  * fix permissions on installed jar file, switch from ao-view to
+    altosui in
+  * install altosui man page
+  * fix man page delivery path
+  * Revert "lose the prebuild hook for now while I'm fumbling"
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 27 Aug 2010 12:40:04 -0600
+
+altos (0.6+303+gb6da90b) unstable; urgency=low
+
+  * add freetts as a build dep
+  * move to science menu
+  * working on java packaging details
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 11 Aug 2010 22:11:28 -0400
+
+altos (0.6+292+g8fc261c) unstable; urgency=low
+
+  * see if my new freetts package works
+
+ -- Bdale Garbee <bdale@gag.com>  Sat, 31 Jul 2010 10:55:21 -0600
+
+altos (0.6+290+g7877496) unstable; urgency=low
+
+  [ Keith Packard ]
+  * altosui: check for closed serial device before reading
+  * altosui: Remove unnecessary freetts .jar files
+  * altosui: Close serial, join reader thread, free altos_file
+  * altosui: remove debug printf
+  * libaltos: build with java src encoding UTF8
+  * altosui: construct Darwin application directory
+  * Add Mac OS X packaging bits
+  * altosui: Switch eeprom extension back to .eeprom
+  * Moved Mac OS packaging to altosui dir
+  * altosui: remove option to install to alternate volume
+  * Make altosui test script executable
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 29 Jul 2010 13:30:19 -0600
+
+altos (0.6+277+gd184819) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * fix text since TM only has one led to blink
+  * add swig as a build dep
+  * add a jdk to the build deps
+
+  [ Keith Packard ]
+  * When the EP0 IN buffer is full, don't panic, just skip sending
+    another
+  * Add libaltos which talks to USB connected altos devices
+  * Switch AltosUI to libaltos for device access
+  * Present list of altos devices in nice format
+  * Re-enable freetts
+  * Re-enable Linux support for altosui.
+  * Darwin doesn't have strndup.
+  * libaltos needs -I. on all systems
+  * libaltos: make clean remove all built files
+  * libaltos: build fat 10.5-compatible library
+  * Add Mac OS X packaging files for altosui
+  * Add application icons for Mac OS X
+  * Clean up altosui build a bit
+  * Remove directories as .class file dependencies; it makes them get
+    rebuilt all the time
+  * Java clean ups -- use varargs where possible, remove
+    AltosSerialReader
+  * Java voice reporting cleanups.
+  * Force java source encoding to UTF-8
+  * Make ao_log_data re-entrant as it is used for both sensor and GPS
+    logs
+  * altosui: Catch errors opening USB devices. Limit list to relevant
+    devices
+  * Make voice and channel menus work.
+  * Add voice test command for help in adjusting volume.
+  * Remove debug printf
+  * altosui: Add eeprom data capture function. No UI yet.
+  * altosui: Add progress bar for eeprom downloading status
+  * altosui: Fix Save flight data monitor layout, add cancel
+  * altosui: Replace device dialog. Center eeprom monitor.
+  * altosui: report rocket ground bearing at landing only if known
+  * Reset GPS ready status when GPS comes unlocked on the pad
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 29 Jul 2010 12:50:40 -0600
+
+altos (0.6+236+gcd8aa79) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Telemetry code was mis-computing RSSI
+  * Switch DBG pins to GPIO when using any debug commands. Reboot to
+    restore.
+
+  [ Bdale Garbee ]
+  * significant documentation update
+  * add build dep for sndfile
+  * reflect documentation file name change
+  * update to latest Debian standards version
+
+ -- Bdale Garbee <bdale@gag.com>  Tue, 20 Jul 2010 22:24:14 -0600
+
+altos (0.6+224+g4766b13) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * documentation updates from Bob
+
+  [ Mike Beattie ]
+  * Extension to KML output format, and minor bug fix
+
+  [ Keith Packard ]
+  * ao-view: disable radio telemetry monitoring during channel change
+  * Add special code for USB panic's.
+  * ao-postflight: was walking off state.data array
+  * Abort any in-progress radio operation when changing radio channel
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 24 Jun 2010 12:37:34 -0700
+
+altos (0.6+214+g16c4cae) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * updates including a typo fix from Bob Finch to the PKGBUILD-git.altos
+  * merge a derivative of Bob Finch's mere mortals guide as getting started
+  * merge the altusmetrum-themes package
+
+  [ Keith Packard ]
+  * Fix telemetrum.inf, tested by Adrian and Keithp
+  * Finish basic flight monitoring UI with voice using FreeTTS
+
+ -- Bdale Garbee <bdale@gag.com>  Tue, 18 May 2010 00:24:40 -0600
+
+altos (0.6+204+g6bd8513) unstable; urgency=low
+
+  * lose the quotes since they apparently aren't necessary
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 12 May 2010 19:53:58 -0600
+
+altos (0.6+202+gae6854d) unstable; urgency=low
+
+  * update desktop file for conformance with current standards
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 12 May 2010 17:04:31 -0600
+
+altos (0.6+200+g68eaaa6) unstable; urgency=low
+
+  * add initial package build scripts for Arch Linux from Bob Finch
+  * add desktop file provided by Bob Finch
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 12 May 2010 16:44:27 -0600
+
+altos (0.6+195+gcde60f1) unstable; urgency=low
+
+  * Revert "Merge remote branch 'remotes/origin/fix-reset'"
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 06 May 2010 13:59:16 -0600
+
+altos (0.6+193+g314d27a) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Don't change dbg clock while changing reset_n. Use 20ms everywhere
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 06 May 2010 12:47:51 -0600
+
+altos (0.6+190+g8b6767e) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Fix all stdio reading functions to be __critical
+  * Use ao_delay to sleep for 2 seconds instead of trying ao_sleep
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 05 May 2010 02:34:06 -0600
+
+altos (0.6+187+g8702f49) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * more text created during SFO->DEN flight
+  * initial attempt at a telemetrum turn on script .. needs work
+
+  [ Keith Packard ]
+  * Revert "Add optional 's' command to packet slave to enable/disable
+    slave mode"
+  * Disable interrupts while reading from stdin
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 05 May 2010 01:52:27 -0600
+
+altos (0.6+180+g99094f0) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Increase reset switch time to 100ms
+  * Add optional 's' command to packet slave to enable/disable slave
+    mode
+  * More ALtosUI changes
+  * Autodetect flite voice registration function
+
+  [ Bdale Garbee ]
+  * capture work done on SFO->DEN flight
+  * add some RF usage information from an email reply sent today, and
+    re-indent
+
+ -- Bdale Garbee <bdale@gag.com>  Tue, 27 Apr 2010 00:17:57 -0600
+
+altos (0.6+171+g9394393) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * wrong Yaesu model
+
+  [ Keith Packard ]
+  * Only have the slave return a packet if it received one.
+
+ -- Bdale Garbee <bdale@gag.com>  Sat, 10 Apr 2010 15:01:04 -0600
+
+altos (0.6+168+gc0ee1ae) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * INSTALL file changed by auto tools
+
+  [ Keith Packard ]
+  * libflite may forget to reference libasound
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 09 Apr 2010 00:08:24 -0600
+
+altos (0.6+164+g5c3b6e2) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Start adding java-based UI
+  * Add telemetry data parsing code
+  * Add Windows install .inf file
+  * Fix windows install file
+  * Add telem parsing code
+  * Steal C code from ao-view
+  * Display table of flight info. gps is not working yet though
+  * Fix up table formatting
+  * Fix status update
+  * Fix state updates
+  * Clean up GPS data formatting
+  * Report current gps nsat, not last locked nsat
+  * Remove GPS data missing from skytraq. Save max height/accel/speed
+  * Remove unused cell renderer class
+  * Make .jar file
+  * Use RXTX for serial comm. Add logdir preference saving
+  * Make ao_radio_idle keep trying to get the radio to idle.
+  * Don't abort the radio when enabling telemetry monitoring
+  * Clean up some altosui comments
+  * Switch TeleMetrum from v0.2 to v1.0
+  * Add Linux device discovery
+  * Interrupt running replay thread when starting another replay
+  * serial port read function cannot be interrupted. poll every 1 second
+  * TD reports "not-connected" when GPS has 0 sats
+  * Tasks may move in task structure as a result of ao_exit
+  * Enable telemetry monitoring
+  * Use 16-bit flite voice (which appears to have changed symbols
+    recently)
+  * When changing RESET line, delay 20ms
+
+  [ Bdale Garbee ]
+  * choose a better set of docbook xsl files
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 08 Apr 2010 19:56:27 -0600
+
+altos (0.6+131+g6629ec5) unstable; urgency=low
+
+  * lose the url entirely for now
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 08 Apr 2010 12:43:01 -0600
+
+altos (0.6+129+g934434f) unstable; urgency=low
+
+  * fix typo in url
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 08 Apr 2010 12:41:38 -0600
+
+altos (0.6+127+g05ad583) unstable; urgency=low
+
+  * need another build dep
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 08 Apr 2010 12:35:04 -0600
+
+altos (0.6+125+g8f1d47e) unstable; urgency=low
+
+  * make lintian happy
+  * tweak copyright assertion
+  * crudely incorporate "day in the life" info from web page
+  * rewrite urls in docbook format
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 08 Apr 2010 12:28:04 -0600
+
+altos (0.6+119+g00f49c8) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * update changelogs for Debian build
+  * move gbp.conf into debian/
+  * initial harness for documentation
+  * fix typo
+
+  [ Keith Packard ]
+  * Round radio calibration value instead of truncating
+  * Document the ao-dumplog '--remote' flag for radio-link downloads
+
+ -- Bdale Garbee <bdale@gag.com>  Tue, 30 Mar 2010 23:19:15 -0600
+
+altos (0.6+108+g6e61170) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Need to duplicate new altitude conversion code in aoview.
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 04 Mar 2010 17:33:27 -0700
+
+altos (0.6+106+ga1478f6) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Add ao_radio_xmit to help test boards without flashing them.
+  * Allow product names to have suffixes (like board revisions)
+  * Fix and document the ao-rawload --run flag
+  * Add LED test
+  * Leave .ihx files in the build directory too - easier to debug that way
+  * Eliminate deadlock when writing config from radio link
+  * Fix up LED colors for each product.
+  * Add .gitignore for ao-bringup
+
+  [ Bdale Garbee ]
+  * create a turn on script for lighting up TeleDongle v0.2 boards
+
+ -- Bdale Garbee <bdale@gag.com>  Sat, 27 Feb 2010 17:35:32 -0700
+
+altos (0.6+95+g2f45953) unstable; urgency=low
+
+  * update changelogs for Debian build
+  * conditionalize use of git on executability of /usr/bin/git binary
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 24 Feb 2010 17:30:00 -0700
+
+altos (0.6+88+gdeccc10) unstable; urgency=low
+
+  * add gawk as a build dependency since strtonum is a gawk extension
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 24 Feb 2010 16:44:35 -0700
+
+altos (0.6+86+g2491282) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Disable monitor mode before attempting radio test.
+  * Ensure that ao_alarm waits at least the specified time
+  * Remove dbg driver code from telemetrum/teledongle
+  * Add AT45DBxx1D driver
+  * Remove green LED and temp sensor from v0.2 code
+  * Add at45db161d.h header file for new flash part.
+  * Add 'f' command to display flash status register contents
+  * Dump more flash parameters for the flash_status command
+  * Dump config block from read/write config and flash_status commands
+  * Don't set ao_flash_setup_done until we're actually done.
+  * Remove flash debugging printfs
+  * Add simple gps dump command 'g'
+  * Force idle mode by shorting the SPI clock to ground at boot time.
+  * Switch to using internal cc1111 temperature sensor
+  * Missing ao_mutex_put in gps_dump
+  * Compute daytime using GPS as time base
+  * Pull in a bit more data for filtering the start of the boost
+  * Log GPS data on pad after boost detect.
+  * Change barometer conversion code to shrink conversion table
+  * Change altos build process to support per-product compile-time
+    changes
+  * Update .gitignore files
+  * Quiet make output.
+  * Add back stack size checking to altos linking phase
+  * Must install .map files for ao-load to work
+
+ -- Bdale Garbee <bdale@gag.com>  Wed, 24 Feb 2010 14:53:01 -0700
+
+altos (0.6+60+g10d1bbc) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Use ao_radio_get/ao_radio_put in packet code.
+
+ -- Bdale Garbee <bdale@gag.com>  Sat, 19 Dec 2009 13:53:32 -0700
+
+altos (0.6+58+gbbb152c) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Re-order config values. Change frequency to cal
+  * Allow radio calibration to be set from ao-load
+  * Add --cal to man page
+
+ -- Bdale Garbee <bdale@gag.com>  Sat, 19 Dec 2009 12:05:26 -0700
+
+altos (0.6+53+gcd49847) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Remove send_serial and serial_baud commands.
+  * Make ao_cmd_decimal produce both 32 and 16 bit values.
+  * Add radio calibration configuration.
+
+ -- Bdale Garbee <bdale@gag.com>  Sat, 05 Dec 2009 11:02:49 -0700
+
+altos (0.6+49+g9a1d7dd) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Change default callsign to "N0CALL"
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 04 Dec 2009 21:01:55 -0700
+
+altos (0.6+47+g4053309) unstable; urgency=low
+
+  * fix absolute path in debian/dirs, add Suggests for slim-altusmetrum
+  * change home URL in control file to be the AltOS page
+
+ -- Bdale Garbee <bdale@gag.com>  Thu, 26 Nov 2009 11:15:47 -0700
+
+altos (0.6+43+gd6ba07e) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Decode HDOP data from skytraq GPS
+  * Document ao-postflight --gps and --kml options.
+  * Make ao-postflight create filenames using input filenames.
+  * Make TD print 0000-00-00 for invalid dates.
+  * Fix --plot arg handling. Add -all option.
+  * Convert telemetry file GPS satellite information in cc_log_read
+  * Don't crash if --plot isn't passed on ao-postflight command line
+  * ao-postflight: compute barometric alt for each GPS position
+  * ao-postflight: don't try to use missing gps sat data
+  * Automatically extract flight number for eeprom and telem filenames.
+
+ -- Bdale Garbee <bdale@gag.com>  Sun, 22 Nov 2009 10:18:26 -0700
+
+altos (0.6+32+g87e6f3e) unstable; urgency=low
+
+  [ Bdale Garbee ]
+  * fix typo in comment
+
+  [ Keith Packard ]
+  * Reduce igniter firing time from 500ms to 50ms.
+  * Add GPS date/time output to ao-postflight.
+  * Eliminate SiRF state values from ao-view.
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 20 Nov 2009 13:18:06 -0700
+
+altos (0.6+27+gb0d7e3f) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Add two-point accelerometer calibration.
+  * Remove "l" command as ao-dumplong no longer uses it
+  * Remove "d" command
+  * Remove "f" command
+  * Reformat ADC values to show all 16 bits
+  * ao_flight_test was using accel value for pressure too
+  * Pass accel calibration over telemetry stream. Telemetry data format
+    change.
+  * Add ability to dump eeprom data over radio link.
+  * In packet master, move USB flush from packet thread to echo thread
+  * In USB pollchar, wait for packet before re-checking USB out len
+  * Explicitly use USB I/O routines in packet code
+  * Flush pending input when switching to remote packet mode
+  * Stop recording in ao-dumplog after receiving an invalid block
+  * Move ao_match_word from ao_ignite.c to ao_cmd.c
+  * Add Watchdog Timer Control register definitions
+  * Add reboot command.
+  * Return radio to telemetry settings when packet system closed.
+  * ao-postflight: fix sloppy gps sat data realloc code (was crashing).
+  * Loosen tolerances for main->landed transition
+  * Provide a dummy 'uninstall' target in the src directory.
+  * Share telemetry parsing code in cc library.
+  * Enable telemetry receive in ao_view
+  * Switch order of serial/flight in ao-postflight summary
+  * Add flight number to telemetry stream.
+  * Add date to GPS data, captured from GPRMC packet.
+  * Stop using SiRF state info.
+
+ -- Bdale Garbee <bdale@gag.com>  Fri, 20 Nov 2009 11:43:56 -0700
+
+altos (0.6) unstable; urgency=low
+
+  [ Keith Packard ]
+  * Add support for the SkyTraq GPS unit
+  * Build two versions of TM, one for SiRF, one for SkyTraq
+  * Save some DSEG space by marking cmd functions __reentrant
+  * Add ao_wake_task and ao_exit
+  * Add keyhole-markup generation for ao-postflight.
+  * Initial packet bits. Just testing transmission
+  * Add radio carrier command
+  * Wait for TX to finish sending data
+  * Add ao_alarm
+  * Remove reason from ao_dma_abort
+  * Switch packet code from timer thread to ao_alarm
+  * Use ao_radio_done to wait for TX to completely finish with packet
+  * Send SYN packet to set sequence numbers
+  * Add RFIM register
+  * Do more flushing in packet test code
+  * Use ao_alarm for ao_delay so it can be easily interrupted
+  * Poke master to speed up packet rate when things are busy
+  * No need to wakeup &ao_tick_count now
+  * Enable packet-based communcation to command processor
+  * Add more docs to the README file
+  * Disable interrupts while removing tasks from task list
+  * Add ao_usb_pollchar to ao.h
+
+ -- Bdale Garbee <bdale@gag.com>  Mon, 02 Nov 2009 16:53:45 -0700
+
+altos (0.5+90+g127c312) unstable; urgency=low
+
+  * de-version the libreadline-dev build dependency
+
+ -- Bdale Garbee <bdale@gag.com>  Mon, 02 Nov 2009 15:57:29 -0700
+
+altos (0.5+86+g2de548f) unstable; urgency=low
+
+  * automate push of updated and tagged master branch during
+    debian/rules prebuild
+  * flush repetitive junk out of debian/changelog, and update the
+    prebuild target
+  * add support for tagging git repository on each Debian package build
+
+ -- Bdale Garbee <bdale@gag.com>  Mon, 12 Oct 2009 16:54:28 -0600
+
+altos (0.5+77+gc57bd7f) unstable; urgency=low
+
+  * build for Debian from git
+
+ -- Bdale Garbee <bdale@gag.com>  Mon, 12 Oct 2009 15:57:19 -0600
+

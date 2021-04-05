@@ -1,0 +1,32 @@
+Desired AltosDroid feature list
+
+ *) GPS satellite status tab. Monitor GPS C/N0 numbers and
+    SVIDs. Provides more info before GPS lock is acquired.
+
+ *) Channel scanning. Provide the ability to search for telemetry
+    signals like AltosUI does.
+
+ *) Highlight current frequency in the frequency list.
+
+ *) Random frequency selection. Provide some mechanism to input
+    arbitrary radio frequencies. Could be like AltosUI which allows
+    you to edit the list of frequencies and assign names to them,
+    or perhaps something better.
+  
+ *) TM configuration from the droid
+
+ *) Monitor-idle mode
+
+ *) Frequency scanning
+
+ *) Select satellite imaging mode
+
+ *) Remember most-recently-used TBT and frequency, perhaps
+    auto-connect at startup.
+    
+ *) Re-loading flight data from .telem file to get back to
+    'find my rocket' mode after shutting down the application.
+
+ *) Imperial Units mode
+
+ *) TeleBT battery voltage

@@ -1,0 +1,33 @@
+#!/bin/sh
+case "$#" in
+0)
+	echo "usage: $0 <filename> ..."
+	exit 1
+	;;
+esac
+
+ST_FLASH=st-flash
+
+if which $ST_FLASH > /dev/null; then
+    :
+else
+    echo "$0: $ST_FLASH not found. Check to see if the stlink package is installed"
+    exit 1
+fi
+
+file=$1
+
+bin=/tmp/flash$$.bin
+trap "rm $bin" 0 1 15
+
+base=`arm-none-eabi-nm $file | awk '/interrupt_vector/ { print $1 }'`
+case x"$base" in
+x)
+    echo "$file: No interrupt vector address found"
+    exit 1
+    ;;
+esac
+
+arm-none-eabi-objcopy -O binary $file $bin
+
+$ST_FLASH --reset write $bin $base

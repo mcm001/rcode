@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=TeleGPS
+GenericName=TeleGPS monitor, download and analysis
+Comment=View and log data from TeleGPS tracking devices
+Icon=%icondir%/telegps.svg
+Exec=%bindir%/telegps %f
+Terminal=false
+MimeType=text/plain;
+Categories=Education;Electronics;Science;

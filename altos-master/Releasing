@@ -1,0 +1,112 @@
+These are Bdale's notes on how to do a release.
+
+	git checkout master
+
+	- make sure there is a doc/release-notes-<version>.xsl
+	- make sure that doc/altusmetrum.xsl has the right copyright year,
+	  and add release to the revision history at the front (release notes
+	  will be pulled in automatically)
+
+	- get a Google Maps API key and install it in
+          ~/altusmetrumllc/google-maps-api-key. If you don't have a
+          key, the app will still work, but downloading map tiles will
+          be slow, and you will only be able to download a limited
+          number per day.
+
+	- update the version in configure.ac
+        git log > ChangeLog
+	git commit -a
+
+	- make absolutely sure checked-out tree is "clean" 
+	- make absolutely sure the pdclib/ submodule is on the master branch,
+	  up to date, and "clean"
+
+	- if this is an x.y release, then:
+		git checkout -b branch-<version>
+		git tag -a <version>
+		- edit .git/gbp.conf to use branch-<version> as upstream
+
+	- if this is an x.y.z release, then:
+		git checkout branch-<version>		# the x.y parts only
+		git merge master
+		git tag -a <version>			# full x.y.z version
+
+	git checkout debian
+	git merge branch-<version>
+
+	- verify debian/changelog is "clean" ending in last release version
+	- craft a suitable debian/changelog entry, possibly using:
+	git-dch --release --new-version=<version>-1 --multimaint-merge
+
+        git commit -n debian/changelog -m "update changelog for Debian build"
+
+	- if this is a -1 release, then
+		git-buildpackage --git-no-pristine-tar --git-submodules \
+			--git-upstream-branch=branch-<version> \ # eg 1.3
+			--git-upstream-tag=<version>	         # eg 1.3.1
+		pristine-tar commit \
+			../build-area/altos_<version>.orig.tar.gz \
+			branch-<version>
+	  else if this is not a -1 release
+		git-buildpackage --git-submodules
+
+	git tag debian/<version>
+
+	- at this point we have packages in ~/debian/build-area/altos, now
+	  we move on to the non-Debian part of the release process
+
+	make distclean
+
+	./autogen.sh --with-fat-dir=/home/bdale/web/altusmetrum/AltOS/releases
+	make && make fat
+
+		this pushes packages for each platform to web site
+
+	# store a stable copy of ARM binaries for production use
+	cp src/easymini-v1.0/*.elf \
+	   src/telemega-v1.0/*.elf \
+	   src/telemetrum-v2.0/*.elf \
+	   ~/altusmetrumllc/Binaries/
+	cp src/easymini-v1.0/flash-loader/*.elf \
+	   src/telemega-v1.0/flash-loader/*.elf \
+	   src/telemetrum-v2.0/flash-loader/*.elf \
+	   ~/altusmetrumllc/Binaries/loaders/
+	(cd ~/altusmetrumllc ; git commit -a) 
+
+	- copy the relevant release notes file from doc/ to 
+	    /home/bdale/web/altusmetrum/AltOS/releases/<rev>
+
+	- create /home/bdale/web/altusmetrum/MicroPeak/releases/<rev>,
+	  and move the MicroPeak installers from AltOS/releases to there
+		
+	- go edit ~/web/altusmetrum/AltOS/releases/<rev>.mdwn and 
+	  /home/bdale/web/altusmetrum/MicroPeak/releases/<rev>.mdwn, to 
+	  include release date and explicit ref to dir contents so the 
+	  web pages shows versioned links, commit and push
+
+	(cd doc ; make publish)
+
+		this pushes fresh documents to the web site
+
+	sudo debian/rules clean
+	git push origin master branch-<version> debian pristine-tar
+	git push --tags
+
+		push commits and leave the build tree in an uncluttered state
+
+Testing before a release
+
+	To verify that a build works, the following need to be checked
+	on each platform:
+
+	1) Install package
+
+	2) Connect TM *and* TD devices. Verify that you can Monitor
+	   Flight from the TD and Configure Telemetrum from the TM.
+
+	3) Replay Flight, using your favorite .eeprom file. Check
+	   each tab, especially the 'Site Map' tab. Make sure the
+	   sound works.
+
+	4) Graph Data. Graph a favorite .eeprom file. Make sure you
+	   can zoom in on some region of the graph.

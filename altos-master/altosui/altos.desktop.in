@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=AltOS UI
+GenericName=Altus Metrum Ground Station
+Comment=View and log downlink data from Altus Metrum products
+Icon=%icondir%/altusmetrum.svg
+Exec=%bindir%/altosui %f
+Terminal=false
+MimeType=text/plain;
+Categories=Education;Electronics;Science;

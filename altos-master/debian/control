@@ -1,0 +1,22 @@
+Source: altos
+Section: electronics
+Priority: optional
+Maintainer: Bdale Garbee <bdale@gag.com>
+Uploaders: Keith Packard <keithp@keithp.com>
+Build-Depends: debhelper (>= 7), autoconf, automake, gawk, libreadline-dev, libusb-1.0-0-dev, nickle, cc1111, xsltproc, fop, xmlto, docbook-xml, docbook-xsl, swig, default-jdk, freetts, libtool, libjfreechart-java, libbluetooth-dev, pkg-config, libelf-dev, libbluetooth-dev, libssl-dev, gcc-arm-none-eabi, icoutils, librsvg2-bin
+Standards-Version: 3.9.5
+Homepage: http://altusmetrum.org/AltOS
+Vcs-Git: git://git.gag.com/fw/altos
+Vcs-Browser: http://git.gag.com/?p=fw/altos
+
+Package: altos
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, default-jre | java2-runtime, freetts, nickle, libjfreechart-java
+Suggests: slim | gdm
+Replaces: altusmetrum-themes, slim-altusmetrum
+Conflicts: altusmetrum-themes, slim-altusmetrum
+Description: Altus Metrum firmware and utilities
+ Firmware and utilities needed to support high power model rocketry products
+ from Altus Metrum, including TeleMetrum, TeleMini, and TeleDongle.
+ .
+ See http://altusmetrum.org/ for more information.

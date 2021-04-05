@@ -1,0 +1,47 @@
+vpath % ../stm:../product:../drivers:../kernel:../util:../kalman:../aes:../math:..
+vpath make-altitude ../util
+vpath make-kalman ../util
+vpath kalman.5c ../kalman
+vpath kalman_filter.5c ../kalman
+vpath load_csv.5c ../kalman
+vpath matrix.5c ../kalman
+vpath ao-make-product.5c ../util
+
+.SUFFIXES: .elf .ihx
+
+.elf.ihx:
+	$(ELFTOHEX) --output=$@ $*.elf
+
+ifndef TOPDIR
+TOPDIR=..
+endif
+
+ifndef VERSION
+include $(TOPDIR)/Version
+endif
+include $(TOPDIR)/Makedefs
+
+CC=$(ARM_CC)
+LIBS=$(PDCLIB_LIBS_M3) -lgcc
+
+WARN_FLAGS=-Wall -Wextra -Werror
+
+AO_CFLAGS=-I. -I../stm -I../kernel -I../drivers -I../math -I.. $(PDCLIB_INCLUDES)
+STM_CFLAGS=-std=gnu99 -mlittle-endian -mcpu=cortex-m3 -mthumb \
+	-ffreestanding -nostdlib $(AO_CFLAGS) $(WARN_FLAGS)
+
+LDFLAGS=-L../stm -Wl,-Taltos.ld
+
+NICKLE=nickle
+ELFTOHEX=$(TOPDIR)/../ao-tools/ao-elftohex/ao-elftohex
+
+V=0
+# The user has explicitly enabled quiet compilation.
+ifeq ($(V),0)
+quiet = @printf "  $1 $2 $@\n"; $($1)
+endif
+# Otherwise, print the full command line.
+quiet ?= $($1)
+
+.c.o:
+	$(call quiet,CC) -c $(CFLAGS) -o $@ $<
