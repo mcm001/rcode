@@ -9,3 +9,6 @@ java/javamemes/.classpath
 python/Tex/*
 python/Tex
 *.pyc
+
+out_*.txt
+.vscode
