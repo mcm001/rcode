@@ -53,6 +53,7 @@ def find_serial_port():
         print('Found device at port '+ port.device)
     if ports == [] or port is None:
         raise ConnectionError("No devices found!")
+    global ser
     ser = serial.Serial(port.device)
     if ser.isOpen():
         ser.close()
@@ -91,12 +92,14 @@ def write_string(dataString, parsed, time):
 def serial_loop():
     while True: 
         try:
-            # data = ser.readline().decode('ascii', errors='replace')
-            data = "$GPGGA,215338.000,4449.6176,N,07310.3220,W,1,04,4.9,46.5,M,-32.1,M,,0000*5E\n\n"
-            time.sleep(1)
+            data = ser.readline().decode('ascii', errors='replace')
+            #time.sleep(1)
 
             try:
                 parsed = pynmea2.parse(str(data))
+                if not parsed.is_valid:
+                    print("Invalid packet!")
+                    continue
                 rxtime = parsed.timestamp.strftime("%H:%M:%S")
 
                 write_string(data, parsed, rxtime)
@@ -105,14 +108,15 @@ def serial_loop():
             except Exception as e:
                 pass
 
-        except IOError:
-            pass
+        except IOError as e:
+            print(e)
         except KeyboardInterrupt:
 
             print("disconnected")
 
-            if client_sock_list is not None:
-                client_sock_list.close()
+            if client_sock_list != []:
+                for c in client_sock_list:
+                    c.close()
             if server_sock is not None:
                 server_sock.close()
             print("all done")
@@ -121,7 +125,7 @@ def serial_loop():
         except Exception:
             pass
 
-# find_serial_port()
+find_serial_port()
 threading.Thread(target=advertise_bluetooth).start()
 # advertise_bluetooth()
 serial_loop()
