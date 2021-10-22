@@ -3,6 +3,8 @@ from pykml.parser import Schema
 from pykml.factory import KML_ElementMaker as KML
 from pykml.factory import GX_ElementMaker as GX
 import datetime
+import numpy as np
+import matplotlib.pyplot as plt
 
 import pynmea2
 stri = ""
@@ -12,11 +14,13 @@ stri = ""
 # launchTime = datetime.datetime(2021,9,19,18,58,32)
 launchTime = datetime.datetime(2021,9,19,18,58,20 + 5, 670000)
 
+# from:44.824872, -73.16448 (-367) to:44.82696, -73.172033 (-607)
+landLatLon = np.array([44.824872, -73.16448])
+launchLatLon = np.array([44.82696, -73.172033])
+
 dat = []
 latlng = []
 
-import numpy as np
-import matplotlib.pyplot as plt
 
 # for line in open("D:\\Documents\\machiavelli combined gps.log"):
 for line in open("D:\\Documents\\machiavelli.txt"):
@@ -37,10 +41,52 @@ for line in open("D:\\Documents\\machiavelli.txt"):
             # print(p.spd_over_grnd)
             # print(p.altitude)
     except Exception as e:
-        print(e)
+        # print(e)
         pass
 
 altData = [line.strip().split(",") for line in open("D:\\Documents\\Machiavelli Strat 3 9-19-21.csv")]
+
+
+import simplekml
+
+#install simplekml module using command "pip install simplekml"
+#to run script: > python ./convert2kml.py
+
+#Specify file names (input: CSV format)
+fileIN = '../../magnetics/day1_edit.txt'
+fileOUT = './magnetics.kml'
+delimiterIN = ','
+headerlines = 0
+
+kml = simplekml.Kml()
+
+out = []
+for row in altData:
+    # launch is 1, land is 47 ish
+    # Assume constant velocity over ground
+    t = row[0]
+    t = float(t)
+    interpLatLon = launchLatLon + (t-0) * (landLatLon - launchLatLon)/(47)
+    # print(f"{interpLatLon[1]},{interpLatLon[0]},{row[1]}")
+
+
+    latIN = interpLatLon[0]
+    longIN = interpLatLon[1]
+    out.append((longIN,latIN, float(row[1]) * 0.3048))
+    # pnt = kml.newpoint(name='', coords=[(longIN,latIN, float(row[1]) * 0.3048)], gxaltitudemode=simplekml.GxAltitudeMode.relativetoseafloor)
+    # pnt.style.iconstyle.scale = 1
+
+
+    if t > 47:
+        break
+
+linestring = kml.newlinestring(name="Machiavelli")
+linestring.coords = out
+linestring.altitudemode = simplekml.AltitudeMode.relativetoground
+linestring.style.linestyle.width = 8
+# linestring.extrude = 1
+kml.save("out_machiavelli.kml")
+
 altData = np.array(altData)[:,0:2]
 altData = altData.astype(np.float)
 altData = altData[20:,:]
@@ -65,7 +111,7 @@ plt.plot(latlng[:,0], latlng[:,1])
 plt.subplot(224)
 plt.title("Lng vs time")
 plt.plot(latlng[:,0], latlng[:,2])
-plt.show()
+# plt.show()
 
 # f.close()
 
