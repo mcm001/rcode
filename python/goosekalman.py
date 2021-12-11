@@ -27,12 +27,37 @@ def make_goose():
 
     dt = 50/1000 # ms
 
+def make_drone_goose():
+    # in this dataset, ay is up
+    global timeArr, altArr, dt, ayArr
+    csv = pd.read_csv("D:\\Documents\\drone test 2 12-11021.txt")
+    timeArr = csv['time']
+    timeArr = timeArr / 1000
+    # timeArr = timeArr - 670
+
+    # Convert to mpss sans earth gravity
+    # ayArr = csv['ay']
+    # ayArr = ayArr - 1
+    # ayArr = ayArr * 9.81
+    ayArr = csv['ay']**2+csv['ax']**2+csv['az']**2
+    ayArr=np.sqrt(ayArr)
+    ayArr = ayArr - 1
+    ayArr = ayArr * 9.81
+
+    # Already in meters
+    altArr = csv['altitude']
+
+    dt = 21/1000 # ms
+
 def make_fcb():
     global timeArr, altArr, dt, ayArr
-    df = pd.read_csv("D:\\Downloads\\output-post.csv")
-    # df = pd.read_csv("D:\\Downloads\\fcb-06-20-2021-output-post(1).csv")
+    # df = pd.read_csv("D:\\Downloads\\output-post.csv")
+    df = pd.read_csv("D:\\Downloads\\fcb-06-20-2021-output-post(1).csv")
     timeArr = df["timestamp_s"] / 1000
-    ayArr = df["imu_accel_y_avg"] - 9.81
+    # ayArr = df["imu_accel_y_avg"] - 9.81
+    ayArr = df['imu_accel_x_avg']**2+df['imu_accel_y_avg']**2+df['imu_accel_z_avg']**2
+    ayArr=np.sqrt(ayArr)
+    ayArr = ayArr - 9.81
     altArr = (df["baro_temp_avg"] / -0.0065) * (1 - pow(df["baro_pres_avg"] / df["baro_pres_avg"][0], 287.0474909 * -0.0065 / 9.80665)) * 10
     dt = np.mean(np.diff(timeArr))
 
@@ -64,22 +89,24 @@ def do_kalman():
     global timeArr, altArr, dt, ayArr, xhatarr
     global stateArray
 
-    sysc = ct.ss(np.array([[0,1],[0,0]]), np.array([[0],[1]]), np.array([1,0]), np.array([0]))
-    sysd = sysc.sample(dt)  # Discretize model
+    # sysc = ct.ss(np.array([[0,1],[0,0]]), np.array([[0],[1]]), np.array([1,0]), np.array([0]))
+    # sysd = sysc.sample(dt)  # Discretize model
+    dt = 0.02
+    sysd = ct.ss(np.array([[1, dt, dt* dt /2],[0,1, dt],[0,0,1]]), np.array([[0,0],[0,0],[0,0]]), np.array([[1,0,0],[0,0,1]]), np.array([[0, 0], [0, 0]]))
     print(sysd)
 
     # Q is our process noise covariance
-    # It's [pos variance, vel variance]^t
+    # It's [pos variance, vel variance, accel variance]^t
     # R is measurement noise (how sure we are about out measurement)
-    Q = make_cov_matrix([0.5, 1])
-    R = make_cov_matrix([10])
+    Q = make_cov_matrix([0.5, 4, 1])
+    R = make_cov_matrix([3, 1])
 
     kalman_gain, P_steady = kalmd(sysd, Q, R)
     print(kalman_gain)
 
     # We assume we start at 0 position and velocity
     xhatarr = []
-    x_hat = np.array([[0], [0]])
+    x_hat = np.array([[0], [100], [0]])
 
     uArray = []
     buarray  = []
@@ -88,15 +115,18 @@ def do_kalman():
     stateArray = []
 
     for (t, accel, altitude) in zip(timeArr, ayArr, altArr):
-        if state >= 2:
-            u = np.array([[0]])
-        else:
-            u = np.array([[accel]])
+        # if state >= 2:
+        #     u = np.array([[0, 0]])
+        # else:
+        #     u = np.array([[accel]])
+        u = np.array([[0], [0]])
+
         uArray.append(u[0,0])
         bu = np.dot(sysd.B, u)
         buarray.append([bu[0,0], bu[1,0]])
         # u = np.array([-9.81])
-        y = np.array([altitude])
+        # y = np.array([[altitude], [accel]])
+        y = np.array([[0], [0]])
 
         # predict
         x_hat = sysd.A @ x_hat + sysd.B @ u
@@ -106,7 +136,7 @@ def do_kalman():
             y - sysd.C @ x_hat - sysd.D @ u
         )
 
-        xhatarr.append([x_hat[0,0], x_hat[1,0]])
+        xhatarr.append([x_hat[0,0], x_hat[1,0], x_hat[2, 0]])
 
         if x_hat[0,0] > 50 and state == 0:
             state = 1 # boost 
@@ -130,22 +160,35 @@ def plot_bu():
 
 def plot_kalman():
     global uArray, buarray, xhatarr, altArr, ayArr, timeArr, stateArray
-    plt.subplot(211)
+    plt.subplot(311)
     plt.title("Position (m)")
     plt.plot(timeArr, altArr, label="Barometric Position")
-    plt.plot(timeArr, ayArr, label="Upwards acceleration",color='y')
+    # plt.plot(timeArr, ayArr, label="Upwards acceleration",color='y')
     plt.plot(timeArr, xhatarr[:,0], label="Kalman Position")
     plt.legend()
-    plt.subplot(212)
+    plt.subplot(312)
     plt.title("Velocity (m/s)")
     # plt.scatter(timeArr[1:], np.diff(altArr)/np.diff(timeArr), label="Velocity (dBaro/dt)")
     plt.plot(timeArr, xhatarr[:,1], label="Kalman Velocity")
-    plt.plot(timeArr, ayArr, label="Upwards acceleration")
+    # plt.plot(timeArr, ayArr, label="Upwards acceleration")
     plt.legend()
+
+    plt.subplot(313)
+    plt.title("Accel (m/s/s)")
+    # plt.scatter(timeArr[1:], np.diff(altArr)/np.diff(timeArr), label="Velocity (dBaro/dt)")
+    plt.plot(timeArr, ayArr, label="Raw acceleration")
+    plt.plot(timeArr, xhatarr[:,2], label="Kalman Accel")
+    plt.legend()
+
     # plt.subplot(313)
-    plt.figure()
-    plt.plot(timeArr, stateArray, label="state")
-    plt.legend()
+    # plt.figure()
+    # plt.plot(timeArr, altArr, label="Barometric Position")
+    # plt.plot(timeArr, xhatarr[:,0], label="Kalman Position")
+    # plt.plot(timeArr, xhatarr[:,1], label="Kalman Velocity")
+    # plt.plot(timeArr, xhatarr[:,2], label="Kalman Accel")
+    # plt.plot(timeArr, ayArr, label="Raw acceleration")
+    # plt.plot(timeArr, stateArray, label="state")
+    # plt.legend()
 
 def plot_altitude():
     global uArray, buarray, xhatarr, altArr, ayArr, timeArr
@@ -159,9 +202,9 @@ def plot_accel():
 
 if __name__ == "__main__":
     # make_fcb()
-    # make_goose()
-    # make_line_cutter()
+    make_goose()
     # make_drone_goose()
+    # make_line_cutter()
 
     do_kalman()
     plot_kalman()
