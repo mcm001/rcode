@@ -16,6 +16,7 @@ import threading
 
 d = datetime.fromtimestamp(time.time()).strftime("%b_%d_%y_%H_%M_%S")
 csvOutputFile = open(f"out_{d}.txt", "a")
+print(csvOutputFile)
 
 ser = None
 client_sock_list = []
@@ -85,6 +86,7 @@ def print_stuff(dataString, parsed, rxtime):
 def write_string(dataString, parsed, time):
     try:
         csvOutputFile.write(dataString.strip())
+        csvOutputFile.write('\n')
         csvOutputFile.flush()
     except Exception as e:
         print(e)

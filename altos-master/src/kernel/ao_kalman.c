@@ -23,6 +23,7 @@
 #include "ao_sample.h"
 #include "ao_kalman.h"
 
+#define HAS_ACCEL 1
 
 static __pdata int32_t		ao_k_height;
 static __pdata int32_t		ao_k_speed;

@@ -1,0 +1,17 @@
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <Placemark>
+    <name>gx:altitudeMode Example</name>
+    <LookAt>
+      <longitude>-73.16</longitude>
+      <latitude>44.8</latitude>
+      <heading>0</heading>
+      <tilt>70</tilt>
+      <range>100</range>
+      <gx:altitudeMode>relativeToGround</gx:altitudeMode>
+    </LookAt>
+    <LineString>
+      <gx:altitudeMode>absolute</gx:altitudeMode>
+      <coordinates>-73.16462,44.824807,55.8 -73.164625,44.824803,55 -73.164637,44.82479,54.2 -73.16464999999999,44.82478,53.7 -73.16465700000001,44.824778,53.89999999999999 -73.164658,44.824777,53.6 -73.16466200000001,44.824772,53 -73.164677,44.824757,52.39999999999999</coordinates>
+    </LineString>
+  </Placemark>
+</kml>
