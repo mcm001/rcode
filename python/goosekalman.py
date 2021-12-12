@@ -15,17 +15,22 @@ def make_goose():
     csv = pd.read_csv("D:\\Documents\\Angry Goose TCC 5-15-21.txt")
     timeArr = csv['time']
     timeArr = timeArr / 1000
-    timeArr = timeArr - 670
+    timeArr = timeArr
 
     # Convert to mpss sans earth gravity
-    ayArr = csv['ay']
+    # ayArr = csv['ay']
+    # ayArr = ayArr - 1
+    # ayArr = ayArr * 9.81
+    ayArr = csv['ay']**2+csv['ax']**2+csv['az']**2
+    ayArr=np.sqrt(ayArr)
     ayArr = ayArr - 1
     ayArr = ayArr * 9.81
 
     # Already in meters
     altArr = csv['alt']
 
-    dt = 50/1000 # ms
+    # dt = 50/1000 # ms
+    dt = np.mean(np.diff(timeArr))
 
 def make_drone_goose():
     # in this dataset, ay is up
@@ -88,25 +93,26 @@ def do_kalman():
     global uArray, buarray, xhatarr
     global timeArr, altArr, dt, ayArr, xhatarr
     global stateArray
+    global apogeeTime
+    apogeeTime = 0
 
     # sysc = ct.ss(np.array([[0,1],[0,0]]), np.array([[0],[1]]), np.array([1,0]), np.array([0]))
     # sysd = sysc.sample(dt)  # Discretize model
-    dt = 0.02
     sysd = ct.ss(np.array([[1, dt, dt* dt /2],[0,1, dt],[0,0,1]]), np.array([[0,0],[0,0],[0,0]]), np.array([[1,0,0],[0,0,1]]), np.array([[0, 0], [0, 0]]))
     print(sysd)
 
     # Q is our process noise covariance
     # It's [pos variance, vel variance, accel variance]^t
     # R is measurement noise (how sure we are about out measurement)
-    Q = make_cov_matrix([0.5, 4, 1])
-    R = make_cov_matrix([3, 1])
+    Q = make_cov_matrix([0.5, 6, 1])
+    R = make_cov_matrix([8, 2])
 
     kalman_gain, P_steady = kalmd(sysd, Q, R)
     print(kalman_gain)
 
     # We assume we start at 0 position and velocity
     xhatarr = []
-    x_hat = np.array([[0], [100], [0]])
+    x_hat = np.array([[0], [0], [0]])
 
     uArray = []
     buarray  = []
@@ -115,18 +121,15 @@ def do_kalman():
     stateArray = []
 
     for (t, accel, altitude) in zip(timeArr, ayArr, altArr):
-        # if state >= 2:
-        #     u = np.array([[0, 0]])
-        # else:
-        #     u = np.array([[accel]])
-        u = np.array([[0], [0]])
+        if state >= 2:
+            accel = 0
 
-        uArray.append(u[0,0])
-        bu = np.dot(sysd.B, u)
-        buarray.append([bu[0,0], bu[1,0]])
-        # u = np.array([-9.81])
-        # y = np.array([[altitude], [accel]])
-        y = np.array([[0], [0]])
+        # uArray.append(u[0,0])
+        # bu = np.dot(sysd.B, u)
+        # buarray.append([bu[0,0], bu[1,0]])
+        u = np.array([[0],[0]])
+        y = np.array([[altitude], [accel]])
+        # y = np.array([[0], [0]])
 
         # predict
         x_hat = sysd.A @ x_hat + sysd.B @ u
@@ -141,6 +144,7 @@ def do_kalman():
         if x_hat[0,0] > 50 and state == 0:
             state = 1 # boost 
         elif state == 1 and last_alt > x_hat[0,0] and x_hat[1,] < 0:
+            apogeeTime = t
             state = 2 # apogee
 
 
@@ -159,19 +163,24 @@ def plot_bu():
     plt.legend()
 
 def plot_kalman():
-    global uArray, buarray, xhatarr, altArr, ayArr, timeArr, stateArray
+    global uArray, buarray, xhatarr, altArr, ayArr, timeArr, stateArray, apogeeTime
+    print(np.max(xhatarr[:,0]))
     plt.subplot(311)
     plt.title("Position (m)")
     plt.plot(timeArr, altArr, label="Barometric Position")
     # plt.plot(timeArr, ayArr, label="Upwards acceleration",color='y')
     plt.plot(timeArr, xhatarr[:,0], label="Kalman Position")
     plt.legend()
+    plt.axvline(x=apogeeTime, ls='--')
+
     plt.subplot(312)
     plt.title("Velocity (m/s)")
     # plt.scatter(timeArr[1:], np.diff(altArr)/np.diff(timeArr), label="Velocity (dBaro/dt)")
+    plt.plot(timeArr[1:], np.diff(xhatarr[:,0])/np.diff(timeArr), label="Numerical Diff Velocity")
     plt.plot(timeArr, xhatarr[:,1], label="Kalman Velocity")
     # plt.plot(timeArr, ayArr, label="Upwards acceleration")
     plt.legend()
+    plt.axvline(x=apogeeTime, ls='--')
 
     plt.subplot(313)
     plt.title("Accel (m/s/s)")
@@ -179,6 +188,7 @@ def plot_kalman():
     plt.plot(timeArr, ayArr, label="Raw acceleration")
     plt.plot(timeArr, xhatarr[:,2], label="Kalman Accel")
     plt.legend()
+    plt.axvline(x=apogeeTime, ls='--')
 
     # plt.subplot(313)
     # plt.figure()
