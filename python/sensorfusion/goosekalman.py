@@ -178,12 +178,12 @@ def do_kalman():
     xhatarr = np.array(xhatarr)
     buarray = np.array(buarray)
 
-def plot_bu():
-    global uArray, buarray, xhatarr, timeArr
-    plt.plot(timeArr, uArray, label="Control input")
-    plt.plot(timeArr, buarray[:,0], label="delta position")
-    plt.plot(timeArr, buarray[:,1], label="Delta accel")
-    plt.legend()
+import json
+class NumpyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return json.JSONEncoder.default(self, obj)
 
 def do_gyro_integration(mag_data):
     global csv, timeArr, orientation
@@ -234,7 +234,13 @@ def do_gyro_integration(mag_data):
     # o2 = RocketEKF.EKF(gyr=gyro_data, mag=mag_data, frequency=1/np.mean(np.diff(timeArr)), q0=initial_tilt, m_ref=m_ref, frame='ENU')
     # orientation = o2
 
-    np.savetxt('orient.mat', orientation.Q)
+    # np.savetxt('orient.mat', json.dumps(orientation.Q.tolist())
+    json_dump = json.dumps(orientation.Q, 
+                       cls=NumpyEncoder)
+    # print(json_dump)
+    with open("orient.json", "w") as txt:
+        txt.write(json_dump)
+
 
 def plot_gyro():
     global csv, timeArr, orientation
