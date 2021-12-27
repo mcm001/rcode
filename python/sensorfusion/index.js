@@ -59,6 +59,9 @@ function CubeBegin() {
     var light = new THREE.PointLight(0xFFFFFF);
     light.position.set(10, 10, 10);
     scene.add(light);
+    var light = new THREE.PointLight(0xFFFFFF);
+    light.position.set(0, 10, 0);
+    scene.add(light);
 
     const loader = new THREE.STLLoader()
     const rocketMat = new THREE.MeshPhongMaterial({ color: 0xaa5533, specular: 0x111111, shininess: 200 });
@@ -81,7 +84,7 @@ function CubeBegin() {
     render();
 }
 function WebSocketBegin() {
-    console.print("Start using: python -m http.server")
+    console.log("Start using: python -m http.server")
     CubeBegin();
 
     fetch('../../orient.json')
@@ -99,7 +102,7 @@ function WebSocketBegin() {
                     rocket.quaternion = rocket.quaternion.multiply(new THREE.Quaternion(0,0,1,0).normalize())
                     rocket.quaternion.normalize()
                     i += 1
-                }, 30);
+                }, 0.0155 * 1000);
         })
 
 }

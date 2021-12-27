@@ -81,7 +81,9 @@ def make_fcb(num = 3):
     # ayArr=np.sqrt(ayArr)
     # ayArr = ayArr - 9.81
     altArr = (df["baro_temp_avg"] / -0.0065) * (1 - pow(df["baro_pres_avg"] / df["baro_pres_avg"][0], 287.0474909 * -0.0065 / 9.80665)) * 10
-    dt = np.mean(np.diff(timeArr))
+
+    # dt = np.mean(np.diff(timeArr))
+    dt = .0155 # On average, during flight 
 
     return csv
 
@@ -186,7 +188,7 @@ class NumpyEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 def do_gyro_integration(mag_data):
-    global csv, timeArr, orientation
+    global csv, timeArr, orientation, dt
     import ahrs.filters as filters
     import ahrs.common.orientation as orient
 
@@ -219,7 +221,7 @@ def do_gyro_integration(mag_data):
 
     # orientation = filters.Mahony(gyr=gyro_data, acc=acc_data, frequency=1.0/np.mean(np.diff(timeArr)))
     # orientation = filters.Tilt(acc=acc_data)
-    orientation = filters.AngularRate(gyr=gyro_data[1000:,:], q0=initial_tilt, frequency=1/np.mean(np.diff(timeArr)))
+    orientation = filters.AngularRate(gyr=gyro_data[1000:,:], q0=initial_tilt, frequency=1/dt)
     
     import RocketEKF
     from ahrs.utils.wmm import WMM
@@ -493,6 +495,20 @@ def output_mag_vec(mag):
     plt.legend()
     np.savetxt("magvec.mat", mag)
 
+    plt.figure()
+    plt.title("dt, seconds")
+    plt.plot(timeArr[1:], np.diff(timeArr))
+    # plt.plot(1/np.diff(timeArr))
+    df = csv
+    # plt.subplot(212)
+    # plt.title("state")
+    # plt.scatter(timeArr, csv['state'])
+    plt.axvline(timeArr[np.where(df['state'] == 12)[0][0]], ls="--")
+    plt.axvline(timeArr[np.where(df['state'] == 7)[0][0]], ls="--")
+    plt.axvline(timeArr[np.where(df['state'] == 8)[0][0]], ls="--")
+    plt.axvline(timeArr[np.where(df['state'] == 10)[0][0]], ls="--")
+    plt.axvline(timeArr[np.where(df['state'] == 11)[0][0]], ls="--")
+
 if __name__ == "__main__":
     make_fcb(3)
     mag = plot_mag()
@@ -509,4 +525,5 @@ if __name__ == "__main__":
     # plt.figure()
 
     # pygame_orientation()
+    
     plt.show()
