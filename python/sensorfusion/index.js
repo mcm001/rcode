@@ -81,6 +81,7 @@ function CubeBegin() {
     render();
 }
 function WebSocketBegin() {
+    console.print("Start using: python -m http.server")
     CubeBegin();
 
     fetch('../../orient.json')
