@@ -15,9 +15,12 @@ timeArr = None
 def make_goose():
     # in this dataset, ay is up
     global timeArr, altArr, dt, ayArr, temperature, csv
+    
     # csv = pd.read_csv("D:\\Documents\\Angry Goose TCC 5-15-21.txt")
     # csv = pd.read_csv("D:\\Documents\\Angry Goose StAlbans 11-20-21.txt")
     csv = pd.read_csv("D:\\Documents\\pendulum test 2.txt")
+    # csv = pd.read_csv("D:\\Downloads\\Flight-1-1-22-F31.csv")
+
     timeArr = csv['time']
     timeArr = timeArr / 1000
     timeArr = timeArr
@@ -211,8 +214,10 @@ def do_gyro_integration(mag_data):
         acc_data = np.array([csv["imu1_accel_x_real"],csv["imu1_accel_y_real"],csv["imu1_accel_z_real"]]).T
     
     # gyro_data = gyro_data[900:,:]
-    # initial_tilt = orient.acc2q(acc_data[900,:])
-    initial_tilt = orient.ecompass(acc_data[0], mag_data[0], frame='ENU', representation='quaternion')
+    if mag_data is not None:
+        initial_tilt = orient.ecompass(acc_data[0], mag_data[0], frame='ENU', representation='quaternion')
+    else:
+        initial_tilt = orient.acc2q(acc_data[1,:])
 
     rotM = orient.q2R(initial_tilt)
     newX = np.array([1,0,0]).T @ rotM
