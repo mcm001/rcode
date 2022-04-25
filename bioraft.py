@@ -15,8 +15,7 @@ except Exception:
 
 driver.get("https://northeastern.bioraft.com/node/2054541/users")
 
-# list = ["veghte.b@northeastern.edu","tortolani.ma@northeastern.edu","wheeler.ky@northeastern.edu","demartino.da@northeastern.edu","dao.t@northeastern.edu","smoragiewicz.t@northeastern.edu","moore.w@northeastern.edu","barnett.c@northeastern.edu","ng.da@northeastern.edu","lefkoff.h@northeastern.edu","benenson.sa@northeastern.edu","barbozahurtado.j@northeastern.edu","rabson.g@northeastern.edu","frieden.t@northeastern.edu","ryan.bre@northeastern.edu","zabib.a@northeastern.edu","rezendebarbosa.g@northeastern.edu","leffers.ch@northeastern.edu","fox.wi@northeastern.edu","logcher.s@northeastern.edu","webster.q@northeastern.edu","gurin.r@northeastern.edu",]
-list = ["Aidan Rozes","Zach Safford","Henry Silverstein","Spencer Sweeney","David Wasserman","Owen Welch","Sam Wohlever","Hanye ","David DeRienzo","Sandra Chai","Salmaan Shafqat","Tej Vyas","Ashley Banaszewski","Vanessa Khangi","Thomas Chan","Kellan McCarthy"]
+list= ["mondal.an@northeatern.edu","gurl.a@northeastern.edu","kelly.bro@northeastern.edu","Johnson.tyler@northeastern.edu","porto.m@northeastern.edu","sett.r@northeastern.edu"]
 
 # input("Waiting for input...")
 try:

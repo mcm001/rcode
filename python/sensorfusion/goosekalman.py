@@ -18,8 +18,10 @@ def make_goose():
     
     # csv = pd.read_csv("D:\\Documents\\Angry Goose TCC 5-15-21.txt")
     # csv = pd.read_csv("D:\\Documents\\Angry Goose StAlbans 11-20-21.txt")
-    csv = pd.read_csv("D:\\Documents\\pendulum test 2.txt")
+    # csv = pd.read_csv("D:\\Documents\\pendulum test 2.txt")
     # csv = pd.read_csv("D:\\Downloads\\Flight-1-1-22-F31.csv")
+    # csv = pd.read_csv("D:\\Downloads\\Carby_Goose_Jan_2022.txt")
+    csv = pd.read_csv("python/sensorfusion/flightdata/Goose_MDRA_11-14.csv")
 
     timeArr = csv['time']
     timeArr = timeArr / 1000
@@ -69,13 +71,23 @@ def make_drone_goose():
 def make_fcb(num = 3):
     global timeArr, altArr, dt, ayArr, csv
     if num == 1:
-        df = pd.read_csv("D:\\Downloads\\output-post.csv")
+        # df = pd.read_csv("D:\\Downloads\\output-post.csv")
+        OUTPUT_POST_CSV_NAME = ("D:\\Documents\\GitHub\\fcb-offloader-standalone\\output_data\\output-post.csv")
+        df = pd.read_csv(OUTPUT_POST_CSV_NAME)
     elif num == 2:
         df = pd.read_csv("D:\\Downloads\\fcb-06-20-2021-output-post(1).csv")
     elif num == 3:
         df = pd.read_csv("D:\\Downloads\\fcb-mdra-marmon-12-19-2021.csv")
     elif num == 4:
         df = pd.read_csv("D:\\Downloads\\magcal_raw.csv")
+    elif num == 5:
+        df = pd.read_csv("D:\\Downloads\\carbytooded.csv")
+    elif num == 6:
+        df = pd.read_csv("D:\\Downloads\\fcbv0-11-20-2021-carby.csv")
+    elif num == 7:
+        df = pd.read_csv("D:\\Downloads\\superguppy-fcb.csv")
+    elif num == 7:
+        df = pd.read_csv("python/sensorfusion/flightdata/fcb 11-14-21 trd.csv")
     csv = df
     # print(csv)
     timeArr = df["timestamp_s"] / 1000
@@ -83,12 +95,22 @@ def make_fcb(num = 3):
     # ayArr = df['imu_accel_x_avg']**2+df['imu_accel_y_avg']**2+df['imu_accel_z_avg']**2
     # ayArr=np.sqrt(ayArr)
     # ayArr = ayArr - 9.81
-    altArr = (df["baro_temp_avg"] / -0.0065) * (1 - pow(df["baro_pres_avg"] / df["baro_pres_avg"][0], 287.0474909 * -0.0065 / 9.80665)) * 10
+    altArr = (df["baro_temp_avg"] / -0.0065) * (1 - pow(25 / df["baro_pres_avg"][0], 287.0474909 * -0.0065 / 9.80665)) * 10
 
-    # dt = np.mean(np.diff(timeArr))
     dt = .0155 # On average, during flight 
+    # dt = .02 # In sim
 
     return csv
+
+def make_blackhole():
+    global timeArr, altArr, dt, ayArr, csv
+    # df = pd.read_csv("D:\\Downloads\\blackhole2.csv")
+    df = pd.read_csv("D:\\Downloads\\blackholebooster.csv")
+    timeArr = df["time"]
+    altArr = df["altitude"] * 0.3048
+    ayArr = np.zeros((len(timeArr), 1))
+    dt = np.mean(np.diff(timeArr))
+    csv = df
 
 def make_line_cutter():
     global timeArr, altArr, dt, ayArr
@@ -128,8 +150,8 @@ def do_kalman():
     # Q is our process noise covariance
     # It's [pos variance, vel variance, accel variance]^t
     # R is measurement noise (how sure we are about out measurement)
-    Q = make_cov_matrix([0.5, 1])
-    R = make_cov_matrix([50])
+    Q = make_cov_matrix([0.5, 3])
+    R = make_cov_matrix([80])
 
     kalman_gain, P_steady = kalmd(sysd, Q, R)
     # kalman_gain = np.array([[.01657], [.0934]])
@@ -144,6 +166,7 @@ def do_kalman():
     last_alt = 0
     state = 0
     stateArray = []
+    max_alt = 0
 
     for (t, accel, altitude) in zip(timeArr, ayArr, altArr):
         if state >= 2:
@@ -159,7 +182,7 @@ def do_kalman():
 
         y = np.array([[altitude]])
         
-        # predict
+        # # predict
         x_hat = sysd.A @ x_hat + sysd.B @ u
 
         # correct
@@ -171,13 +194,14 @@ def do_kalman():
 
         if x_hat[0,0] > 50 and state == 0:
             state = 1 # boost 
-        elif state == 1 and last_alt > x_hat[0,0] and x_hat[1,] < 0:
+        elif state == 1 and max_alt - 3 > x_hat[0,0] and x_hat[1,0] < 0:
             apogeeTime = t
             state = 2 # apogee
 
 
         last_alt = x_hat[0,0]
         stateArray.append(state)
+        max_alt = max(max_alt, x_hat[0,0])
 
     # Convert to NP array so we can slice
     xhatarr = np.array(xhatarr)
@@ -199,13 +223,13 @@ def do_gyro_integration(mag_data):
         gyro_data = np.array([csv["wx_raw"] / 32.8,csv["wy_raw"] / 32.8, csv["wz_raw"] / 32.8]).T
         gyro_data = gyro_data * M_PI / 180.0 # deg/s to rad/s
     elif "imu1_gyro_x_real" in csv:
-        gyro_data = np.array([csv["imu1_gyro_x_real"],csv["imu1_gyro_y_real"], csv["imu1_gyro_z_real"]]).T
+        gyro_data = np.array([csv["imu1_gyro_x_real"],csv["imu1_gyro_y_real"], csv["imu1_gyro_z_real"]]).T / 4 # /4 for sensitivity bug fix
     else:
         gyro_data = np.array([csv["wx"],csv["wy"], csv["wz"]]).T
         gyro_data = gyro_data * M_PI / 180.0 # deg/s to rad/s
 
     # Crappy gyro cal -- subtract out the average of the first 10
-    gyro_offset = [np.mean(gyro_data[:100,0]), np.mean(gyro_data[:100,1]), np.mean(gyro_data[:100,2])]
+    gyro_offset = [np.mean(gyro_data[:30,0]), np.mean(gyro_data[:30]), np.mean(gyro_data[:30,2])]
     gyro_data = gyro_data - gyro_offset
 
     if "ax" in csv:
@@ -226,7 +250,8 @@ def do_gyro_integration(mag_data):
 
     # orientation = filters.Mahony(gyr=gyro_data, acc=acc_data, frequency=1.0/np.mean(np.diff(timeArr)))
     # orientation = filters.Tilt(acc=acc_data)
-    orientation = filters.AngularRate(gyr=gyro_data[1000:,:], q0=initial_tilt, frequency=1/dt)
+    # orientation = filters.AngularRate(gyr=gyro_data[1000:,:], q0=initial_tilt, frequency=1/dt)
+    orientation = filters.AngularRate(gyr=gyro_data, q0=initial_tilt, frequency=1/dt)
     
     import RocketEKF
     from ahrs.utils.wmm import WMM
@@ -242,12 +267,42 @@ def do_gyro_integration(mag_data):
     # orientation = o2
 
     # np.savetxt('orient.mat', json.dumps(orientation.Q.tolist())
-    json_dump = json.dumps(orientation.Q, 
+
+    bigarr = []
+    i = 0
+    for row in orientation.Q:
+        # bigarr.append([row[0], row[1], row[2], row[3], csv["high_g_accel_x_real"][i], csv["high_g_accel_y_real"][i], csv["high_g_accel_z_real"][i], timeArr[i]])
+        bigarr.append([row[0], row[1], row[2], row[3], timeArr[i]])
+        i = i + 1
+    bigarr = np.array(bigarr)
+    print(bigarr.shape)
+
+    json_dump = json.dumps(bigarr, 
                        cls=NumpyEncoder)
     # print(json_dump)
     with open("orient.json", "w") as txt:
         txt.write(json_dump)
 
+def plot_gyro_rates(name):
+    global csv, timeArr
+    plt.figure()
+
+    gyro_data = None
+    if "wx_raw" in csv:
+        gyro_data = np.array([csv["wx_raw"] / 32.8,csv["wy_raw"] / 32.8, csv["wz_raw"] / 32.8]).T
+    elif "wx" in csv:
+        gyro_data = np.array([csv["wx"],csv["wy"], csv["wz"]]).T
+    elif "imu1_gyro_x_real" in csv:
+        gyro_data = np.array([csv["imu1_gyro_x_real"],csv["imu1_gyro_y_real"], csv["imu1_gyro_z_real"]]).T
+        gyro_data = np.rad2deg(gyro_data)
+        gyro_data = gyro_data / 4 # Fix error in sensitivity
+
+    if gyro_data is not None:
+        plt.title(f"Angular rate over time for {name}")
+        plt.plot(timeArr, gyro_data[:,0], label="wx (deg/s)")
+        plt.plot(timeArr, gyro_data[:,1], label="wy (deg/s)")
+        plt.plot(timeArr, gyro_data[:,2], label="wz (deg/s)")
+        plt.legend()
 
 def plot_gyro():
     global csv, timeArr, orientation
@@ -269,10 +324,18 @@ def plot_gyro():
     plt.plot(euler[:,0], label="Roll, deg")
     plt.plot(euler[:,1], label="Pitch, deg")
     plt.plot(euler[:,2], label="Yaw, deg")
-    plt.plot(csv["imu1_accel_y_real"], label="Yaw, deg")
-    plt.plot(csv["pos_z"], label="Yaw, deg")
+    # plt.plot(csv["imu1_accel_y_real"], label="Y accel")
+    # plt.plot(csv["pos_z"], label="Altitude")
     plt.legend()
     plt.subplot(212)
+
+    # we can really just plot the orientation direction cosines
+    cosines = [orient.q2euler(row) for row in orientation.Q]
+    cosines = np.array(cosines)
+    plt.plot(timeArr, cosines[:,0], label="East")
+    plt.plot(timeArr, cosines[:,1], label="North")
+    plt.plot(timeArr, cosines[:,2], label="Up")
+
     # plt.plot(timeArr, csv['ax'], label="Ax, gees")
     # plt.plot(timeArr, csv['ay'], label="Ay, gees")
     # plt.plot(timeArr, csv['az'], label="Az, gees")
@@ -347,7 +410,7 @@ def plot_kalman():
     plt.title("Position (m)")
     plt.plot(timeArr, altArr, label="Barometric Position")
     # plt.plot(timeArr, ayArr, label="Upwards acceleration",color='y')
-    plt.plot(timeArr, xhatarr[:,0], label="Kalman Position")
+    # plt.plot(timeArr, xhatarr[:,0], label="Kalman Position")
     plt.legend()
     plt.axvline(x=apogeeTime, ls='--')
 
@@ -355,7 +418,7 @@ def plot_kalman():
     plt.title("Velocity (m/s)")
     # plt.scatter(timeArr[1:], np.diff(altArr)/np.diff(timeArr), label="Velocity (dBaro/dt)")
     # plt.plot(timeArr[1:], np.diff(xhatarr[:,0])/np.diff(timeArr), label="Numerical Diff Velocity")
-    plt.plot(timeArr, xhatarr[:,1], label="Kalman Velocity")
+    # plt.plot(timeArr, xhatarr[:,1], label="Kalman Velocity")
     # plt.plot(timeArr, ayArr, label="Upwards acceleration")
     plt.legend()
     plt.axvline(x=apogeeTime, ls='--')
@@ -399,9 +462,15 @@ def plot_altitude():
     plt.plot(timeArr, altArr)
 
 def plot_accel():
-    plt.plot(timeArr, csv['ax'], label="ax")
-    plt.plot(timeArr, csv['ay'], label="ay")
-    plt.plot(timeArr, csv['az'], label="az")
+    global timeArr, csv
+    if "ax" in csv:
+        acc_data = np.array([csv["ax"] * 9.81,csv["ay"] * 9.81,csv["az"] * 9.81]).T
+    else:
+        acc_data = np.array([csv["imu1_accel_x_real"],csv["imu1_accel_y_real"],csv["imu1_accel_z_real"]]).T
+    plt.figure()
+    plt.plot(timeArr, acc_data[:,0], label="ax")
+    plt.plot(timeArr, acc_data[:,1], label="ay")
+    plt.plot(timeArr, acc_data[:,2], label="az")
     plt.legend()
 
 def plot_mag():
@@ -440,11 +509,12 @@ def plot_mag():
 
     if True:
         plt.figure()
-        plt.scatter(cal_mag_x, cal_mag_y, color='r')
-        plt.scatter(cal_mag_y, cal_mag_z, color='g')
-        plt.scatter(cal_mag_z, cal_mag_x, color='b')
+        plt.scatter(cal_mag_x, cal_mag_y, color='r',label='XY')
+        plt.scatter(cal_mag_y, cal_mag_z, color='g',label='YZ')
+        plt.scatter(cal_mag_z, cal_mag_x, color='b',label='ZX')
         plt.xlim(-3000, 3000)
         plt.ylim(-3000, 3000)
+        plt.legend()
 
     return np.array([cal_mag_x, cal_mag_y, cal_mag_z]).T
 
@@ -515,19 +585,27 @@ def output_mag_vec(mag):
     plt.axvline(timeArr[np.where(df['state'] == 11)[0][0]], ls="--")
 
 if __name__ == "__main__":
-    make_fcb(3)
-    mag = plot_mag()
+    make_fcb(1)
+    # plot_accel()
+    # plot_gyro_rates("FCB (Corrected, /4)")
+
+    # make_goose()
+    # plot_accel()
+    # plot_gyro_rates("GOOSE")
+
+    # mag = plot_mag()
     # make_goose()
     # make_drone_goose()
     # make_line_cutter()
+    # make_blackhole()
 
-    output_mag_vec(mag)
+    # output_mag_vec(mag)
 
-    # do_kalman()
-    do_gyro_integration(mag)
-    # plot_kalman()
+    do_kalman()
+    # do_gyro_integration(None)
+    plot_kalman()
     # plot_gyro()
-    # plt.figure()
+    plot_gyro_rates("FCB")
 
     # pygame_orientation()
     

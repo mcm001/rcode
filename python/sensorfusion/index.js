@@ -101,6 +101,15 @@ function WebSocketBegin() {
                     rocket.quaternion.set(row[1], row[2], row[3], row[0])
                     rocket.quaternion = rocket.quaternion.multiply(new THREE.Quaternion(0,0,1,0).normalize())
                     rocket.quaternion.normalize()
+
+                    // const ax = row[4]
+                    // const ay = row[5]
+                    // const az = row[6]
+                    // const time_ = row[7]
+                    // const norm = Math.sqrt(ax * ax)
+
+                    // document.getElementById("myspan").textContent=`Time: ${time_}\tAccel upwards: ${norm}`;
+
                     i += 1
                 }, 0.0155 * 1000);
         })

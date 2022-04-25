@@ -17,26 +17,44 @@ xyz = []
 
 
 
-# for line in open("D:\\Documents\\machiavelli combined gps.log"):
-for line in open("D:\\Documents\\possibly machiavelli rekit.txt"):
-    # print(line)
-    try:
-        p = pynmea2.parse(line)
-        # stri += (f"{p.longitude},{p.latitude},{10} ")
-        if p.longitude != 0 and p.latitude != 0:
-            # f.write(f"{p.longitude},{p.latitude}\n")
+# # for line in open("D:\\Documents\\machiavelli combined gps.log"):
+# for line in open("D:\\Documents\\possibly machiavelli rekit.txt"):
+#     # print(line)
+#     try:
+#         p = pynmea2.parse(line)
+#         # stri += (f"{p.longitude},{p.latitude},{10} ")
+#         if p.longitude != 0 and p.latitude != 0:
+#             # f.write(f"{p.longitude},{p.latitude}\n")
             
-            time = datetime.datetime(2021,9,19, p.timestamp.hour, p.timestamp.minute, p.timestamp.second)
-            # dt = time.total_seconds()
-            # dt = (time-launchTime).total_seconds()
+#             time = datetime.datetime(2021,9,19, p.timestamp.hour, p.timestamp.minute, p.timestamp.second)
+#             # dt = time.total_seconds()
+#             # dt = (time-launchTime).total_seconds()
 
-            xyz.append([p.longitude, p.latitude, p.altitude])
+#             xyz.append([p.longitude, p.latitude, p.altitude])
 
-            # print(p.spd_over_grnd)
-            # print(p.altitude)
-    except Exception as e:
-        # print(e)
-        pass
+#             # print(p.spd_over_grnd)
+#             # print(p.altitude)
+#     except Exception as e:
+#         # print(e)
+#         pass
+
+def RunningMedian(x,N):
+    idx = np.arange(N) + np.arange(len(x)-N+1)[:,None]
+    b = [row[row>0] for row in x[idx]]
+    return np.array(map(np.median,b))
+
+
+
+import pandas as pd
+csv = pd.read_csv("D:\\Downloads\\Antenna testing - export.csv")
+for i, row in csv.iterrows():
+
+    lon = row["longitude"]
+    lat = row["latitude"]
+    if abs(lon + 71.1) < 0.03 and abs(lat  - 42.35) < 0.03 and abs(row["altitude"] < 60):
+
+
+        xyz.append([row["longitude"], row["latitude"], row["altitude"]])
 
 # altData = [line.strip().split(",") for line in open("D:\\Documents\\Machiavelli Strat 3 9-19-21.csv")]
 
@@ -50,10 +68,10 @@ import simplekml
 headerlines = 0
 
 kml = simplekml.Kml()
-linestring = kml.newlinestring(name="Machiavelli")
+linestring: simplekml.LineString = kml.newlinestring(name="FCB Radio Test")
 linestring.coords = xyz
 linestring.altitudemode = simplekml.AltitudeMode.relativetoground
-linestring.style.linestyle.width = 8
+linestring.style.linestyle.width = 6
 # linestring.extrude = 1
 kml.save("out_machiavelli.kml")
 

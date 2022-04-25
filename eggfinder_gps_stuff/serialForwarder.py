@@ -67,6 +67,8 @@ def find_serial_port():
 def send_bluetooth(dataString, parsed, time):
         for cs in client_sock_list:
             try:
+                print(dataString)
+                print(type(dataString))
                 cs.send(dataString)
             except Exception as e:
                 print(f"Lost BT from {cs.getpeername()}")
