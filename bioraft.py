@@ -15,7 +15,7 @@ except Exception:
 
 driver.get("https://northeastern.bioraft.com/node/2054541/users")
 
-list= ["mondal.an@northeatern.edu","gurl.a@northeastern.edu","kelly.bro@northeastern.edu","Johnson.tyler@northeastern.edu","porto.m@northeastern.edu","sett.r@northeastern.edu"]
+list= ["some.email@foo.bar"]
 
 # input("Waiting for input...")
 try:
