@@ -35,7 +35,7 @@ function CubeBegin() {
 
     var material = new THREE.MeshFaceMaterial(cubeMaterials);
     // var material = cubeMaterials
-    // cube = new THREE.Mesh(geometry, material);
+    cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
     scene.add(new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0).normalize(), new THREE.Vector3(0, 0, 0),
         10, // length
