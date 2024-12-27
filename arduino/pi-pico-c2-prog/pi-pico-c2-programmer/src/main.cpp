@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <mbed.h>
+#include <sync.h>
 
 // https://gist.github.com/racerxdl/c9a592808acdd9cd178e6e97c83f8baf
 
@@ -53,7 +54,6 @@ unsigned char c2_read_bits (unsigned char len) {
   mask = 0x01 << (len-1);
   data = 0;
   pinMode(C2D, INPUT);
-  __disable_irq();
   for (i=0;i<len;i++) {
     c2_pulse_clk();
     data = data >> 1;
@@ -61,16 +61,14 @@ unsigned char c2_read_bits (unsigned char len) {
       data = data | mask;
     }
   }
-  __enable_irq();
   pinMode(C2D, OUTPUT);
 
   return data;
 }
 
-void c2_send_bits (unsigned char data, unsigned char len) {
+inline void c2_send_bits (unsigned char data, unsigned char len) {
   unsigned char i;
   pinMode(C2D, OUTPUT);
-  __disable_irq();
   for (i=0;i<len;i++) {
     if (data&0x01) {
       digitalWrite(C2D, HIGH);
@@ -80,7 +78,6 @@ void c2_send_bits (unsigned char data, unsigned char len) {
     c2_pulse_clk();
     data = data >> 1;
   }
-  __enable_irq();
 }
 
 void c2_write_data (unsigned char data) {
@@ -171,12 +168,14 @@ unsigned char c2_erase_device (void) {
 }
 
 unsigned char c2_init_PI (void) {
+  Serial.println("Hi 1");
   c2_rst();
   c2_write_addr(0x02);
   c2_write_data(0x02);
   c2_write_data(0x04);
   c2_write_data(0x01);
   delay(20);
+  Serial.println("Hi 2");
   return 0;
 }
 
@@ -194,29 +193,58 @@ unsigned char c2_read_data() {
   return retval;
 }
 
+// datasheet says to disable/enable irqs, but we need those for USB... lol
 unsigned char c2_read_addr() {
+  // uint32_t status = save_and_disable_interrupts();
   unsigned char retval;
   c2_send_bits(0x0, 1);
-  c2_send_bits(0x2, 2);
+  c2_send_bits(0b10, 2);
   retval = c2_read_bits(8);
   c2_send_bits(0x0, 1);
+  // restore_interrupts(status);
   return retval;
 }
 
 void c2_write_addr(unsigned char addr) {
+  // uint32_t status = save_and_disable_interrupts();
   c2_send_bits(0x0,1);
-  c2_send_bits(0x3,2);
+  c2_send_bits(0b11,2);
   c2_send_bits(addr,8);
   c2_send_bits(0x0,1);  
+  // restore_interrupts(status);
 }
 
 void setup() {
   Serial.begin(38400);
+
+  while (!Serial) {}
+  Serial.println("Hello!");
+  Serial.setTimeout(30000);
+
   pinMode(C2CK, OUTPUT);
   pinMode(C2D, OUTPUT);
   digitalWrite(LED, LOW);
   digitalWrite(C2CK, HIGH);
   delay(300);
+
+  Serial.readStringUntil('\n');
+  Serial.println("init");
+  c2_init_PI();
+
+  Serial.readStringUntil('\n');
+  Serial.print("devid ");
+  c2_write_addr(0x01);
+  uint8_t retval = c2_read_data();
+  Serial.println(retval);
+  Serial.println("revid");
+  c2_write_addr(0x01);
+  retval = c2_read_data();
+  Serial.println(retval);
+
+  // Serial.readStringUntil('\n');
+  // Serial.println("erase");
+  // c2_erase_device();
+  // Serial.println("device erased");
 }
 
 unsigned int i;
@@ -251,17 +279,23 @@ void loop() {
   if (Serial.available()) {
     rx = Serial.read();
     rx_state = rx_state_machine(rx_state, rx);
+    Serial.print("Rx: ");
+    Serial.print(rx);
+    Serial.print(" Rx state : ");
+    Serial.println(rx_state);
     if (rx_state == 3) {
       switch (rx_message[0]) {
         case 0x01:
           c2_init_PI();
-          Serial.write(0x81);
+          // Serial.write(0x81);
+          Serial.println("C2 initialized");
           digitalWrite(LED, HIGH);
           rx_state = 0;
           break;
         case 0x02:
           c2_rst();
-          Serial.write(0x82);
+          // Serial.write(0x82);
+          Serial.println("C2 reset sent");
           digitalWrite(LED, LOW);
           rx_state = 0;
           break;
@@ -271,12 +305,16 @@ void loop() {
             flash_buffer[i] = rx_message[i+6];
           }
           c2_write_flash_block(addr,flash_buffer,rx_message[2]);
-          Serial.write(0x83);
+          // Serial.write(0x83);
+          Serial.print("C2 flash - wrote ");
+          Serial.print(rx_message[2]);
+          Serial.println(" bytes");
           rx_state = 0;
           break;
         case 0x04:
           c2_erase_device();
-          Serial.write(0x84);
+          // Serial.write(0x84);
+          Serial.print("C2 flash - erased");
           rx_state = 0;
           break;
         case 0x05:

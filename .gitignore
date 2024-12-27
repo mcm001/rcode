@@ -12,3 +12,4 @@ python/Tex
 
 out_*.txt
 .vscode
+.venv

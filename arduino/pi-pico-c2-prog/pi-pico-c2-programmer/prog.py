@@ -3,7 +3,7 @@ import serial, sys, struct, time
 
 class PI:
     def __init__(self, com):
-        self.ser = serial.Serial(com, 1000000, timeout=1)
+        self.ser = serial.Serial(com, 38400, timeout=2)
 
     def conf(
         self,
@@ -13,14 +13,17 @@ class PI:
         while True:
             try:
                 self.ser.write("\x01\x00".encode())
-                x = struct.unpack("B", self.ser.read(1))[0]
-                print("x:", hex(x))
-                assert 0x81 == x
-                break
+                line = self.ser.read(10000)
+                print(line)
+                # x = struct.unpack("B", self.ser.read(1))[0]
+                # print("x:", hex(x))
+                # assert 0x81 == x
+                assert "C2 initialized" in line.decode()
             except Exception as e:
                 print(e)
-                while self.ser.read(1) != "":
-                    pass
+                # flush??
+                while thing := self.ser.read(1):
+                    print(thing)
 
         print("PI initiated")
 

@@ -1,0 +1,221 @@
+======== test/H 04aug04 zach standing on his chair.jpg
+Date/Time Original              : 2004:08:04 00:00:00
+Create Date                     : 2004:08:04 00:00:00
+======== test/J 30 Oct04 Zachary with Aligator climb 2.JPG
+Date/Time Original              : 2004:10:30 00:00:00
+Create Date                     : 2004:10:30 00:00:00
+======== test/J 30Oct04 Matthew Hand print 2.JPG
+Date/Time Original              : 2004:10:30 11:02:10
+Create Date                     : 2004:10:30 11:02:10
+Modify Date                     : 2004:10:30 11:02:10
+======== test/H 12Aug04 Zach's first haircut 1.JPG
+Date/Time Original              : 2004:08:12 15:11:11
+Create Date                     : 2004:08:12 15:11:11
+Modify Date                     : 2004:08:12 15:11:11
+======== test/J 30Oct04 Zachary hand print 3.JPG
+Date/Time Original              : 2004:10:30 11:03:39
+Create Date                     : 2004:10:30 11:03:39
+Modify Date                     : 2004:10:30 11:03:39
+======== test/I 16Sep04 Matt swinging 2.JPG
+Date/Time Original              : 2004:09:16 11:12:27
+Create Date                     : 2004:09:16 11:12:27
+Modify Date                     : 2004:09:16 11:12:27
+======== test/H 07Aug04 Zach 4.JPG
+Date/Time Original              : 2004:08:07 00:00:00
+Create Date                     : 2004:08:07 00:00:00
+======== test/H 07Aug04 Matt and Owen 2.JPG
+Date/Time Original              : 2004:08:07 15:17:59
+Create Date                     : 2004:08:07 15:17:59
+Modify Date                     : 2004:08:07 15:17:59
+======== test/H 05Aug04 Matt, Zach and Grandpa.JPG
+Date/Time Original              : 2004:08:05 18:26:13
+Create Date                     : 2004:08:05 18:26:13
+Modify Date                     : 2004:08:05 18:26:13
+======== test/K 07Nov04 Captain Matthew.JPG
+Date/Time Original              : 2004:11:07 12:27:25
+Create Date                     : 2004:11:07 12:27:25
+Modify Date                     : 2004:11:07 12:27:25
+======== test/H 16Aug04 Zach on choo-choo 1.JPG
+Date/Time Original              : 2004:08:16 15:29:26
+Create Date                     : 2004:08:16 15:29:26
+Modify Date                     : 2004:08:16 15:29:26
+======== test/H 06Aug04 Matt at bear.jpg
+Date/Time Original              : 2004:08:06 10:00:46
+Create Date                     : 2004:08:06 10:00:46
+Modify Date                     : 2004:08:24 18:46:43
+======== test/I 11Sep04 Matt at Splash Zone.JPG
+Date/Time Original              : 2004:09:11 00:00:00
+Create Date                     : 2004:09:11 00:00:00
+======== test/H 21Aug04 Zach (and Matt) opening bday present from Scott and Grace 2.JPG
+Date/Time Original              : 2004:08:21 11:27:48
+Create Date                     : 2004:08:21 11:27:48
+Modify Date                     : 2004:08:21 11:27:48
+======== test/H 09Aug04 Zach and Nana.JPG
+Date/Time Original              : 2004:08:09 10:42:14
+Create Date                     : 2004:08:09 10:42:14
+Modify Date                     : 2004:08:09 10:42:14
+======== test/H 24Aug04 Matt figuring out aquarium pipes.JPG
+Date/Time Original              : 2004:08:24 00:00:00
+Create Date                     : 2004:08:24 00:00:00
+======== test/I 11Sep04 Matt and Zach in clam shell.JPG
+Date/Time Original              : 2004:09:11 09:53:46
+Create Date                     : 2004:09:11 09:53:46
+Modify Date                     : 2004:09:11 09:53:46
+======== test/H 12Aug04 Zach at Mitchell Park 4.JPG
+Date/Time Original              : 2004:08:12 10:52:24
+Create Date                     : 2004:08:12 10:52:24
+Modify Date                     : 2004:08:12 10:52:24
+======== test/J 31Oct04 Zachary with Nanny 1.JPG
+Date/Time Original              : 2004:10:31 00:00:00
+Create Date                     : 2004:10:31 00:00:00
+======== test/J 11Oct04 Zach 2.JPG
+Date/Time Original              : 2004:10:11 13:15:00
+Create Date                     : 2004:10:11 13:15:00
+Modify Date                     : 2004:10:11 13:15:00
+======== test/H 06 Aug04 Zach and Dad 2.jpg
+Date/Time Original              : 2004:08:06 10:04:00
+Create Date                     : 2004:08:06 10:04:00
+Modify Date                     : 2004:08:24 18:46:44
+======== test/I 20Sep04 Matt at preschool.JPG
+Date/Time Original              : 2004:09:20 08:41:06
+Create Date                     : 2004:09:20 08:41:06
+Modify Date                     : 2004:09:20 08:41:06
+======== test/H 16Aug04 Zach and Matt 4x6bw.jpg
+Date/Time Original              : 2004:08:16 00:00:00
+Create Date                     : 2004:08:16 00:00:00
+======== test/J 30Oct04 Matthew at Scoop a Duck.JPG
+Date/Time Original              : 2004:10:30 11:12:36
+Create Date                     : 2004:10:30 11:12:36
+Modify Date                     : 2004:10:30 11:12:36
+======== test/h 07aug04 matt helping zach with his milk.jpg
+Date/Time Original              : 2004:08:07 00:00:00
+Create Date                     : 2004:08:07 00:00:00
+======== test/K 08Nov04 Captain Matthew and Grandpa.JPG
+Date/Time Original              : 2004:11:08 12:16:06
+Create Date                     : 2004:11:08 12:16:06
+Modify Date                     : 2004:11:08 12:16:06
+======== test/I 14Sep04 Zach's 1st day at preschool 4.JPG
+Date/Time Original              : 2004:09:14 00:00:00
+Create Date                     : 2004:09:14 00:00:00
+======== test/I 11Sep04 Anchovie Matthew.JPG
+Date/Time Original              : 2004:09:11 09:27:33
+Create Date                     : 2004:09:11 09:27:33
+Modify Date                     : 2004:09:11 09:27:33
+======== test/I 03Sept04 Zach eating in Matt's chair.JPG
+Date/Time Original              : 2004:09:03 00:00:00
+Create Date                     : 2004:09:03 00:00:00
+======== test/H 06Aug04 Matt and Dad at Bear lake 3.jpg
+Date/Time Original              : 2004:08:06 16:11:40
+Create Date                     : 2004:08:06 16:11:40
+Modify Date                     : 2004:08:24 18:47:01
+======== test/H 17Aug04 Zach and his sunglasses.JPG
+Date/Time Original              : 2004:08:17 15:42:27
+Create Date                     : 2004:08:17 15:42:27
+Modify Date                     : 2004:08:17 15:42:27
+======== test/J 31Oct04 Boys in costume with Mom.JPG
+Date/Time Original              : 2004:10:31 17:35:28
+Create Date                     : 2004:10:31 17:35:28
+Modify Date                     : 2004:10:31 17:35:28
+======== test/H 24AUg04 Matt in the clam shell 1.JPG
+Date/Time Original              : 2004:08:24 11:35:34
+Create Date                     : 2004:08:24 11:35:34
+Modify Date                     : 2004:08:24 11:35:34
+======== test/J 09Oct04 Zach at beach 3.JPG
+Date/Time Original              : 2004:10:09 00:00:00
+Create Date                     : 2004:10:09 00:00:00
+======== test/J 31Oct04 Boys in costume.JPG
+Date/Time Original              : 2004:10:31 00:00:00
+Create Date                     : 2004:10:31 00:00:00
+======== test/H 21Aug04 Matt and Scott playing hide and seek.JPG
+Date/Time Original              : 2004:08:21 11:12:42
+Create Date                     : 2004:08:21 11:12:42
+Modify Date                     : 2004:08:21 11:12:42
+======== test/H 06Aug04 Zach and Mom.JPG
+Date/Time Original              : 2004:08:06 09:09:49
+Create Date                     : 2004:08:06 09:09:49
+Modify Date                     : 2004:08:06 09:09:49
+======== test/J 08Oct04 Matt at Santa Barbara beach 1.JPG
+Date/Time Original              : 2004:10:08 08:56:51
+Create Date                     : 2004:10:08 08:56:51
+Modify Date                     : 2004:10:08 08:56:51
+======== test/J 11Oct04 Zach 2bw.jpg
+Date/Time Original              : 2004:10:11 00:00:00
+Create Date                     : 2004:10:11 00:00:00
+======== test/J 08Oct04 The boys at the zoo 1.JPG
+Date/Time Original              : 2004:10:08 10:33:03
+Create Date                     : 2004:10:08 10:33:03
+Modify Date                     : 2004:10:08 10:33:03
+======== test/J 31Oct04 Halloween night 1.JPG
+Date/Time Original              : 2004:10:31 17:47:07
+Create Date                     : 2004:10:31 17:47:07
+Modify Date                     : 2004:10:31 17:47:07
+======== test/J 31Oct04  Boys in wheelbarrow 1.JPG
+Date/Time Original              : 2004:10:31 10:21:02
+Create Date                     : 2004:10:31 10:21:02
+Modify Date                     : 2004:10:31 10:21:02
+======== test/H 08Aug04 Zach in the canoe 1.JPG
+Date/Time Original              : 2004:08:08 09:34:34
+Create Date                     : 2004:08:08 09:34:34
+Modify Date                     : 2004:08:08 09:34:34
+======== test/H 17Aug04 Matt and his sunglasses.JPG
+Date/Time Original              : 2004:08:17 00:00:00
+Create Date                     : 2004:08:17 00:00:00
+======== test/J 11Oct04 Matt at preschool 2.JPG
+Date/Time Original              : 2004:10:11 08:54:13
+Create Date                     : 2004:10:11 08:54:13
+Modify Date                     : 2004:10:11 08:54:13
+======== test/K 09Nov04 Banjo time 3.JPG
+Date/Time Original              : 2004:11:09 11:58:32
+Create Date                     : 2004:11:09 11:58:32
+Modify Date                     : 2004:11:09 11:58:32
+======== test/J 11Oct04 Matt at preschool 4.JPG
+Date/Time Original              : 2004:10:11 00:00:00
+Create Date                     : 2004:10:11 00:00:00
+======== test/H 07Aug04 at Bear lake with the Smoleks.jpg
+Date/Time Original              : 2004:08:07 12:23:41
+Create Date                     : 2004:08:07 12:23:41
+Modify Date                     : 2004:08:24 18:47:05
+======== test/J 09Oct04 Matt at beach 1.JPG
+Date/Time Original              : 2004:10:09 11:17:04
+Create Date                     : 2004:10:09 11:17:04
+Modify Date                     : 2004:10:09 11:17:04
+======== test/H 04aug04 Zach sitting on his chair.jpg
+Date/Time Original              : 2004:08:04 00:00:00
+Create Date                     : 2004:08:04 00:00:00
+======== test/H 24Aug04 Matt and Zach at the aquarium 2.JPG
+Date/Time Original              : 2004:08:24 00:00:00
+Create Date                     : 2004:08:24 00:00:00
+======== test/H 12Aug04 Zach at Mitchell Park 3.JPG
+Date/Time Original              : 2004:08:12 10:03:52
+Create Date                     : 2004:08:12 10:03:52
+Modify Date                     : 2004:08:12 10:03:52
+======== test/H 12Aug04 Matt and Zach at Mitchell Park.JPG
+Date/Time Original              : 2004:08:12 10:02:34
+Create Date                     : 2004:08:12 10:02:34
+Modify Date                     : 2004:08:12 10:02:34
+======== test/J 08Oct04 Matt and the giraffes.JPG
+Date/Time Original              : 2004:10:08 11:35:12
+Create Date                     : 2004:10:08 11:35:12
+Modify Date                     : 2004:10:08 11:35:12
+======== test/I 17Sep04 Matt and his bike 2.JPG
+Date/Time Original              : 2004:09:17 17:15:41
+Create Date                     : 2004:09:17 17:15:41
+Modify Date                     : 2004:09:17 17:15:41
+======== test/J 11Oct04 Matt at preschool 1.JPG
+Date/Time Original              : 2004:10:11 08:39:36
+Create Date                     : 2004:10:11 08:39:36
+Modify Date                     : 2004:10:11 08:39:36
+======== test/H 08Aug04 Zach and Mom.JPG
+Date/Time Original              : 2004:08:08 09:39:51
+Create Date                     : 2004:08:08 09:39:51
+Modify Date                     : 2004:08:08 09:39:51
+======== test/H 09Aug04 Matt, Zach and Nana.JPG
+Date/Time Original              : 2004:08:09 10:41:45
+Create Date                     : 2004:08:09 10:41:45
+Modify Date                     : 2004:08:09 10:41:45
+======== test/H 09Aug04 Matt singing in drain pipe 2.JPG
+Date/Time Original              : 2004:08:09 09:10:23
+Create Date                     : 2004:08:09 09:10:23
+Modify Date                     : 2004:08:09 09:10:23
+    1 directories scanned
+   59 image files read
